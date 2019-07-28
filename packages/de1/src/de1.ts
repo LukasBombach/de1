@@ -1,4 +1,4 @@
-import Sblendid, { Peripheral, Service, Adapter } from "sblendid/src";
+import Sblendid, { Peripheral, Service, Adapter } from "sblendid";
 import converters from "./converters";
 
 export default class DE1 {

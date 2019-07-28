@@ -1,4 +1,3 @@
-import { onyAnyEvent } from "sblendid/debug";
 import chalk from "chalk";
 import DE1 from "../src";
 
@@ -6,29 +5,6 @@ import DE1 from "../src";
   try {
     console.log("connecting...");
     const de1 = await DE1.connect();
-
-    // Log all events
-    onyAnyEvent(de1.getAdapter(), (name, ...args) => {
-      switch (name) {
-        case "read":
-          console.log(
-            chalk.dim("event"),
-            name,
-            args[2],
-            args[3].toString("hex"),
-            args[4]
-          );
-          return;
-
-        case "notify":
-          console.log(chalk.dim("event", name), args);
-          return;
-
-        default:
-          console.log(chalk.dim("event", name));
-          return;
-      }
-    });
 
     console.log("reading");
     await de1.get("state");

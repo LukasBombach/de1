@@ -8,11 +8,6 @@
   "repository": "git@github.com:LukasBombach/sblendid.git",
   "author": "Lukas Bombach <lukas.bombach@googlemail.com>",
   "license": "MIT",
-  "husky": {
-    "hooks": {
-      "pre-commit": "cp packages/sblendid/README.md ./README.md && git add ./README.md"
-    }
-  },
   "devDependencies": {
     "husky": "3.0.1"
   }
