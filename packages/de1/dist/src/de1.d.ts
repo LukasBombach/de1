@@ -1,5 +1,6 @@
 import { Adapter } from "sblendid";
 export default class DE1 {
+    static bindings: any;
     private machine?;
     private service?;
     getAdapter(): Adapter;
