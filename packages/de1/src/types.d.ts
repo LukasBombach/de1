@@ -1,11 +1,13 @@
-// type PUUID = string;
-// type SUUID = BluetoothServiceUUID;
-// type CUUID = BluetoothCharacteristicUUID;
-// type DUUID = BluetoothDescriptorUUID;
+type PUUID = string;
+type SUUID = BluetoothServiceUUID;
+type CUUID = BluetoothCharacteristicUUID;
+type DUUID = BluetoothDescriptorUUID;
 
-// type Promish<T> = Promise<T> | T;
-// type Encoder<T> = (value: T) => Promish<Buffer>;
-// type Decoder<T> = (value: Buffer) => Promish<T>;
+type Promish<T> = Promise<T> | T;
+type Encoder<T> = (value: T) => Promish<Buffer>;
+type Decoder<T> = (value: Buffer) => Promish<T>;
+
+declare module "noble-mac";
 
 type Prop = string;
 type PropListener<P> = (value: any) => void;

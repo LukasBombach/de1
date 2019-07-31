@@ -1,11 +1,8 @@
 import Sblendid, { Peripheral, Service, Adapter } from "sblendid";
-import { requireBindings } from "sblendid/compat";
+import macOs from "noble-mac";
 import converters from "./converters";
 
-const bindings = requireBindings("noble-mac");
-
 export default class DE1 {
-  public static bindings: any;
   private machine?: Peripheral;
   private service?: Service;
 
@@ -22,8 +19,7 @@ export default class DE1 {
 
   public async connect(): Promise<void> {
     if (this.isConnected()) return;
-    Sblendid.bindings = DE1.bindings;
-    this.machine = await Sblendid.connect("DE1", bindings);
+    this.machine = await Sblendid.connect("DE1", macOs);
     this.service = await this.machine.getService("a000", converters);
   }
 
