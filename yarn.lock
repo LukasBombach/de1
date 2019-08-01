@@ -1396,9 +1396,9 @@
   integrity sha1-Ubq/nH3q3VNDYgBV/Ir/eZXIsDE=
 
 "@types/node@^10.12.18":
-  version "10.14.13"
-  resolved "https://spring.jfrog.io/spring/api/npm/npm-red/@types/node/-/node-10.14.13.tgz#ac786d623860adf39a3f51d629480aacd6a6eec7"
-  integrity sha1-rHhtYjhgrfOaP1HWKUgKrNam7sc=
+  version "10.14.14"
+  resolved "https://spring.jfrog.io/spring/api/npm/npm-red/@types/node/-/node-10.14.14.tgz#a47955df2acf76ba7f0ac3b205d325da193dc9ad"
+  integrity sha1-pHlV3yrPdrp/CsOyBdMl2hk9ya0=
 
 "@types/normalize-package-data@^2.4.0":
   version "2.4.0"
@@ -1423,9 +1423,9 @@
     "@types/react" "*"
 
 "@types/react@*":
-  version "16.8.23"
-  resolved "https://spring.jfrog.io/spring/api/npm/npm-red/@types/react/-/react-16.8.23.tgz#ec6be3ceed6353a20948169b6cb4c97b65b97ad2"
-  integrity sha1-7Gvjzu1jU6IJSBabbLTJe2W5etI=
+  version "16.8.24"
+  resolved "https://spring.jfrog.io/spring/api/npm/npm-red/@types/react/-/react-16.8.24.tgz#8d1ea1fcbfa214220da3d3c04e506f1077b0deac"
+  integrity sha1-jR6h/L+iFCINo9PATlBvEHew3qw=
   dependencies:
     "@types/prop-types" "*"
     csstype "^2.2.0"
@@ -2551,7 +2551,7 @@ bytes@3.1.0:
   resolved "https://spring.jfrog.io/spring/api/npm/npm-red/bytes/-/bytes-3.1.0.tgz#f6cf7933a360e0588fa9fde85651cdc7f805d1f6"
   integrity sha1-9s95M6Ng4FiPqf3oVlHNx/gF0fY=
 
-cacache@^11.0.2, cacache@^11.3.2:
+cacache@^11.0.2:
   version "11.3.3"
   resolved "https://spring.jfrog.io/spring/api/npm/npm-red/cacache/-/cacache-11.3.3.tgz#8bd29df8c6a718a6ebd2d010da4d7972ae3bbadc"
   integrity sha1-i9Kd+ManGKbr0tAQ2k15cq47utw=
@@ -2561,6 +2561,27 @@ cacache@^11.0.2, cacache@^11.3.2:
     figgy-pudding "^3.5.1"
     glob "^7.1.4"
     graceful-fs "^4.1.15"
+    lru-cache "^5.1.1"
+    mississippi "^3.0.0"
+    mkdirp "^0.5.1"
+    move-concurrently "^1.0.1"
+    promise-inflight "^1.0.1"
+    rimraf "^2.6.3"
+    ssri "^6.0.1"
+    unique-filename "^1.1.1"
+    y18n "^4.0.0"
+
+cacache@^12.0.2:
+  version "12.0.2"
+  resolved "https://spring.jfrog.io/spring/api/npm/npm-red/cacache/-/cacache-12.0.2.tgz#8db03205e36089a3df6954c66ce92541441ac46c"
+  integrity sha1-jbAyBeNgiaPfaVTGbOklQUQaxGw=
+  dependencies:
+    bluebird "^3.5.5"
+    chownr "^1.1.1"
+    figgy-pudding "^3.5.1"
+    glob "^7.1.4"
+    graceful-fs "^4.1.15"
+    infer-owner "^1.0.3"
     lru-cache "^5.1.1"
     mississippi "^3.0.0"
     mkdirp "^0.5.1"
@@ -2670,9 +2691,9 @@ caniuse-api@^3.0.0:
     lodash.uniq "^4.5.0"
 
 caniuse-lite@^1.0.0, caniuse-lite@^1.0.30000929, caniuse-lite@^1.0.30000939, caniuse-lite@^1.0.30000955, caniuse-lite@^1.0.30000980, caniuse-lite@^1.0.30000984:
-  version "1.0.30000986"
-  resolved "https://spring.jfrog.io/spring/api/npm/npm-red/caniuse-lite/-/caniuse-lite-1.0.30000986.tgz#f34350e367cc900509511574817ac092112bf7ab"
-  integrity sha1-80NQ42fMkAUJURV0gXrAkhEr96s=
+  version "1.0.30000988"
+  resolved "https://spring.jfrog.io/spring/api/npm/npm-red/caniuse-lite/-/caniuse-lite-1.0.30000988.tgz#742f35ec1b8b75b9628d705d7652eea1fef983db"
+  integrity sha1-dC817BuLdblijXBddlLuof75g9s=
 
 capture-exit@^2.0.0:
   version "2.0.0"
@@ -3895,9 +3916,9 @@ electron-publish@20.44.4:
     mime "^2.4.4"
 
 electron-to-chromium@^1.3.103, electron-to-chromium@^1.3.122, electron-to-chromium@^1.3.191:
-  version "1.3.203"
-  resolved "https://spring.jfrog.io/spring/api/npm/npm-red/electron-to-chromium/-/electron-to-chromium-1.3.203.tgz#76de1b76eaaf7208e587a26b8e45407535a00abd"
-  integrity sha1-dt4bduqvcgjlh6JrjkVAdTWgCr0=
+  version "1.3.209"
+  resolved "https://spring.jfrog.io/spring/api/npm/npm-red/electron-to-chromium/-/electron-to-chromium-1.3.209.tgz#cd43879f1d3fb85c75bb843fb11a828570fa1ce4"
+  integrity sha1-zUOHnx0/uFx1u4Q/sRqChXD6HOQ=
 
 electron@5.0.6:
   version "5.0.6"
@@ -4222,9 +4243,9 @@ estree-walker@^0.6.1:
   integrity sha1-UwSRQ/QMbrkYsjZx0f4yGfOhs2I=
 
 esutils@^2.0.0, esutils@^2.0.2:
-  version "2.0.2"
-  resolved "https://spring.jfrog.io/spring/api/npm/npm-red/esutils/-/esutils-2.0.2.tgz#0abf4f1caa5bcb1f7a9d8acc6dea4faaa04bac9b"
-  integrity sha1-Cr9PHKpbyx96nYrMbepPqqBLrJs=
+  version "2.0.3"
+  resolved "https://spring.jfrog.io/spring/api/npm/npm-red/esutils/-/esutils-2.0.3.tgz#74d2eb4de0b8da1293711910d50775b9b710ef64"
+  integrity sha1-dNLrTeC42hKTcRkQ1Qd1ubcQ72Q=
 
 etag@~1.8.1:
   version "1.8.1"
@@ -4535,7 +4556,7 @@ find-cache-dir@^0.1.1:
     mkdirp "^0.5.1"
     pkg-dir "^1.0.0"
 
-find-cache-dir@^2.0.0:
+find-cache-dir@^2.0.0, find-cache-dir@^2.1.0:
   version "2.1.0"
   resolved "https://spring.jfrog.io/spring/api/npm/npm-red/find-cache-dir/-/find-cache-dir-2.1.0.tgz#8d0f94cd13fe43c6c7c261a0d86115ca918c05f7"
   integrity sha1-jQ+UzRP+Q8bHwmGg2GEVypGMBfc=
@@ -5397,6 +5418,11 @@ indexes-of@^1.0.1:
   version "1.0.1"
   resolved "https://spring.jfrog.io/spring/api/npm/npm-red/indexes-of/-/indexes-of-1.0.1.tgz#f30f716c8e2bd346c7b67d3df3915566a7c05607"
   integrity sha1-8w9xbI4r00bHtn0985FVZqfAVgc=
+
+infer-owner@^1.0.3:
+  version "1.0.4"
+  resolved "https://spring.jfrog.io/spring/api/npm/npm-red/infer-owner/-/infer-owner-1.0.4.tgz#c4cefcaa8e51051c2a40ba2ce8a3d27295af9467"
+  integrity sha1-xM78qo5RBRwqQLos6KPScpWvlGc=
 
 inflight@^1.0.4:
   version "1.0.6"
@@ -6922,9 +6948,9 @@ merge-stream@^1.0.1:
     readable-stream "^2.0.1"
 
 merge2@^1.2.3:
-  version "1.2.3"
-  resolved "https://spring.jfrog.io/spring/api/npm/npm-red/merge2/-/merge2-1.2.3.tgz#7ee99dbd69bb6481689253f018488a1b902b0ed5"
-  integrity sha1-fumdvWm7ZIFoklPwGEiKG5ArDtU=
+  version "1.2.4"
+  resolved "https://spring.jfrog.io/spring/api/npm/npm-red/merge2/-/merge2-1.2.4.tgz#c9269589e6885a60cf80605d9522d4b67ca646e3"
+  integrity sha1-ySaVieaIWmDPgGBdlSLUtnymRuM=
 
 methods@~1.1.2:
   version "1.1.2"
@@ -7095,11 +7121,6 @@ mkdirp@0.5.1, mkdirp@0.5.x, mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@~0.5.0, mkdirp@
   dependencies:
     minimist "0.0.8"
 
-module-alias@2.2.0:
-  version "2.2.0"
-  resolved "https://spring.jfrog.io/spring/api/npm/npm-red/module-alias/-/module-alias-2.2.0.tgz#a2e32275381642252bf0c51405f7a09a367479b5"
-  integrity sha1-ouMidTgWQiUr8MUUBfegmjZ0ebU=
-
 move-concurrently@^1.0.1:
   version "1.0.1"
   resolved "https://spring.jfrog.io/spring/api/npm/npm-red/move-concurrently/-/move-concurrently-1.0.1.tgz#be2c005fda32e0b29af1f05d7c4b33214c701f92"
@@ -7167,11 +7188,6 @@ nanomatch@^1.2.9:
     snapdragon "^0.8.1"
     to-regex "^3.0.1"
 
-napi-thread-safe-callback@0.0.6:
-  version "0.0.6"
-  resolved "https://spring.jfrog.io/spring/api/npm/npm-red/napi-thread-safe-callback/-/napi-thread-safe-callback-0.0.6.tgz#ef86a149b5312e480f74e89a614e6d9e3b17b456"
-  integrity sha1-74ahSbUxLkgPdOiaYU5tnjsXtFY=
-
 natural-compare@^1.4.0:
   version "1.4.0"
   resolved "https://spring.jfrog.io/spring/api/npm/npm-red/natural-compare/-/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
@@ -7207,20 +7223,6 @@ no-case@^2.2.0:
   integrity sha1-YLgTOWvjmz8SiKTB7V0efSi0ZKw=
   dependencies:
     lower-case "^1.1.1"
-
-"noble-mac@https://github.com/LukasBombach/noble-mac":
-  version "0.0.4"
-  resolved "https://github.com/LukasBombach/noble-mac#a71996c4634aefbf0f5bbf6ed4f37d6c9c219b39"
-  dependencies:
-    cross-spawn "^6.0.5"
-    napi-thread-safe-callback "0.0.6"
-    node-addon-api "^1.1.0"
-    node-pre-gyp "^0.10.0"
-
-node-addon-api@^1.1.0:
-  version "1.7.1"
-  resolved "https://spring.jfrog.io/spring/api/npm/npm-red/node-addon-api/-/node-addon-api-1.7.1.tgz#cf813cd69bb8d9100f6bdca6755fc268f54ac492"
-  integrity sha1-z4E81pu42RAPa9ymdV/CaPVKxJI=
 
 node-forge@0.7.5:
   version "0.7.5"
@@ -7276,22 +7278,6 @@ node-notifier@^5.2.1:
     semver "^5.5.0"
     shellwords "^0.1.1"
     which "^1.3.0"
-
-node-pre-gyp@^0.10.0:
-  version "0.10.3"
-  resolved "https://spring.jfrog.io/spring/api/npm/npm-red/node-pre-gyp/-/node-pre-gyp-0.10.3.tgz#3070040716afdc778747b61b6887bf78880b80fc"
-  integrity sha1-MHAEBxav3HeHR7YbaIe/eIgLgPw=
-  dependencies:
-    detect-libc "^1.0.2"
-    mkdirp "^0.5.1"
-    needle "^2.2.1"
-    nopt "^4.0.1"
-    npm-packlist "^1.1.6"
-    npmlog "^4.0.2"
-    rc "^1.2.7"
-    rimraf "^2.6.1"
-    semver "^5.3.0"
-    tar "^4"
 
 node-pre-gyp@^0.12.0:
   version "0.12.0"
@@ -8788,9 +8774,9 @@ pseudomap@^1.0.2:
   integrity sha1-8FKijacOYYkX7wqKw0wa5aaChrM=
 
 psl@^1.1.24, psl@^1.1.28:
-  version "1.2.0"
-  resolved "https://spring.jfrog.io/spring/api/npm/npm-red/psl/-/psl-1.2.0.tgz#df12b5b1b3a30f51c329eacbdef98f3a6e136dc6"
-  integrity sha1-3xK1sbOjD1HDKerL3vmPOm4TbcY=
+  version "1.3.0"
+  resolved "https://spring.jfrog.io/spring/api/npm/npm-red/psl/-/psl-1.3.0.tgz#e1ebf6a3b5564fa8376f3da2275da76d875ca1bd"
+  integrity sha1-4ev2o7VWT6g3bz2iJ12nbYdcob0=
 
 public-encrypt@^4.0.0:
   version "4.0.3"
@@ -9467,10 +9453,17 @@ resolve@1.10.0:
   dependencies:
     path-parse "^1.0.6"
 
-resolve@1.11.1, resolve@^1.10.0, resolve@^1.11.0, resolve@^1.11.1, resolve@^1.3.2, resolve@^1.5.0, resolve@^1.8.1, resolve@^1.9.0:
+resolve@1.11.1:
   version "1.11.1"
   resolved "https://spring.jfrog.io/spring/api/npm/npm-red/resolve/-/resolve-1.11.1.tgz#ea10d8110376982fef578df8fc30b9ac30a07a3e"
   integrity sha1-6hDYEQN2mC/vV434/DC5rDCgej4=
+  dependencies:
+    path-parse "^1.0.6"
+
+resolve@^1.10.0, resolve@^1.11.0, resolve@^1.11.1, resolve@^1.3.2, resolve@^1.5.0, resolve@^1.8.1, resolve@^1.9.0:
+  version "1.12.0"
+  resolved "https://spring.jfrog.io/spring/api/npm/npm-red/resolve/-/resolve-1.12.0.tgz#3fc644a35c84a48554609ff26ec52b66fa577df6"
+  integrity sha1-P8ZEo1yEpIVUYJ/ybsUrZvpXffY=
   dependencies:
     path-parse "^1.0.6"
 
@@ -9539,11 +9532,6 @@ rollup-plugin-commonjs@10.0.1:
     magic-string "^0.25.2"
     resolve "^1.11.0"
     rollup-pluginutils "^2.8.1"
-
-rollup-plugin-natives@0.5.0:
-  version "0.5.0"
-  resolved "https://spring.jfrog.io/spring/api/npm/npm-red/rollup-plugin-natives/-/rollup-plugin-natives-0.5.0.tgz#11fb630922a01d615c3f0c7654f2efcd20579e65"
-  integrity sha1-EftjCSKgHWFcPwx2VPLvzSBXnmU=
 
 rollup-plugin-node-resolve@5.2.0:
   version "5.2.0"
@@ -10014,9 +10002,9 @@ source-map-resolve@^0.5.0:
     urix "^0.1.0"
 
 source-map-support@^0.5.12, source-map-support@^0.5.6, source-map-support@~0.5.10, source-map-support@~0.5.12:
-  version "0.5.12"
-  resolved "https://spring.jfrog.io/spring/api/npm/npm-red/source-map-support/-/source-map-support-0.5.12.tgz#b4f3b10d51857a5af0138d3ce8003b201613d599"
-  integrity sha1-tPOxDVGFelrwE4086AA7IBYT1Zk=
+  version "0.5.13"
+  resolved "https://spring.jfrog.io/spring/api/npm/npm-red/source-map-support/-/source-map-support-0.5.13.tgz#31b24a9c2e73c2de85066c0feb7d44767ed52932"
+  integrity sha1-MbJKnC5zwt6FBmwP631Edn7VKTI=
   dependencies:
     buffer-from "^1.0.0"
     source-map "^0.6.0"
@@ -10406,9 +10394,9 @@ symbol-tree@^3.2.2:
   integrity sha1-QwY30ki6d+B4iDlR+5qg7tfGP6I=
 
 table@^5.2.3:
-  version "5.4.4"
-  resolved "https://spring.jfrog.io/spring/api/npm/npm-red/table/-/table-5.4.4.tgz#6e0f88fdae3692793d1077fd172a4667afe986a6"
-  integrity sha1-bg+I/a42knk9EHf9FypGZ6/phqY=
+  version "5.4.5"
+  resolved "https://spring.jfrog.io/spring/api/npm/npm-red/table/-/table-5.4.5.tgz#c8f4ea2d8fee08c0027fac27b0ec0a4fe01dfa42"
+  integrity sha1-yPTqLY/uCMACf6wnsOwKT+Ad+kI=
   dependencies:
     ajv "^6.10.2"
     lodash "^4.17.14"
@@ -10463,19 +10451,18 @@ terser-webpack-plugin@1.2.3:
     worker-farm "^1.5.2"
 
 terser-webpack-plugin@^1.1.0:
-  version "1.3.0"
-  resolved "https://spring.jfrog.io/spring/api/npm/npm-red/terser-webpack-plugin/-/terser-webpack-plugin-1.3.0.tgz#69aa22426299f4b5b3775cbed8cb2c5d419aa1d4"
-  integrity sha1-aaoiQmKZ9LWzd1y+2MssXUGaodQ=
+  version "1.4.1"
+  resolved "https://spring.jfrog.io/spring/api/npm/npm-red/terser-webpack-plugin/-/terser-webpack-plugin-1.4.1.tgz#61b18e40eaee5be97e771cdbb10ed1280888c2b4"
+  integrity sha1-YbGOQOruW+l+dxzbsQ7RKAiIwrQ=
   dependencies:
-    cacache "^11.3.2"
-    find-cache-dir "^2.0.0"
+    cacache "^12.0.2"
+    find-cache-dir "^2.1.0"
     is-wsl "^1.1.0"
-    loader-utils "^1.2.3"
     schema-utils "^1.0.0"
     serialize-javascript "^1.7.0"
     source-map "^0.6.1"
-    terser "^4.0.0"
-    webpack-sources "^1.3.0"
+    terser "^4.1.2"
+    webpack-sources "^1.4.0"
     worker-farm "^1.7.0"
 
 terser@^3.16.1:
@@ -10487,7 +10474,7 @@ terser@^3.16.1:
     source-map "~0.6.1"
     source-map-support "~0.5.10"
 
-terser@^4.0.0, terser@^4.1.0:
+terser@^4.1.0, terser@^4.1.2:
   version "4.1.2"
   resolved "https://spring.jfrog.io/spring/api/npm/npm-red/terser/-/terser-4.1.2.tgz#b2656c8a506f7ce805a3f300a2ff48db022fa391"
   integrity sha1-smVsilBvfOgFo/MAov9I2wIvo5E=
@@ -11141,10 +11128,10 @@ webpack-manifest-plugin@2.0.4:
     lodash ">=3.5 <5"
     tapable "^1.0.0"
 
-webpack-sources@^1.1.0, webpack-sources@^1.3.0:
-  version "1.3.0"
-  resolved "https://spring.jfrog.io/spring/api/npm/npm-red/webpack-sources/-/webpack-sources-1.3.0.tgz#2a28dcb9f1f45fe960d8f1493252b5ee6530fa85"
-  integrity sha1-KijcufH0X+lg2PFJMlK17mUw+oU=
+webpack-sources@^1.1.0, webpack-sources@^1.3.0, webpack-sources@^1.4.0:
+  version "1.4.1"
+  resolved "https://spring.jfrog.io/spring/api/npm/npm-red/webpack-sources/-/webpack-sources-1.4.1.tgz#b91b2c5b1c4e890ff50d1d35b7fa3657040da1da"
+  integrity sha1-uRssWxxOiQ/1DR01t/o2VwQNodo=
   dependencies:
     source-list-map "^2.0.0"
     source-map "~0.6.1"
@@ -11614,6 +11601,6 @@ yauzl@2.4.1:
     fd-slicer "~1.0.1"
 
 yn@^3.0.0:
-  version "3.1.0"
-  resolved "https://spring.jfrog.io/spring/api/npm/npm-red/yn/-/yn-3.1.0.tgz#fcbe2db63610361afcc5eb9e0ac91e976d046114"
-  integrity sha1-/L4ttjYQNhr8xeueCskel20EYRQ=
+  version "3.1.1"
+  resolved "https://spring.jfrog.io/spring/api/npm/npm-red/yn/-/yn-3.1.1.tgz#1e87401a09d767c1d5eab26a6e4c185182d2eb50"
+  integrity sha1-HodAGgnXZ8HV6rJqbkwYUYLS61A=

@@ -26,6 +26,7 @@
     ]
   },
   "dependencies": {
+    "de1": "0.0.1",
     "react": "16.8.6",
     "react-dom": "16.8.6",
     "react-scripts": "3.0.1"
@@ -42,7 +43,6 @@
     "electron-builder": "20.44.4",
     "electron-devtools-installer": "2.2.4",
     "electron-is-dev": "1.1.0",
-    "module-alias": "2.2.0",
     "typescript": "3.5.2",
     "wait-on": "3.2.0"
   }

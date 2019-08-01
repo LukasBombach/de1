@@ -11,7 +11,6 @@
     "example": "ts-node --project tsconfig.json"
   },
   "dependencies": {
-    "noble-mac": "https://github.com/LukasBombach/noble-mac",
     "sblendid": "1.0.0"
   },
   "devDependencies": {
@@ -20,7 +19,6 @@
     "rollup": "1.17.0",
     "rollup-plugin-auto-external": "2.0.0",
     "rollup-plugin-commonjs": "10.0.1",
-    "rollup-plugin-natives": "0.5.0",
     "rollup-plugin-node-resolve": "5.2.0",
     "rollup-plugin-terser": "5.1.1",
     "rollup-plugin-typescript2": "0.22.1",

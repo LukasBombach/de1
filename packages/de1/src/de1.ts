@@ -1,14 +1,18 @@
 import Sblendid, { Peripheral, Service, Adapter } from "sblendid";
-import macOs from "noble-mac";
 import converters from "./converters";
 
 export default class DE1 {
   private machine?: Peripheral;
   private service?: Service;
 
-  public getAdapter(): Adapter {
+  public getAdapterForDebugging(): Adapter {
     if (!this.machine) throw new Error("No Machine, not connected?");
     return this.machine.adapter;
+  }
+
+  public async scanForDebugging(): Promise<void> {
+    const sblendid = await Sblendid.powerOn();
+    sblendid.startScanning(p => console.log(p.uuid));
   }
 
   public static async connect(): Promise<DE1> {
@@ -19,7 +23,7 @@ export default class DE1 {
 
   public async connect(): Promise<void> {
     if (this.isConnected()) return;
-    this.machine = await Sblendid.connect("DE1", macOs);
+    this.machine = await Sblendid.connect("DE1");
     this.service = await this.machine.getService("a000", converters);
   }
 
