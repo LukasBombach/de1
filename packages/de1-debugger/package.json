@@ -4,9 +4,9 @@
   "private": true,
   "main": "electron.js",
   "scripts": {
-    "start": "concurrently \"BROWSER=none yarn start:cra\" \"wait-on http://localhost:3000 && yarn start:electron\"",
-    "start:electron": "electron .",
-    "start:cra": "rescripts start",
+    "dev": "concurrently \"BROWSER=none yarn dev:cra\" \"wait-on http://localhost:3000 && yarn dev:electron\"",
+    "dev:electron": "electron .",
+    "dev:cra": "rescripts start",
     "build": "rescripts build",
     "test": "rescripts test"
   },
@@ -31,7 +31,20 @@
     "electron-builder": "20.44.4",
     "electron-devtools-installer": "2.2.4",
     "electron-is-dev": "1.1.0",
+    "node-loader": "0.6.0",
     "typescript": "3.5.2",
     "wait-on": "3.2.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

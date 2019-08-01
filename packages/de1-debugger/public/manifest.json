@@ -1,6 +1,6 @@
 {
-  "short_name": "DE1 Demo App",
-  "name": "DE1 Demo App showing all Features of the DE1 library",
+  "short_name": "DE1 Debugger App",
+  "name": "DE1 Debugger App",
   "icons": [
     {
       "src": "icons/icon_128@2x.png",
