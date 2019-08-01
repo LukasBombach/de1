@@ -5,8 +5,8 @@ import "./App.css";
 async function de1State() {
   const de1 = await DE1.connect();
   const state = await de1.get("state");
-  // await de1.disconnect();
-  // console.log(state);
+  await de1.disconnect();
+  console.log(state);
 }
 
 const App: React.FC = () => {
