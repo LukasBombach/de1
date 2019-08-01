@@ -22,8 +22,8 @@ app.on("activate", () => (mainWindow ? createWindow() : null));
 
 async function createWindow() {
   mainWindow = new BrowserWindow({
-    width: 900,
-    height: 700,
+    width: 1200,
+    height: 1200,
     icon,
     webPreferences: {
       nodeIntegration: true
