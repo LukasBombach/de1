@@ -19,7 +19,11 @@ const Read: React.FC<ReadProps> = ({ feature, connected }) => {
   return (
     <Row>
       <Col span={12}>
-        <Button loading={loading} onClick={() => readValue()}>
+        <Button
+          loading={loading}
+          disabled={!connected}
+          onClick={() => readValue()}
+        >
           Read
         </Button>
       </Col>

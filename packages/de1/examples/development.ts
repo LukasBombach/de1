@@ -6,8 +6,15 @@ import DE1 from "../src";
   const de1 = await DE1.connect();
   log("Connected", de1.isConnected());
 
-  // const a002 = await de1.get("a002");
-  // log("a002", a002.toString("hex"));
+  await de1.on("state", (...args) => logNotification("Notification", ...args));
+
+  log("State", await de1.get("state"));
+
+  await de1.set("state", "idle");
+
+  log("State", await de1.get("state"));
+
+  await de1.set("state", "sleep");
 
   log("State", await de1.get("state"));
 
@@ -16,4 +23,8 @@ import DE1 from "../src";
 
 function log(label: string, ...rest: any[]) {
   console.log(chalk.blue(label.padEnd(20, " ")), ...rest);
+}
+
+function logNotification(label: string, ...rest: any[]) {
+  console.log(chalk.red(label.padEnd(20, " ")), ...rest);
 }

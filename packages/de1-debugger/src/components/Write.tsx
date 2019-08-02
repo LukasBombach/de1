@@ -1,18 +1,6 @@
 import React, { useState } from "react";
 import { Row, Col, Button, Select, Input } from "antd";
-import de1 from "../hooks/de1";
-
-function useWrite(feature: String): [any, (value: any) => Promise<void>] {
-  const [loading, setLoading] = useState(false);
-
-  const writeValue = async (value: any) => {
-    setLoading(true);
-    await de1.set(feature, value);
-    setLoading(false);
-  };
-
-  return [loading, writeValue];
-}
+import useWrite from "../hooks/de1/useWrite";
 
 interface WriteProps {
   feature: String;
@@ -33,13 +21,21 @@ const Write: React.FC<WriteProps> = ({ feature, values, connected }) => {
   return (
     <Row>
       <Col span={12}>
-        <Button loading={loading} onClick={() => writeValue(value)}>
+        <Button
+          loading={loading}
+          disabled={!connected}
+          onClick={() => writeValue(value)}
+        >
           Write
         </Button>
       </Col>
       <Col span={12}>
         {values ? (
-          <Select<string> style={{ width: "100%" }} onChange={v => setValue(v)}>
+          <Select<string>
+            style={{ width: "100%" }}
+            disabled={!connected}
+            onChange={v => setValue(v)}
+          >
             {valuesArray!.map(([name, value]) => (
               <Select.Option key={name} value={value}>
                 {name}
@@ -47,7 +43,11 @@ const Write: React.FC<WriteProps> = ({ feature, values, connected }) => {
             ))}
           </Select>
         ) : (
-          <Input value={value} onChange={e => setValue(e.target.value)} />
+          <Input
+            value={value}
+            disabled={!connected}
+            onChange={e => setValue(e.target.value)}
+          />
         )}
       </Col>
     </Row>

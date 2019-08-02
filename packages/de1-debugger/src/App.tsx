@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { Layout, Row, Col } from "antd";
 import Connection from "./components/Connection";
 import Control from "./components/Control";
 import { states } from "./hooks/de1";
 
 const App: React.FC = () => {
+  const [isConnected, setIsConnected] = useState(false);
+
   return (
     <Layout>
       <Layout.Content>
@@ -15,11 +17,12 @@ const App: React.FC = () => {
               read={true}
               write={true}
               notify={true}
+              connected={isConnected}
               values={Object.keys(states)}
             />
           </Col>
         </Row>
-        <Connection />
+        <Connection onChange={v => setIsConnected(v)} />
       </Layout.Content>
     </Layout>
   );
