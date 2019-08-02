@@ -11,10 +11,14 @@ const Read: React.FC<ReadProps> = ({ feature, connected }) => {
   const [value, loading, readValue] = useRead(feature);
 
   const valueTagStyles = {
-    height: 32,
-    width: "100%",
-    padding: "4px 11px"
+    height: "auto",
+    maxHeight: 64,
+    overflow: "scroll",
+    width: "100%"
   };
+
+  const valueStr =
+    typeof value === "object" ? JSON.stringify(value, null, 2) : value;
 
   return (
     <Row>
@@ -28,7 +32,9 @@ const Read: React.FC<ReadProps> = ({ feature, connected }) => {
         </Button>
       </Col>
       <Col span={12}>
-        <Tag style={valueTagStyles}>{value}</Tag>
+        <Tag style={valueTagStyles}>
+          <pre>{valueStr}</pre>
+        </Tag>
       </Col>
     </Row>
   );
