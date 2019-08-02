@@ -1,20 +1,20 @@
 import React from "react";
-import DE1 from "de1";
-import "./App.css";
-
-async function de1State() {
-  const de1 = await DE1.connect();
-  console.log("Reading 1", await de1.get("state"));
-  console.log("Reading 2", await de1.get("state"));
-}
+import { Layout, Row, Col } from "antd";
+import Connection from "./components/Connection";
+import Control from "./components/Control";
 
 const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <button onClick={() => de1State()}>Hello World</button>
-      </header>
-    </div>
+    <Layout>
+      <Layout.Content>
+        <Row gutter={16}>
+          <Col xs={24} sm={12} md={6} lg={8} xl={4}>
+            <Control feature="state" read={true} notify={true} />
+          </Col>
+        </Row>
+        <Connection />
+      </Layout.Content>
+    </Layout>
   );
 };
 
