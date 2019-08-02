@@ -31,7 +31,13 @@ const Notify: React.FC<NotifyProps> = ({ feature, connected }) => {
           bordered
           dataSource={values}
           style={listStyle}
-          renderItem={v => <List.Item>{v}</List.Item>}
+          renderItem={value => {
+            value =
+              typeof value === "object"
+                ? JSON.stringify(value, null, 2)
+                : value;
+            return <List.Item>{value}</List.Item>;
+          }}
         />
       </Col>
     </Row>

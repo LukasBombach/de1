@@ -12,6 +12,7 @@ const Read: React.FC<ReadProps> = ({ feature, connected }) => {
 
   const valueTagStyles = {
     height: "auto",
+    minHeight: 32,
     maxHeight: 64,
     overflow: "scroll",
     width: "100%"
@@ -33,7 +34,7 @@ const Read: React.FC<ReadProps> = ({ feature, connected }) => {
       </Col>
       <Col span={12}>
         <Tag style={valueTagStyles}>
-          <pre>{valueStr}</pre>
+          <pre>{value && valueStr}</pre>
         </Tag>
       </Col>
     </Row>

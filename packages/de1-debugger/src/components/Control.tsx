@@ -6,6 +6,7 @@ import Notify from "./Notify";
 
 interface ControlProps {
   feature: String;
+  uuid: String;
   connected?: boolean;
   read?: Boolean;
   write?: Boolean;
@@ -15,13 +16,14 @@ interface ControlProps {
 
 const Control: React.FC<ControlProps> = ({
   feature,
+  uuid,
   connected = false,
   read = false,
   write = false,
   notify = false,
   values
 }) => (
-  <Card title={feature}>
+  <Card title={`${feature} ${uuid}`}>
     {read && <Read feature={feature} connected={connected} />}
     {write && <Write feature={feature} connected={connected} values={values} />}
     {notify && <Notify feature={feature} connected={connected} />}

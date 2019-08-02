@@ -9,15 +9,19 @@ export default class Parser<T> {
     this.varsInternal = {};
   }
 
-  public char(name: string) {
-    const value = this.dataView.getUint8(this.offset);
+  public char(name: string, divideBy: number | ((value: number) => any) = 1) {
+    const process =
+      typeof divideBy === "number" ? (v: number) => v / divideBy : divideBy;
+    const value = process(this.dataView.getUint8(this.offset));
     this.setVar(name, value);
     this.offset += 1;
     return this;
   }
 
-  public short(name: string, divideBy = 1) {
-    const value = this.dataView.getUint16(this.offset, false) / divideBy;
+  public short(name: string, divideBy: number | ((value: number) => any) = 1) {
+    const process =
+      typeof divideBy === "number" ? (v: number) => v / divideBy : divideBy;
+    const value = process(this.dataView.getUint16(this.offset, false));
     this.setVar(name, value);
     this.offset += 2;
     return this;
