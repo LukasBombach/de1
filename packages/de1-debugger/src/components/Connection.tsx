@@ -17,7 +17,7 @@ const Connection: React.FC = () => {
   if (isConnected) {
     return (
       <Button type="primary" style={stickyBottomRight}>
-        <Icon type="check-circle" theme="twoTone" twoToneColor="#52c41a" />
+        <Icon type="check-circle" theme="twoTone" />
         Connected!
       </Button>
     );
