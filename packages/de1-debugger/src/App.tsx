@@ -4,8 +4,8 @@ import "./App.css";
 
 async function de1State() {
   const de1 = await DE1.connect();
-  const state = await de1.get("state");
-  console.log(state);
+  console.log("Reading 1", await de1.get("state"));
+  console.log("Reading 2", await de1.get("state"));
 }
 
 const App: React.FC = () => {
