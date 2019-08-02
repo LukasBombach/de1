@@ -1,5 +1,6 @@
 import React from "react";
 import { Card } from "antd";
+import Read from "./Read";
 
 interface ControlProps {
   feature: String;
@@ -11,15 +12,13 @@ interface ControlProps {
 
 const Control: React.FC<ControlProps> = ({
   feature,
-  connected,
+  connected = false,
   read = false,
   write = false,
   notify = false
 }) => (
   <Card title={feature}>
-    <p>Card content</p>
-    <p>Card content</p>
-    <p>Card content</p>
+    {read && <Read feature={feature} connected={connected} />}
   </Card>
 );
 
