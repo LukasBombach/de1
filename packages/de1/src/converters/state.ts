@@ -3,12 +3,12 @@ import Serializer from "../serializer";
 
 const converter: Converter<State> = {
   name: "state",
-  uuid: "a003",
+  uuid: "a002",
   encode,
   decode
 };
 
-const states: States = {
+export const states: States = {
   sleep: 0x00,
   goingToSleep: 0x01,
   idle: 0x02,
@@ -33,30 +33,24 @@ const states: States = {
 };
 
 function decode(data: Buffer): State {
-  const { state: value } = parse(data);
+  const value = parse(data);
   const state = getNameFromValue(value);
   if (!state) throw new Error(`Received unexpected state ${value}`);
   return state;
 }
 
 function encode(state: State): Buffer {
-  const stateValue = states[state];
-  if (stateValue === undefined) throw new Error(`Unknown state "${state}"`);
+  const value = states[state];
+  if (value === undefined) throw new Error(`Unknown state "${state}"`);
   return serialize(state);
 }
 
-function parse(data: Buffer): StateParseResult {
-  return new Parser<StateParseResult>(data)
-    .char("state")
-    .char("substate")
-    .vars();
+function parse(data: Buffer): number {
+  return new Parser<{ state: number }>(data).char("state").vars().state;
 }
 
 function serialize(state: State): Buffer {
-  return new Serializer()
-    .char(states[state])
-    .char(0x00)
-    .buffer();
+  return new Serializer().char(states[state]).buffer();
 }
 
 function getNameFromValue(state: number): State | undefined {

@@ -19,11 +19,6 @@ interface Converter<T> {
   decode?: Decoder<T>;
 }
 
-interface StateParseResult {
-  state: number;
-  substate: number;
-}
-
 declare enum State {
   sleep,
   goingToSleep,

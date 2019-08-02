@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Row, Col, Button, Tag } from "antd";
 import useRead from "../hooks/de1/useRead";
 
@@ -7,14 +7,14 @@ interface ReadProps {
   connected?: boolean;
 }
 
-const valueTagStyles = {
-  marginTop: 7,
-  height: 22,
-  minWidth: 70
-};
-
 const Read: React.FC<ReadProps> = ({ feature, connected }) => {
   const [value, loading, readValue] = useRead(feature);
+
+  const valueTagStyles = {
+    height: 32,
+    width: "100%",
+    padding: "4px 11px"
+  };
 
   return (
     <Row>

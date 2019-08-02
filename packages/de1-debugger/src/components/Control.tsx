@@ -1,6 +1,7 @@
 import React from "react";
 import { Card } from "antd";
 import Read from "./Read";
+import Write from "./Write";
 
 interface ControlProps {
   feature: String;
@@ -8,6 +9,7 @@ interface ControlProps {
   read?: Boolean;
   write?: Boolean;
   notify?: Boolean;
+  values?: Record<string, any>;
 }
 
 const Control: React.FC<ControlProps> = ({
@@ -15,10 +17,12 @@ const Control: React.FC<ControlProps> = ({
   connected = false,
   read = false,
   write = false,
-  notify = false
+  notify = false,
+  values
 }) => (
   <Card title={feature}>
     {read && <Read feature={feature} connected={connected} />}
+    {write && <Write feature={feature} connected={connected} values={values} />}
   </Card>
 );
 

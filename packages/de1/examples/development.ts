@@ -2,15 +2,14 @@ import chalk from "chalk";
 import DE1 from "../src";
 
 (async () => {
+  log("Connecting...");
   const de1 = await DE1.connect();
-
   log("Connected", de1.isConnected());
 
-  log("State reading 1", await de1.get("state"));
+  // const a002 = await de1.get("a002");
+  // log("a002", a002.toString("hex"));
 
-  await new Promise(res => setTimeout(res, 1000));
-
-  log("State reading 2", await de1.get("state"));
+  log("State", await de1.get("state"));
 
   process.exit();
 })();
