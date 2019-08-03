@@ -11,10 +11,12 @@ export default function useNotify(
     setValues(values => values.concat(value));
   };
 
+  const [[persistedListener]] = useState([listener]);
+
   const start = () =>
-    de1.on(feature, listener).then(() => setIsNotifiying(true));
+    de1.on(feature, persistedListener).then(() => setIsNotifiying(true));
   const stop = () =>
-    de1.off(feature, listener).then(() => setIsNotifiying(false));
+    de1.off(feature, persistedListener).then(() => setIsNotifiying(false));
 
   return [start, stop, isNotifiying, values];
 }

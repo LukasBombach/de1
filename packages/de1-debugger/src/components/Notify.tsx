@@ -15,6 +15,13 @@ const Notify: React.FC<NotifyProps> = ({ feature, connected }) => {
     overflow: "scroll"
   };
 
+  if (values.length)
+    console.info(
+      `%cNotification for ${feature}`,
+      "color: green;",
+      values[values.length - 1]
+    );
+
   return (
     <Row>
       <Col span={12}>
@@ -29,7 +36,7 @@ const Notify: React.FC<NotifyProps> = ({ feature, connected }) => {
         <List
           size="small"
           bordered
-          dataSource={values}
+          dataSource={values.reverse()}
           style={listStyle}
           renderItem={value => {
             value =

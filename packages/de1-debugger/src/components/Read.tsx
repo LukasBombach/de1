@@ -21,6 +21,9 @@ const Read: React.FC<ReadProps> = ({ feature, connected }) => {
   const valueStr =
     typeof value === "object" ? JSON.stringify(value, null, 2) : value;
 
+  if (value)
+    console.info(`%cParsed value for ${feature}`, "color: blue;", value);
+
   return (
     <Row>
       <Col span={12}>
