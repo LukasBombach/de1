@@ -1,6 +1,6 @@
 import Parser from "../parser";
 
-interface Water {
+export interface Water {
   level: number;
   startFillLevel: number;
 }

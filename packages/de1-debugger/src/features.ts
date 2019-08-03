@@ -71,8 +71,22 @@ export default [
     write: true
   },
   {
+    feature: "shotDescription",
+    uuid: "a00c",
+    unused: true,
+    deprecated: true,
+    read: true,
+    write: true
+  },
+  {
     feature: "shot",
     uuid: "a00d",
+    read: true,
+    notify: true
+  },
+  {
+    feature: "stateInfo",
+    uuid: "a00e",
     read: true,
     notify: true
   },
