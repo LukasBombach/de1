@@ -1,0 +1,35 @@
+/*
+<Col key={feature.feature} xs={24} sm={12} md={6} lg={8} xl={4}></Col>
+*/
+
+.app__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(6, 200px);
+  grid-column-gap: 16px;
+  grid-row-gap: 16px;
+}
+
+/* sm	≥576px */
+@media only screen and (min-width: 576px) {
+  .app__grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 250px);
+  }
+}
+
+/* md	≥768px */
+@media only screen and (min-width: 768px) {
+  .app__grid {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 250px);
+  }
+}
+
+/* lg	≥992px */
+@media only screen and (min-width: 992px) {
+  .app__grid {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 250px);
+  }
+}
