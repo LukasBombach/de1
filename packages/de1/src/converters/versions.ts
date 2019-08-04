@@ -1,3 +1,4 @@
+import { Converter } from "sblendid";
 import Parser from "../parser";
 
 export interface Versions {

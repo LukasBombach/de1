@@ -1,5 +1,32 @@
+import { Converter } from "sblendid";
 import Parser from "../parser";
 import Serializer from "../serializer";
+
+declare enum State {
+  sleep,
+  goingToSleep,
+  idle,
+  busy,
+  espresso,
+  steam,
+  hotWater,
+  shortCal,
+  selfTest,
+  longCal,
+  descale,
+  fatalError,
+  init,
+  noRequest,
+  skipToNext,
+  hotWaterRinse,
+  steamRinse,
+  refill,
+  clean,
+  inBootLoader,
+  airPurge
+}
+
+type States = { [S in keyof typeof State]: number };
 
 const converter: Converter<State> = {
   name: "state",

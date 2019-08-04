@@ -1,4 +1,5 @@
 import Sblendid, { Peripheral, Service } from "sblendid";
+import converters, { De1Converters } from "./converters";
 
 type De1State =
   | "disconnected"
@@ -96,21 +97,21 @@ class DE1 {
     return await this.read("state");
   }
 
-  async getTemperature(): Promise<number> {}
+  // async getTemperature(): Promise<number> {}
 
   async getWaterlevel(): Promise<number> {
     const { level } = await this.read("water");
     return level;
   }
 
-  async getEspressoSettings(): Promise<De1EspressoSettings> {}
-  async setEspressoSettings(settings: De1EspressoSettings): Promise<void> {}
+  // async getEspressoSettings(): Promise<De1EspressoSettings> {}
+  // async setEspressoSettings(settings: De1EspressoSettings): Promise<void> {}
 
-  async getSteamSettings(): Promise<De1SteamSettings> {}
-  async setSteamSettings(settings: De1SteamSettings): Promise<void> {}
+  // async getSteamSettings(): Promise<De1SteamSettings> {}
+  // async setSteamSettings(settings: De1SteamSettings): Promise<void> {}
 
-  async getHotWaterSettings(): Promise<De1HotWaterSettings> {}
-  async setHotWaterSettings(settings: De1HotWaterSettings): Promise<void> {}
+  // async getHotWaterSettings(): Promise<De1HotWaterSettings> {}
+  // async setHotWaterSettings(settings: De1HotWaterSettings): Promise<void> {}
 
   async on(event: De1Event, listener: De1Listener): Promise<void> {}
   async off(event: De1Event, listener: De1Listener): Promise<void> {}
