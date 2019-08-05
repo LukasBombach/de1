@@ -1,13 +1,5 @@
 import Sblendid, { Peripheral, Service, Value, Listener } from "sblendid";
-import converters, {
-  Converters,
-  State,
-  Water,
-  Versions,
-  Shot,
-  ShotSettings,
-  StateInfo
-} from "./converters";
+import converters, { Converters, State } from "./converters";
 
 type De1State =
   | "disconnected"
