@@ -19,7 +19,7 @@ export interface Versions {
 }
 
 const converter: Converter<Versions> = {
-  name: "versions",
+  // name: "versions",
   uuid: "a001",
   decode
 };

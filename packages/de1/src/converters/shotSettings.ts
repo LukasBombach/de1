@@ -14,7 +14,7 @@ export interface ShotSettings {
 }
 
 const converter: Converter<ShotSettings> = {
-  name: "shotSettings",
+  // name: "shotSettings",
   uuid: "a00b",
   encode,
   decode

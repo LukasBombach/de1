@@ -8,7 +8,7 @@ export interface StateInfo {
 }
 
 const converter: Converter<StateInfo> = {
-  name: "stateInfo",
+  // name: "stateInfo",
   uuid: "a00e",
   decode
 };

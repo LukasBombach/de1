@@ -1,5 +1,5 @@
 import Sblendid, { Peripheral, Service } from "sblendid";
-import converters, { De1Converters } from "./converters";
+import converters, { De1Converters, Name, Value } from "./converters";
 
 type De1State =
   | "disconnected"
@@ -16,7 +16,7 @@ type De1State =
 type De1Event = "state" | "temperature" | "waterlevel";
 type De1Listener = () => Promise<void> | void;
 
-class DE1 {
+export default class DE1 {
   private machine?: Peripheral;
   private service?: Service<De1Converters>;
 
@@ -113,28 +113,24 @@ class DE1 {
   // async getHotWaterSettings(): Promise<De1HotWaterSettings> {}
   // async setHotWaterSettings(settings: De1HotWaterSettings): Promise<void> {}
 
-  async on(event: De1Event, listener: De1Listener): Promise<void> {}
-  async off(event: De1Event, listener: De1Listener): Promise<void> {}
+  public async on(event: De1Event, listener: De1Listener): Promise<void> {}
+  public async off(event: De1Event, listener: De1Listener): Promise<void> {}
+
+  public getBleAdapter(): Service<De1Converters> {
+    if (!this.service) throw new Error("DE1 is not connected yet");
+    return this.service;
+  }
 
   private isConnected(): boolean {
     if (!this.machine) return false;
     return this.machine.isConnected();
   }
 
-  private async read<C extends De1Converter>(
-    name: De1ConverterName<C>
-  ): Promise<De1ConverterValue<C>> {
+  private async read<N extends Name>(name: N): Promise<Value<N>> {
     return await this.getBleAdapter().read(name);
   }
 
-  private async write<C extends De1Converter>(
-    name: De1ConverterName<C>,
-    value: De1ConverterValue<C>
-  ): Promise<void> {
+  private async write<N extends Name>(name: N, value: Value<N>): Promise<void> {
     await this.getBleAdapter().write(name, value);
-  }
-
-  getBleAdapter(): Service<De1Converters> {
-    return this.service;
   }
 }

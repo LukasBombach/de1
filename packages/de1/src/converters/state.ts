@@ -29,7 +29,7 @@ declare enum State {
 type States = { [S in keyof typeof State]: number };
 
 const converter: Converter<State> = {
-  name: "state",
+  // name: "state",
   uuid: "a002",
   encode,
   decode

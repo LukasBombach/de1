@@ -20,7 +20,7 @@ export interface Shot {
 export const herz = 50;
 
 const converter: Converter<Shot> = {
-  name: "shot",
+  // name: "shot",
   uuid: "a00d",
   decode
 };
