@@ -101,7 +101,11 @@ export default class DE1 {
     if (currentState === "descale") await this.write("state", "idle");
   }
 
-  async getState(): Promise<De1State> {
+  // todo return DE1State, not ble state
+  // todo return DE1State, not ble state
+  // todo return DE1State, not ble state
+  // todo return DE1State, not ble state
+  async getState(): Promise<State> {
     return await this.read("state");
   }
 

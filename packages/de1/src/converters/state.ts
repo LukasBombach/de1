@@ -2,31 +2,31 @@ import { Converter } from "sblendid";
 import Parser from "../parser";
 import Serializer from "../serializer";
 
-export enum State {
-  sleep,
-  goingToSleep,
-  idle,
-  busy,
-  espresso,
-  steam,
-  hotWater,
-  shortCal,
-  selfTest,
-  longCal,
-  descale,
-  fatalError,
-  init,
-  noRequest,
-  skipToNext,
-  hotWaterRinse,
-  steamRinse,
-  refill,
-  clean,
-  inBootLoader,
-  airPurge
-}
+export type State =
+  | "sleep"
+  | "goingToSleep"
+  | "idle"
+  | "busy"
+  | "espresso"
+  | "steam"
+  | "hotWater"
+  | "shortCal"
+  | "selfTest"
+  | "longCal"
+  | "descale"
+  | "fatalError"
+  | "init"
+  | "noRequest"
+  | "skipToNext"
+  | "hotWaterRinse"
+  | "steamRinse"
+  | "refill"
+  | "clean"
+  | "inBootLoader"
+  | "airPurge";
 
-type States = { [S in keyof typeof State]: number };
+// type States = { [S in State]: number };
+type States = Record<State, number>;
 
 const converter: Converter<State> = {
   // name: "state",
@@ -80,8 +80,12 @@ function serialize(state: State): Buffer {
   return new Serializer().char(states[state]).buffer();
 }
 
-function getNameFromValue(state: number): State | undefined {
-  for (const k in states) if (states[k] === state) return k as any;
+function getNameFromValue(state: number): State {
+  const values = Object.values(states);
+  const keys = Object.keys(states);
+  const valueIndex = values.indexOf(state);
+  if (valueIndex === -1) throw new Error(`Invalid state value "${state}"`);
+  return keys[valueIndex] as State;
 }
 
 export default converter;
