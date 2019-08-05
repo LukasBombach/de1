@@ -2,7 +2,7 @@ import { Converter } from "sblendid";
 import Parser from "../parser";
 import Serializer from "../serializer";
 
-declare enum State {
+export enum State {
   sleep,
   goingToSleep,
   idle,

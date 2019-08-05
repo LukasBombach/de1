@@ -6,17 +6,17 @@ export interface Water {
   startFillLevel: number;
 }
 
-const converter: Converter<number> = {
+const converter: Converter<Water> = {
   // name: "water",
   uuid: "a011",
   decode
 };
 
-function decode(data: Buffer): number {
+function decode(data: Buffer): Water {
   return new Parser<Water>(data)
     .short("level", 256)
     .short("startFillLevel", 256)
-    .vars().level;
+    .vars();
 }
 
 export default converter;

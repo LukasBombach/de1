@@ -1,5 +1,13 @@
-import Sblendid, { Peripheral, Service } from "sblendid";
-import converters, { De1Converters, Name, Value } from "./converters";
+import Sblendid, { Peripheral, Service, Value, Listener } from "sblendid";
+import converters, {
+  Converters,
+  State,
+  Water,
+  Versions,
+  Shot,
+  ShotSettings,
+  StateInfo
+} from "./converters";
 
 type De1State =
   | "disconnected"
@@ -18,7 +26,7 @@ type De1Listener = () => Promise<void> | void;
 
 export default class DE1 {
   private machine?: Peripheral;
-  private service?: Service<De1Converters>;
+  private service?: Service<Converters>;
 
   static async connect(): Promise<DE1> {
     const de1 = new DE1();
@@ -113,10 +121,17 @@ export default class DE1 {
   // async getHotWaterSettings(): Promise<De1HotWaterSettings> {}
   // async setHotWaterSettings(settings: De1HotWaterSettings): Promise<void> {}
 
-  public async on(event: De1Event, listener: De1Listener): Promise<void> {}
-  public async off(event: De1Event, listener: De1Listener): Promise<void> {}
+  public async on<E extends keyof Converters>(
+    event: De1Event,
+    listener: Listener<Converters, E>
+  ): Promise<void> {}
 
-  public getBleAdapter(): Service<De1Converters> {
+  public async off<E extends keyof Converters>(
+    event: De1Event,
+    listener: Listener<Converters, E>
+  ): Promise<void> {}
+
+  public getBleAdapter(): Service<Converters> {
     if (!this.service) throw new Error("DE1 is not connected yet");
     return this.service;
   }
@@ -126,11 +141,16 @@ export default class DE1 {
     return this.machine.isConnected();
   }
 
-  private async read<N extends Name>(name: N): Promise<Value<N>> {
+  private async read<N extends keyof Converters>(
+    name: N
+  ): Promise<Value<Converters, N>> {
     return await this.getBleAdapter().read(name);
   }
 
-  private async write<N extends Name>(name: N, value: Value<N>): Promise<void> {
+  private async write<N extends keyof Converters>(
+    name: N,
+    value: Value<Converters, N>
+  ): Promise<void> {
     await this.getBleAdapter().write(name, value);
   }
 }
