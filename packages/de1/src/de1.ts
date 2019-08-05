@@ -1,20 +1,20 @@
-import Sblendid, { Peripheral, Service, Value, Listener } from "sblendid";
-import converters, { Converters, State } from "./converters";
+import Sblendid, { Peripheral, Service, Value } from "sblendid";
+import converters, { Converters } from "./converters";
 
-type De1State =
-  | "disconnected"
-  | "sleep"
-  | "heating"
-  | "cooling"
-  | "idle"
-  | "espresso"
-  | "steam"
-  | "hotWater"
-  | "flushing"
-  | "descale";
+// type De1State =
+//   | "disconnected"
+//   | "sleep"
+//   | "heating"
+//   | "cooling"
+//   | "idle"
+//   | "espresso"
+//   | "steam"
+//   | "hotWater"
+//   | "flushing"
+//   | "descale";
 
-type De1Event = "state" | "temperature" | "waterlevel";
-type De1Listener = () => Promise<void> | void;
+// type De1Event = "state" | "temperature" | "waterlevel";
+// type De1Listener = () => Promise<void> | void;
 
 export default class DE1 {
   private machine?: Peripheral;
@@ -93,13 +93,7 @@ export default class DE1 {
     if (currentState === "descale") await this.write("state", "idle");
   }
 
-  // todo return DE1State, not ble state
-  // todo return DE1State, not ble state
-  // todo return DE1State, not ble state
-  // todo return DE1State, not ble state
-  async getState(): Promise<State> {
-    return await this.read("state");
-  }
+  // async getState(): Promise<De1State> {}
 
   // async getTemperature(): Promise<number> {}
 
@@ -117,15 +111,15 @@ export default class DE1 {
   // async getHotWaterSettings(): Promise<De1HotWaterSettings> {}
   // async setHotWaterSettings(settings: De1HotWaterSettings): Promise<void> {}
 
-  public async on<E extends keyof Converters>(
-    event: De1Event,
-    listener: Listener<Converters, E>
-  ): Promise<void> {}
+  // public async on<E extends keyof Converters>(
+  //   event: De1Event,
+  //   listener: Listener<Converters, E>
+  // ): Promise<void> {}
 
-  public async off<E extends keyof Converters>(
-    event: De1Event,
-    listener: Listener<Converters, E>
-  ): Promise<void> {}
+  // public async off<E extends keyof Converters>(
+  //   event: De1Event,
+  //   listener: Listener<Converters, E>
+  // ): Promise<void> {}
 
   public getBleAdapter(): Service<Converters> {
     if (!this.service) throw new Error("DE1 is not connected yet");
