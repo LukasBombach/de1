@@ -121,14 +121,14 @@ export default class DE1 {
   //   listener: Listener<Converters, E>
   // ): Promise<void> {}
 
+  public isConnected(): boolean {
+    if (!this.machine) return false;
+    return this.machine.isConnected();
+  }
+
   public getBleAdapter(): Service<Converters> {
     if (!this.service) throw new Error("DE1 is not connected yet");
     return this.service;
-  }
-
-  private isConnected(): boolean {
-    if (!this.machine) return false;
-    return this.machine.isConnected();
   }
 
   private async read<N extends keyof Converters>(

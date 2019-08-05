@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { Layout } from "antd";
+import { converters, Converters } from "de1";
 import ErrorBoundary from "./ErrorBoundary";
 import Connection from "./components/Connection";
 import Control from "./components/Control";
-import features from "./features";
+
 import "./App.css";
 
 const App: React.FC = () => {
@@ -16,20 +17,14 @@ const App: React.FC = () => {
       <Layout style={fullHeight}>
         <Layout.Content style={fullHeight}>
           <section className="app__grid" style={fullHeight}>
-            {features
-              .filter(f => !f.unused && !f.purposelyDisabled)
-              .map(feature => (
-                <Control
-                  key={feature.feature}
-                  feature={feature.feature}
-                  uuid={feature.uuid}
-                  read={feature.read}
-                  write={feature.write}
-                  notify={feature.notify}
-                  connected={isConnected}
-                  values={feature.values}
-                />
-              ))}
+            {Object.entries(converters).map(([name, converter]) => (
+              <Control
+                key={converter.uuid}
+                name={name as keyof Converters}
+                converter={converter}
+                connected={isConnected}
+              />
+            ))}
           </section>
           <Connection onChange={v => setIsConnected(v)} />
         </Layout.Content>

@@ -9,3 +9,4 @@ export {
   ShotSettings,
   StateInfo
 } from "./converters";
+export { Converter, Value } from "sblendid";

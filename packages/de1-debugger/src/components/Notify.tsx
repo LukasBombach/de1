@@ -1,23 +1,24 @@
 import React from "react";
 import { Row, Col, Button, List } from "antd";
+import { Converters } from "de1";
 import useNotify from "../hooks/de1/useNotify";
 
 interface NotifyProps {
-  feature: String;
+  name: keyof Converters;
   connected?: boolean;
 }
 
-const Notify: React.FC<NotifyProps> = ({ feature, connected }) => {
-  const [start, stop, isNotifiying, values] = useNotify(feature);
+const Notify: React.FC<NotifyProps> = ({ name, connected }) => {
+  const [start, stop, isNotifiying, values] = useNotify(name);
 
   const listStyle = {
-    height: 77,
-    overflow: "scroll"
+    height: 190,
+    overflow: "auto"
   };
 
   if (values.length)
     console.info(
-      `%cNotification for ${feature}`,
+      `%cNotification for ${name}`,
       "color: green;",
       values[values.length - 1]
     );

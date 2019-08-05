@@ -1,22 +1,16 @@
 import React, { useState } from "react";
-import { Row, Col, Button, Select, Input } from "antd";
+import { Row, Col, Button, Input } from "antd";
+import { Converters, Value } from "de1";
 import useWrite from "../hooks/de1/useWrite";
 
-interface WriteProps {
-  feature: String;
+interface WriteProps<N extends keyof Converters> {
+  name: N;
   connected?: boolean;
-  values?: Record<string, any> | any[];
 }
 
-const Write: React.FC<WriteProps> = ({ feature, values, connected }) => {
-  const [value, setValue] = useState("");
-  const [loading, writeValue] = useWrite(feature);
-
-  const valuesArray = !values
-    ? undefined
-    : Array.isArray(values)
-    ? values.map(v => [v, v])
-    : Object.entries(values);
+function Write<N extends keyof Converters>({ name, connected }: WriteProps<N>) {
+  const [inputValue, setInputValue] = useState("");
+  const [loading, writeValue] = useWrite(name);
 
   return (
     <Row>
@@ -24,12 +18,27 @@ const Write: React.FC<WriteProps> = ({ feature, values, connected }) => {
         <Button
           loading={loading}
           disabled={!connected}
-          onClick={() => writeValue(value)}
+          onClick={() => writeValue(inputValue as Value<Converters, N>)}
         >
           Write
         </Button>
       </Col>
       <Col span={12}>
+        <Input
+          value={inputValue}
+          disabled={!connected}
+          onChange={e => setInputValue(e.target.value)}
+        />
+      </Col>
+    </Row>
+  );
+}
+
+export default Write;
+
+/*
+        //const Write: React.FC<WriteProps<N>> = ({ name, connected }) => {
+
         {values ? (
           <Select<string>
             style={{ width: "100%" }}
@@ -43,15 +52,4 @@ const Write: React.FC<WriteProps> = ({ feature, values, connected }) => {
             ))}
           </Select>
         ) : (
-          <Input
-            value={value}
-            disabled={!connected}
-            onChange={e => setValue(e.target.value)}
-          />
-        )}
-      </Col>
-    </Row>
-  );
-};
-
-export default Write;
+*/
