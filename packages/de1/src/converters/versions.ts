@@ -1,3 +1,4 @@
+import { Converter } from "sblendid";
 import Parser from "../parser";
 
 export interface Versions {
@@ -18,7 +19,7 @@ export interface Versions {
 }
 
 const converter: Converter<Versions> = {
-  name: "versions",
+  // name: "versions",
   uuid: "a001",
   decode
 };

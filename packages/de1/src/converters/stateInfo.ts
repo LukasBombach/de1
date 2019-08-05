@@ -1,3 +1,4 @@
+import { Converter } from "sblendid";
 import Parser from "../parser";
 
 // todo migrate numbers to strings
@@ -7,7 +8,7 @@ export interface StateInfo {
 }
 
 const converter: Converter<StateInfo> = {
-  name: "stateInfo",
+  // name: "stateInfo",
   uuid: "a00e",
   decode
 };

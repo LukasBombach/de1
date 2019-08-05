@@ -1,4 +1,12 @@
-/// <reference path="./types.d.ts" />
-
 export { default } from "./de1";
-export { states } from "./converters/state";
+export {
+  default as converters,
+  Converters,
+  State,
+  Water,
+  Versions,
+  Shot,
+  ShotSettings,
+  StateInfo
+} from "./converters";
+export { Converter, Value } from "sblendid";

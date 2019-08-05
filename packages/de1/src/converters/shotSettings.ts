@@ -1,3 +1,4 @@
+import { Converter } from "sblendid";
 import Parser from "../parser";
 import Serializer from "../serializer";
 
@@ -13,7 +14,7 @@ export interface ShotSettings {
 }
 
 const converter: Converter<ShotSettings> = {
-  name: "shotSettings",
+  // name: "shotSettings",
   uuid: "a00b",
   encode,
   decode

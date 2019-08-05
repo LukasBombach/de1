@@ -1,8 +1,9 @@
 import { useState } from "react";
+import { Converters } from "de1";
 import de1 from ".";
 
 export default function useNotify(
-  feature: String
+  name: keyof Converters
 ): [() => Promise<void>, () => Promise<void>, boolean, any[]] {
   const [values, setValues] = useState([]);
   const [isNotifiying, setIsNotifiying] = useState(false);
@@ -14,9 +15,16 @@ export default function useNotify(
   const [[persistedListener]] = useState([listener]);
 
   const start = () =>
-    de1.on(feature, persistedListener).then(() => setIsNotifiying(true));
+    de1
+      .getBleAdapter()
+      .on(name, persistedListener)
+      .then(() => setIsNotifiying(true));
+
   const stop = () =>
-    de1.off(feature, persistedListener).then(() => setIsNotifiying(false));
+    de1
+      .getBleAdapter()
+      .off(name, persistedListener)
+      .then(() => setIsNotifiying(false));
 
   return [start, stop, isNotifiying, values];
 }

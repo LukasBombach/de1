@@ -1,15 +1,16 @@
 import { useState } from "react";
+import { Converters } from "de1";
 import de1 from ".";
 
 export default function useRead(
-  feature: String
+  name: keyof Converters
 ): [any, boolean, () => Promise<void>] {
   const [value, setValue] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const readValue = async () => {
     setLoading(true);
-    setValue(await de1.get(feature));
+    setValue(await de1.getBleAdapter().read(name));
     setLoading(false);
   };
 

@@ -3,20 +3,21 @@ import DE1 from "../src";
 
 (async () => {
   log("Connecting...");
+
   const de1 = await DE1.connect();
-  log("Connected", de1.isConnected());
+  const adapter = de1.getBleAdapter();
+  const state = await de1.getState();
 
   await de1.on("state", (...args) => logNotification("Notification", ...args));
 
-  log("State", await de1.get("state"));
+  const x = state !== "disconnected";
+  await adapter.read("state");
+  await adapter.write("state", "idle");
 
-  await de1.set("state", "idle");
-
-  log("State", await de1.get("state"));
-
-  await de1.set("state", "sleep");
-
-  log("State", await de1.get("state"));
+  const y = state !== "XXX";
+  await adapter.read("XXX");
+  await adapter.write("XXX", "idle");
+  await adapter.write("state", "XXX");
 
   process.exit();
 })();
