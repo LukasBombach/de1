@@ -5,22 +5,22 @@ import Read from "./Read";
 import Write from "./Write";
 import Notify from "./Notify";
 
-interface ControlProps {
+interface ControlProps<T> {
   name: keyof Converters;
-  converter: Converter<any>;
+  converter: Converter<T>;
   connected: boolean;
 }
 
-const Control: React.FC<ControlProps> = ({
+const Control: React.FC<ControlProps<any>> = ({
   name,
   converter,
   connected = false
 }) => {
-  const { uuid, encode, decode } = converter;
+  const { uuid, encode, decode, values } = converter;
   return (
     <Card title={`${name} ${uuid}`}>
       {decode && <Read name={name} connected={connected} />}
-      {encode && <Write name={name} connected={connected} />}
+      {encode && <Write name={name} values={values} connected={connected} />}
       {decode && <Notify name={name} connected={connected} />}
     </Card>
   );

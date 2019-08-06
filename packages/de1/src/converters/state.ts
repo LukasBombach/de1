@@ -28,13 +28,6 @@ export type State =
 // type States = { [S in State]: number };
 type States = Record<State, number>;
 
-const converter: Converter<State> = {
-  // name: "state",
-  uuid: "a002",
-  encode,
-  decode
-};
-
 export const states: States = {
   sleep: 0x00,
   goingToSleep: 0x01,
@@ -87,5 +80,13 @@ function getNameFromValue(state: number): State {
   if (valueIndex === -1) throw new Error(`Invalid state value "${state}"`);
   return keys[valueIndex] as State;
 }
+
+const converter: Converter<State> = {
+  // name: "state",
+  uuid: "a002",
+  encode,
+  decode,
+  values: Object.keys(states) as State[]
+};
 
 export default converter;
