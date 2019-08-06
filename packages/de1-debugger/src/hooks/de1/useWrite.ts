@@ -9,7 +9,7 @@ export default function useWrite<N extends keyof Converters>(
 
   const writeValue = async (value: any) => {
     setLoading(true);
-    await de1.getBleAdapter().write(name, value);
+    await de1.getBleService().write(name, value);
     setLoading(false);
   };
 

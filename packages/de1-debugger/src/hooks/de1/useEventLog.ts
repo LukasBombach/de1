@@ -26,7 +26,7 @@ const events: any[] = [
 export default function useEventLog(): void {
   if (de1.isConnected()) {
     for (const event of events) {
-      de1.getBleAdapter().on(event, (...args) => console.info(...args));
+      de1.getBleService().on(event, (...args) => console.info(...args));
     }
   }
 }

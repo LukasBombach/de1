@@ -5,19 +5,12 @@ import DE1 from "../src";
   log("Connecting...");
 
   const de1 = await DE1.connect();
-  const adapter = de1.getBleAdapter();
-  const state = await de1.getState();
+  const service = de1.getBleService();
+  const adapter = de1.getBleAdapterforDebugging();
 
-  await de1.on("state", (...args) => logNotification("Notification", ...args));
+  log("Connected");
 
-  const x = state !== "disconnected";
-  await adapter.read("state");
-  await adapter.write("state", "idle");
-
-  const y = state !== "XXX";
-  await adapter.read("XXX");
-  await adapter.write("XXX", "idle");
-  await adapter.write("state", "XXX");
+  await service.write("state", "sleep");
 
   process.exit();
 })();

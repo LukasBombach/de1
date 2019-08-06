@@ -1,7 +1,7 @@
 import React from "react";
 import useConnection from "../hooks/de1/useConnection";
 import useAutoConnect from "../hooks/de1/useAutoConnect";
-import useEventLog from "../hooks/de1/useEventLog";
+// import useEventLog from "../hooks/de1/useEventLog";
 import { Button, Icon } from "antd";
 
 interface ConnectionProps {
@@ -12,7 +12,7 @@ const Connection: React.FC<ConnectionProps> = ({ onChange = () => {} }) => {
   const [isConnected, connect] = useConnection();
 
   useAutoConnect(isConnected, connect);
-  useEventLog();
+  // useEventLog();
 
   onChange(isConnected);
 

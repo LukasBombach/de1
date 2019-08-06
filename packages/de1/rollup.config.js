@@ -12,12 +12,14 @@ export default {
     {
       file: pkg.main,
       format: "cjs",
-      preferBuiltins: true
+      preferBuiltins: true,
+      sourcemap: true
     },
     {
       file: pkg.module,
       format: "es",
-      preferBuiltins: true
+      preferBuiltins: true,
+      sourcemap: true
     }
   ],
   plugins: [

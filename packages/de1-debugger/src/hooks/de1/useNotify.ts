@@ -16,13 +16,13 @@ export default function useNotify(
 
   const start = () =>
     de1
-      .getBleAdapter()
+      .getBleService()
       .on(name, persistedListener)
       .then(() => setIsNotifiying(true));
 
   const stop = () =>
     de1
-      .getBleAdapter()
+      .getBleService()
       .off(name, persistedListener)
       .then(() => setIsNotifiying(false));
 

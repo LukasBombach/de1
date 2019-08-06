@@ -5,7 +5,7 @@ import useWrite from "../hooks/de1/useWrite";
 
 interface WriteProps<N extends keyof Converters> {
   name: N;
-  values?: any;
+  values?: any[];
   connected?: boolean;
 }
 
@@ -62,7 +62,7 @@ const ValueInput: React.FC<{
 };
 
 const ValueSelect: React.FC<{
-  values?: [string, any][];
+  values?: string[];
   connected?: boolean;
   onChange?: (value: string) => void;
 }> = ({ values = [], connected = false, onChange = () => {} }) => {
@@ -70,11 +70,11 @@ const ValueSelect: React.FC<{
     <Select<string>
       style={{ width: "100%" }}
       disabled={!connected}
-      onChange={onChange}
+      onChange={v => onChange(v)}
     >
-      {values.map(([name, value]) => (
-        <Select.Option key={name} value={value}>
-          {name}
+      {values.map(value => (
+        <Select.Option key={value} value={value}>
+          {value}
         </Select.Option>
       ))}
     </Select>

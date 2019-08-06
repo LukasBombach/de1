@@ -1,4 +1,4 @@
-import Sblendid, { Peripheral, Service, Value } from "sblendid";
+import Sblendid, { Peripheral, Service, Adapter, Value } from "sblendid";
 import converters, { Converters } from "./converters";
 
 // type De1State =
@@ -126,21 +126,26 @@ export default class DE1 {
     return this.machine.isConnected();
   }
 
-  public getBleAdapter(): Service<Converters> {
+  public getBleService(): Service<Converters> {
     if (!this.service) throw new Error("DE1 is not connected yet");
     return this.service;
+  }
+
+  public getBleAdapterforDebugging(): Adapter {
+    if (!this.machine) throw new Error("DE1 is not connected yet");
+    return this.machine.adapter;
   }
 
   private async read<N extends keyof Converters>(
     name: N
   ): Promise<Value<Converters, N>> {
-    return await this.getBleAdapter().read(name);
+    return await this.getBleService().read(name);
   }
 
   private async write<N extends keyof Converters>(
     name: N,
     value: Value<Converters, N>
   ): Promise<void> {
-    await this.getBleAdapter().write(name, value);
+    await this.getBleService().write(name, value);
   }
 }

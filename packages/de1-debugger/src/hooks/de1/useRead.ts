@@ -10,7 +10,7 @@ export default function useRead(
 
   const readValue = async () => {
     setLoading(true);
-    setValue(await de1.getBleAdapter().read(name));
+    setValue(await de1.getBleService().read(name));
     setLoading(false);
   };
 
