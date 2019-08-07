@@ -17,7 +17,7 @@
 - [x]   A00D   [R]    [ShotSample]        `update_de1_shotvalue`          doubts            probably updates on the machines values, esp. during pouring that will probably updates the graphs n stuff
 - [x]   A00E   [R]    [StateInfo]         `update_de1_state`              confirmed         state change notifications, probably just for reading and getting notified, writing's done via A002 probably
 - [x]   A00F   [RW]   [HeaderWrite]       `parse_binary_shotdescheader`   unclear           this seems to be in use and the code is readable, I am not sure what this is used for though
-- [ ]   A010   [RW]   [FrameWrite]        `parse_binary_shotframe`        unclear           this seems to be in use and the code is readable, I am not sure what this is used for though
+- [x]   A010   [RW]   [FrameWrite]        `parse_binary_shotframe`        unclear           this seems to be in use and the code is readable, I am not sure what this is used for though
 - [x]   A011   [RW]   [WaterLevels]       `parse_binary_water_level`      confirmed         returns the current water level and the one the machine started with
 - [ ]   A012   [RW]   [Calibration]       `calibration_ble_received`      unclear           for receiving calibration notifications, whatever that means
 

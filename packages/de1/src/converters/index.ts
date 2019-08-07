@@ -8,6 +8,7 @@ import stateInfo, { StateInfo } from "./stateInfo";
 import shotDescriptionHeader, {
   ShotDescriptionHeader
 } from "./shotDescriptionHeader";
+import shotFrame, { ShotFrame } from "./shotFrame";
 
 export interface Converters {
   state: Converter<State>;
@@ -17,6 +18,7 @@ export interface Converters {
   shotSettings: Converter<ShotSettings>;
   stateInfo: Converter<StateInfo>;
   shotDescriptionHeader: Converter<ShotDescriptionHeader>;
+  shotFrame: Converter<ShotFrame>;
 }
 
 const converters: Converters = {
@@ -26,7 +28,8 @@ const converters: Converters = {
   shot,
   shotSettings,
   stateInfo,
-  shotDescriptionHeader
+  shotDescriptionHeader,
+  shotFrame
 };
 
 export default converters;
@@ -37,3 +40,4 @@ export { Shot } from "./shot";
 export { ShotSettings } from "./shotSettings";
 export { StateInfo } from "./stateInfo";
 export { ShotDescriptionHeader } from "./shotDescriptionHeader";
+export { ShotFrame } from "./shotFrame";
