@@ -5,6 +5,9 @@ import versions, { Versions } from "./versions";
 import shot, { Shot } from "./shot";
 import shotSettings, { ShotSettings } from "./shotSettings";
 import stateInfo, { StateInfo } from "./stateInfo";
+import shotDescriptionHeader, {
+  ShotDescriptionHeader
+} from "./shotDescriptionHeader";
 
 export interface Converters {
   state: Converter<State>;
@@ -13,6 +16,7 @@ export interface Converters {
   shot: Converter<Shot>;
   shotSettings: Converter<ShotSettings>;
   stateInfo: Converter<StateInfo>;
+  shotDescriptionHeader: Converter<ShotDescriptionHeader>;
 }
 
 const converters: Converters = {
@@ -21,7 +25,8 @@ const converters: Converters = {
   versions,
   shot,
   shotSettings,
-  stateInfo
+  stateInfo,
+  shotDescriptionHeader
 };
 
 export default converters;
@@ -31,3 +36,4 @@ export { Versions } from "./versions";
 export { Shot } from "./shot";
 export { ShotSettings } from "./shotSettings";
 export { StateInfo } from "./stateInfo";
+export { ShotDescriptionHeader } from "./shotDescriptionHeader";
