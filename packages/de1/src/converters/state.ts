@@ -25,7 +25,7 @@ export type State =
   | "inBootLoader"
   | "airPurge";
 
-type States = Record<State, number>;
+export type States = Record<State, number>;
 
 export const states: States = {
   sleep: 0x00,
