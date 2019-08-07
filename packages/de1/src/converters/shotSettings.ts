@@ -13,13 +13,6 @@ export interface ShotSettings {
   targetGroupTemp: number;
 }
 
-const converter: Converter<ShotSettings> = {
-  // name: "shotSettings",
-  uuid: "a00b",
-  encode,
-  decode
-};
-
 function decode(data: Buffer): ShotSettings {
   return new Parser<ShotSettings>(data)
     .char("steamSettings")
@@ -45,5 +38,11 @@ function encode(shotSettings: ShotSettings): Buffer {
     .short(shotSettings.targetGroupTemp)
     .buffer();
 }
+
+const converter: Converter<ShotSettings> = {
+  uuid: "a00b",
+  encode,
+  decode
+};
 
 export default converter;

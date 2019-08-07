@@ -15,7 +15,7 @@
 - [x]   A00B   [RW]   [ShotSettings]      `parse_binary_hotwater_desc`    confirmed         settingsing for steam, hot water, espresso volume and group temperature
 - [ ]   A00C   [RW]   [Deprecated]        `parse_binary_shot_desc`        unclear           docs say it's deprecated, reading this gives you a bunch of zeros
 - [x]   A00D   [R]    [ShotSample]        `update_de1_shotvalue`          doubts            probably updates on the machines values, esp. during pouring that will probably updates the graphs n stuff
-- [x]   A00E   [R]    [StateInfo]         `update_de1_state`              confirmed         state change notifications, probably just for reading and getting notified, writing's done via A002 probably
+- [ ]   A00E   [R]    [StateInfo]         `update_de1_state`              confirmed         state change notifications, probably just for reading and getting notified, writing's done via A002 probably
 - [ ]   A00F   [RW]   [HeaderWrite]       `parse_binary_shotdescheader`   unclear           this seems to be in use and the code is readable, I am not sure what this is used for though
 - [ ]   A010   [RW]   [FrameWrite]        `parse_binary_shotframe`        unclear           this seems to be in use and the code is readable, I am not sure what this is used for though
 - [x]   A011   [RW]   [WaterLevels]       `parse_binary_water_level`      confirmed         returns the current water level and the one the machine started with

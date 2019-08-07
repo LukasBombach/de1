@@ -7,17 +7,16 @@ export interface StateInfo {
   substate: number;
 }
 
-const converter: Converter<StateInfo> = {
-  // name: "stateInfo",
-  uuid: "a00e",
-  decode
-};
-
 function decode(data: Buffer): StateInfo {
   return new Parser<StateInfo>(data)
     .char("state")
     .char("substate")
     .vars();
 }
+
+const converter: Converter<StateInfo> = {
+  uuid: "a00e",
+  decode
+};
 
 export default converter;

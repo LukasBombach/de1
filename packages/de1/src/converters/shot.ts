@@ -19,12 +19,6 @@ export interface Shot {
 
 export const herz = 50;
 
-const converter: Converter<Shot> = {
-  // name: "shot",
-  uuid: "a00d",
-  decode
-};
-
 function decode(data: Buffer): Shot {
   return new Parser<Shot>(data)
     .short("timer", v => Math.round(100 * (v / (herz * 2))))
@@ -43,5 +37,10 @@ function decode(data: Buffer): Shot {
 
     .vars();
 }
+
+const converter: Converter<Shot> = {
+  uuid: "a00d",
+  decode
+};
 
 export default converter;

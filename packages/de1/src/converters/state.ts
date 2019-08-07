@@ -25,7 +25,6 @@ export type State =
   | "inBootLoader"
   | "airPurge";
 
-// type States = { [S in State]: number };
 type States = Record<State, number>;
 
 export const states: States = {
@@ -82,7 +81,6 @@ function getNameFromValue(state: number): State {
 }
 
 const converter: Converter<State> = {
-  // name: "state",
   uuid: "a002",
   encode,
   decode,

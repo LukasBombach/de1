@@ -18,12 +18,6 @@ export interface Versions {
   };
 }
 
-const converter: Converter<Versions> = {
-  // name: "versions",
-  uuid: "a001",
-  decode
-};
-
 function decode(data: Buffer): Versions {
   return new Parser<Versions>(data)
     .char("bluetooth.apiVersion")
@@ -38,5 +32,10 @@ function decode(data: Buffer): Versions {
     .sha("firmware.sha")
     .vars();
 }
+
+const converter: Converter<Versions> = {
+  uuid: "a001",
+  decode
+};
 
 export default converter;
