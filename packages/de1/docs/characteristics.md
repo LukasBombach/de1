@@ -1,30 +1,28 @@
-A001    R     Get versions          
-A002    RW    Get / Set State without substate and without notification
-A003   [RW]   [SetTime]           
-A004   [R]    [ShotDirectory]     
-A005   [RW]   [ReadFromMMR]       
-A006   [W]    [WriteToMMR]        
-A007   [W]    [ShotMapRequest]    
-A008   [W]    [DeleteShotRange]   
-A009   [W]    [FWMapRequest]      
-A00A   [R]    [Temperatures]      
-A00B   [RW]   [ShotSettings]      
-A00C   [RW]   [Deprecated]        
-A00D   [R]    [ShotSample]        
-A00E   [R]    [StateInfo]         
-A00F   [RW]   [HeaderWrite]       
-A010   [RW]   [FrameWrite]        
-A011   [RW]   [WaterLevels]       
-A012   [RW]   [Calibration]       
+# Characteristics
+
+## Current assessment and implementation status
+
+- [x]   A001   [R]    [Versions]          `parse_binary_version_desc`     confirmed         although there are a bunch of zeros as FW versions
+- [x]   A002   [RW]   [RequestedState]    `parse_state_change`            confirmed         lets read read and set states but not substates, also cannot be subscribed to. maybe for setting states only while A00E is for reading and notifications?
+- [-]   A003   [RW]   [SetTime]           _not used on tcl source code_   deprecated maybe  reading this gives you a bunch of zeros
+- [-]   A004   [R]    [ShotDirectory]     _not used on tcl source code_   deprecated maybe  reading this gives you a bunch of zeros
+- [-]   A005   [RW]   [ReadFromMMR]       _not used on tcl source code_   deprecated maybe  reading this gives you a bunch of zeros
+- [ ]   A006   [W]    [WriteToMMR]        `firmware_upload_next`          unclear           logs "firmware write ack recved", maybe part of the protocol to update the firmware on the DE1
+- [-]   A007   [W]    [ShotMapRequest]    _not used on tcl source code_   deprecated maybe
+- [-]   A008   [W]    [DeleteShotRange]   _not used on tcl source code_   deprecated maybe
+- [ ]   A009   [W]    [FWMapRequest]      `parse_map_request`             unclear           maybe something to prepare an update of the firmware
+- [-]   A00A   [R]    [Temperatures]      _not used on tcl source code_   deprecated maybe  reading this gives you a bunch of zeros
+- [x]   A00B   [RW]   [ShotSettings]      `parse_binary_hotwater_desc`    confirmed         settingsing for steam, hot water, espresso volume and group temperature
+- [ ]   A00C   [RW]   [Deprecated]        `parse_binary_shot_desc`        unclear           docs say it's deprecated, reading this gives you a bunch of zeros
+- [x]   A00D   [R]    [ShotSample]        `update_de1_shotvalue`          doubts            probably updates on the machines values, esp. during pouring that will probably updates the graphs n stuff
+- [x]   A00E   [R]    [StateInfo]         `update_de1_state`              confirmed         state change notifications, probably just for reading and getting notified, writing's done via A002 probably
+- [ ]   A00F   [RW]   [HeaderWrite]       `parse_binary_shotdescheader`   unclear           this seems to be in use and the code is readable, I am not sure what this is used for though
+- [ ]   A010   [RW]   [FrameWrite]        `parse_binary_shotframe`        unclear           this seems to be in use and the code is readable, I am not sure what this is used for though
+- [x]   A011   [RW]   [WaterLevels]       `parse_binary_water_level`      confirmed         returns the current water level and the one the machine started with
+- [ ]   A012   [RW]   [Calibration]       `calibration_ble_received`      unclear           for receiving calibration notifications, whatever that means
 
 
-
-
-
-
-
-
-
+## Info from the basecamp docs
 
 static T_Versions        I_Versions        = VERSIONINFO; // A001 A R    Versions See T_Versions
 static T_RequestedState  I_RequestedState ; // A002 B RW   RequestedState See T_RequestedState
