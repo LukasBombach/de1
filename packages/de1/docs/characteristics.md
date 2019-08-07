@@ -19,7 +19,7 @@
 - [x]   A00F   [RW]   [HeaderWrite]       `parse_binary_shotdescheader`   unclear           this seems to be in use and the code is readable, I am not sure what this is used for though
 - [x]   A010   [RW]   [FrameWrite]        `parse_binary_shotframe`        unclear           this seems to be in use and the code is readable, I am not sure what this is used for though
 - [x]   A011   [RW]   [WaterLevels]       `parse_binary_water_level`      confirmed         returns the current water level and the one the machine started with
-- [ ]   A012   [RW]   [Calibration]       `calibration_ble_received`      unclear           for receiving calibration notifications, whatever that means
+- [x]   A012   [RW]   [Calibration]       `calibration_ble_received`      unclear           for receiving calibration notifications, whatever that means
 
 
 ## Info from the basecamp docs

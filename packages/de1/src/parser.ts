@@ -9,6 +9,7 @@ export default class Parser<T> {
     this.varsInternal = {};
   }
 
+  // todo only allow function here
   public char(name: string, divideBy: number | ((value: number) => any) = 1) {
     const process =
       typeof divideBy === "number" ? (v: number) => v / divideBy : divideBy;
@@ -18,6 +19,7 @@ export default class Parser<T> {
     return this;
   }
 
+  // todo only allow function here
   public short(name: string, divideBy: number | ((value: number) => any) = 1) {
     const process =
       typeof divideBy === "number" ? (v: number) => v / divideBy : divideBy;
@@ -27,8 +29,15 @@ export default class Parser<T> {
     return this;
   }
 
-  public int(name: string) {
-    const value = this.dataView.getUint32(this.offset, true);
+  public int(name: string, process: (value: number) => any = v => v) {
+    const value = process(this.dataView.getUint32(this.offset, true));
+    this.setVar(name, value);
+    this.offset += 4;
+    return this;
+  }
+
+  public intSigned(name: string, process: (value: number) => any = v => v) {
+    const value = process(this.dataView.getInt32(this.offset, true));
     this.setVar(name, value);
     this.offset += 4;
     return this;

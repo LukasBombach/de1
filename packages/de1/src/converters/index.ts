@@ -9,6 +9,17 @@ import shotDescriptionHeader, {
   ShotDescriptionHeader
 } from "./shotDescriptionHeader";
 import shotFrame, { ShotFrame } from "./shotFrame";
+import calibrate, { Calibrate } from "./calibrate";
+
+export { State } from "./state";
+export { Water } from "./water";
+export { Versions } from "./versions";
+export { Shot } from "./shot";
+export { ShotSettings } from "./shotSettings";
+export { StateInfo } from "./stateInfo";
+export { ShotDescriptionHeader } from "./shotDescriptionHeader";
+export { ShotFrame } from "./shotFrame";
+export { Calibrate } from "./calibrate";
 
 export interface Converters {
   state: Converter<State>;
@@ -19,6 +30,7 @@ export interface Converters {
   stateInfo: Converter<StateInfo>;
   shotDescriptionHeader: Converter<ShotDescriptionHeader>;
   shotFrame: Converter<ShotFrame>;
+  calibrate: Converter<Calibrate>;
 }
 
 const converters: Converters = {
@@ -29,15 +41,8 @@ const converters: Converters = {
   shotSettings,
   stateInfo,
   shotDescriptionHeader,
-  shotFrame
+  shotFrame,
+  calibrate
 };
 
 export default converters;
-export { State } from "./state";
-export { Water } from "./water";
-export { Versions } from "./versions";
-export { Shot } from "./shot";
-export { ShotSettings } from "./shotSettings";
-export { StateInfo } from "./stateInfo";
-export { ShotDescriptionHeader } from "./shotDescriptionHeader";
-export { ShotFrame } from "./shotFrame";
