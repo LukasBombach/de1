@@ -10,6 +10,7 @@ import ErrorBoundary from "./ErrorBoundary";
 import UserApp from "./pages/UserApp";
 import Dashboard from "./pages/Dashboard";
 import Connection from "./components/Connection";
+import PowerButton from "./components/PowerButton";
 import "./App.css";
 
 const App: React.FC = () => {
@@ -57,6 +58,9 @@ const App: React.FC = () => {
             </Menu.Item>
             <Menu.Item key="dashboard">
               <Link to="/dashboard/">Dashboard</Link>
+            </Menu.Item>
+            <Menu.Item key="power" style={{ float: "right" }}>
+              <PowerButton isConnected={isConnected} />
             </Menu.Item>
           </Menu>
           <Connection onChange={v => setIsConnected(v)} />

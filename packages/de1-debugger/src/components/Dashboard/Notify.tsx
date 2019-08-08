@@ -39,7 +39,7 @@ const Notify: React.FC<NotifyProps> = ({ name, connected }) => {
           bordered
           dataSource={values.reverse()}
           style={listStyle}
-          renderItem={value => {
+          renderItem={(value: any) => {
             value =
               typeof value === "object"
                 ? JSON.stringify(value, null, 2)
