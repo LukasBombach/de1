@@ -8,12 +8,12 @@ interface InfoProps {
 }
 
 const Info: React.FC<InfoProps> = ({ isConnected }) => {
-  const [notifyState, , notifyingState, stateInfos] = useNotify("stateInfo");
+  const [stateInfo, notifyState] = useNotify("stateInfo");
   const [loading, setState] = useWrite("state");
 
   if (isConnected) notifyState();
 
-  const { state = null, substate = null } = stateInfos.reverse()[0] || {};
+  const { state, substate } = stateInfo || { state: null, substate: null };
 
   const ready = substate === "ready";
   const heating = substate === "heating";
@@ -23,7 +23,7 @@ const Info: React.FC<InfoProps> = ({ isConnected }) => {
   return (
     <Card>
       <Button
-        disabled={!ready || loading}
+        disabled={sleeping || !ready || loading}
         onClick={() => setState(!pouring ? "espresso" : "idle")}
       >
         {!pouring ? "Start Espresso" : "Stop Espresso"}
@@ -32,17 +32,8 @@ const Info: React.FC<InfoProps> = ({ isConnected }) => {
         {heating && " (heating)"}
       </Button>
 
-      {/* <Divider />
-
-      <Button
-        disabled={!ready || !loading}
-        onClick={() => setState("espresso")}
-      >
-        Start Espresso
-      </Button>
-      <Button disabled={!ready || !loading} onClick={() => setState("idle")}>
-        Set Idle
-      </Button> */}
+      <Divider />
+      <Button onClick={() => setState("idle")}>Emergency Idle</Button>
     </Card>
   );
 };
