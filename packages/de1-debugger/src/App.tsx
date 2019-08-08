@@ -59,7 +59,7 @@ const App: React.FC = () => {
             <Menu.Item key="dashboard">
               <Link to="/dashboard/">Dashboard</Link>
             </Menu.Item>
-            <Menu.Item key="power" style={{ float: "right" }}>
+            <Menu.Item key="power" disabled={true} style={{ float: "right" }}>
               <PowerButton isConnected={isConnected} />
             </Menu.Item>
           </Menu>

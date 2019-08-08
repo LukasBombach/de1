@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Button } from "antd";
 import useNotify from "../hooks/de1/useNotify";
 import useWrite from "../hooks/de1/useWrite";
@@ -16,22 +16,26 @@ const PowerButton: React.FC<PowerButtonProps> = ({ isConnected }) => {
   const stateInfo = stateInfos.reverse()[0] || {};
   const isOn = stateInfo.state !== offState;
 
-  console.log("isNotifiying", isNotifiying);
-  console.log("stateInfo", stateInfo);
+  console.log(
+    "connected, notifying, stateInfo",
+    isConnected,
+    isNotifiying,
+    stateInfo
+  );
 
-  useEffect(() => () => {
-    if (isConnected && !isNotifiying) {
-      console.log("Starting Notifications");
-      notify();
-    } else if (!isConnected) {
-      console.log("Not Starting Notifications, not Connected");
-    } else if (isNotifiying) {
-      console.log("Not Starting Notifications, already Notifiying");
-    }
-  });
+  if (isConnected && !isNotifiying) {
+    console.log("Starting Notifications");
+    notify();
+  } else if (!isConnected) {
+    console.log("Not Starting Notifications, not Connected");
+  } else if (isNotifiying) {
+    console.log("Not Starting Notifications, already Notifiying");
+  }
 
   const buttonText = !isConnected ? (
     <em>Disconnected</em>
+  ) : !stateInfo.state ? (
+    <em>Loading</em>
   ) : isOn ? (
     "Turn off"
   ) : (
@@ -41,7 +45,7 @@ const PowerButton: React.FC<PowerButtonProps> = ({ isConnected }) => {
   return (
     <Button
       loading={writing}
-      disabled={!isConnected}
+      disabled={!isConnected || !stateInfo.state}
       onClick={() => setState(isOn ? offState : idleState)}
     >
       {buttonText}
