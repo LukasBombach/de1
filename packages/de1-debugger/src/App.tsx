@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -6,15 +6,17 @@ import {
   Redirect
 } from "react-router-dom";
 import { Layout, Menu } from "antd";
+import useConnection from "./hooks/de1/useConnection";
+import useAutoConnect from "./hooks/de1/useAutoConnect";
 import ErrorBoundary from "./ErrorBoundary";
 import UserApp from "./pages/UserApp";
 import Dashboard from "./pages/Dashboard";
-import Connection from "./components/Connection";
 import PowerButton from "./components/PowerButton";
 import "./App.css";
 
 const App: React.FC = () => {
-  const [isConnected, setIsConnected] = useState(false);
+  const [isConnected, connect] = useConnection();
+  useAutoConnect(isConnected, connect);
 
   return (
     <Router>
@@ -63,7 +65,6 @@ const App: React.FC = () => {
               <PowerButton isConnected={isConnected} />
             </Menu.Item>
           </Menu>
-          <Connection onChange={v => setIsConnected(v)} />
         </Layout>
       </ErrorBoundary>
     </Router>
