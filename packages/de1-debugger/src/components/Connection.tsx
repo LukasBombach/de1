@@ -18,7 +18,7 @@ const Connection: React.FC<ConnectionProps> = ({ onChange = () => {} }) => {
 
   const stickyBottomRight: React.CSSProperties = {
     position: "fixed",
-    bottom: 20,
+    bottom: 20 + 64,
     right: 20
   };
 
