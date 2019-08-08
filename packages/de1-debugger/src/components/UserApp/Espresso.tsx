@@ -11,7 +11,7 @@ const Info: React.FC<InfoProps> = ({ isConnected }) => {
   const [notifyState, , notifyingState, stateInfos] = useNotify("stateInfo");
   const [loading, setState] = useWrite("state");
 
-  if (isConnected && !notifyingState) notifyState();
+  if (isConnected) notifyState();
 
   const { state = null, substate = null } = stateInfos.reverse()[0] || {};
 

@@ -1,5 +1,6 @@
 import React from "react";
 import { Card, Descriptions } from "antd";
+import { Converters, Value } from "de1";
 import useNotify from "../../hooks/de1/useNotify";
 
 interface InfoProps {
@@ -7,29 +8,45 @@ interface InfoProps {
 }
 
 const Info: React.FC<InfoProps> = ({ isConnected }) => {
-  const [notifyState, , notifyingState, stateInfos] = useNotify("stateInfo");
-  const [notifyShot, , notifyingShot, shotInfos] = useNotify("shot");
+  const [stateInfo, notifyState] = useNotify("stateInfo");
+  const [shotInfo, notifyShot] = useNotify("shot");
 
-  if (isConnected && !notifyingState) notifyState();
-  if (isConnected && !notifyingShot) notifyShot();
-
-  const { state = null, substate = null } = stateInfos.reverse()[0] || {};
-  const { mixTemp = null, setMixTemp = null } = shotInfos.reverse()[0] || {};
-
-  const stateText =
-    state === "sleep" ? "sleeping" : substate ? substate : <em>loading...</em>;
-  const setMixTempText = setMixTemp ? `${setMixTemp}°C` : <em>loading...</em>;
-  const mixTempText = mixTemp ? `${mixTemp.toFixed(2)}°C` : <em>loading...</em>;
+  if (isConnected) notifyState();
+  if (isConnected) notifyShot();
 
   return (
     <Card>
       <Descriptions title="Info">
-        <Descriptions.Item label="State">{stateText}</Descriptions.Item>
-        <Descriptions.Item label="Goal">{setMixTempText}</Descriptions.Item>
-        <Descriptions.Item label="Temperature">{mixTempText}</Descriptions.Item>
+        <Descriptions.Item label="State">
+          {getStateText(stateInfo)}
+        </Descriptions.Item>
+        <Descriptions.Item label="Goal">
+          {getGoalTemp(shotInfo)}
+        </Descriptions.Item>
+        <Descriptions.Item label="Temperature">
+          {getTemp(shotInfo)}
+        </Descriptions.Item>
       </Descriptions>
     </Card>
   );
 };
+
+function getStateText(
+  stateInfo?: Value<Converters, "stateInfo">
+): string | JSX.Element {
+  if (!stateInfo) return <em>loading...</em>;
+  if (stateInfo.state === "sleep") return "sleeping";
+  if (stateInfo.substate) return stateInfo.substate;
+  return `Unknown States ${JSON.stringify(stateInfo)}`;
+}
+
+function getGoalTemp(shot?: Value<Converters, "shot">) {
+  if (!shot) return <em>loading...</em>;
+  return `${shot.setMixTemp}°C`;
+}
+function getTemp(shot?: Value<Converters, "shot">) {
+  if (!shot) return <em>loading...</em>;
+  return `${shot.mixTemp.toFixed(2)}°C`;
+}
 
 export default Info;

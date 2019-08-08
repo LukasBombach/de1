@@ -9,19 +9,14 @@ interface NotifyProps {
 }
 
 const Notify: React.FC<NotifyProps> = ({ name, connected }) => {
-  const [start, stop, isNotifiying, values] = useNotify(name);
+  const [value, start, stop, isNotifiying] = useNotify(name);
 
   const listStyle = {
     height: 190,
     overflow: "auto"
   };
 
-  if (values.length)
-    console.info(
-      `%cNotification for ${name}`,
-      "color: green;",
-      values[values.length - 1]
-    );
+  // if (value) console.info(`%cNotification for ${name}`, "color: green;", value);
 
   return (
     <Row>
@@ -37,7 +32,7 @@ const Notify: React.FC<NotifyProps> = ({ name, connected }) => {
         <List
           size="small"
           bordered
-          dataSource={values.reverse()}
+          dataSource={[value]}
           style={listStyle}
           renderItem={(value: any) => {
             value =

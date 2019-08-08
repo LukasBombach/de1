@@ -1,5 +1,6 @@
 import React from "react";
 import { Button } from "antd";
+import { Converters, Value } from "de1";
 import useNotify from "../hooks/de1/useNotify";
 import useWrite from "../hooks/de1/useWrite";
 
@@ -8,35 +9,34 @@ interface PowerButtonProps {
 }
 
 const PowerButton: React.FC<PowerButtonProps> = ({ isConnected }) => {
-  const [notify, , isNotifiying, stateInfos] = useNotify("stateInfo");
+  const [stateInfo, notify] = useNotify("stateInfo");
   const [writing, setState] = useWrite("state");
 
   const idleState = "idle";
   const offState = "sleep";
-  const stateInfo = stateInfos.reverse()[0] || {};
-  const isOn = stateInfo.state !== offState;
+  const isOn = stateInfo && stateInfo.state !== offState;
 
-  if (isConnected && !isNotifiying) notify();
-
-  const buttonText = !isConnected ? (
-    <em>Disconnected</em>
-  ) : !stateInfo.state ? (
-    <em>Loading</em>
-  ) : isOn ? (
-    "Turn off"
-  ) : (
-    "Turn on"
-  );
+  if (isConnected) notify();
 
   return (
     <Button
       loading={writing}
-      disabled={!isConnected || !stateInfo.state}
+      disabled={!isConnected || !stateInfo}
       onClick={() => setState(isOn ? offState : idleState)}
     >
-      {buttonText}
+      {getButtonText(isConnected, stateInfo)}
     </Button>
   );
 };
+
+function getButtonText(
+  isConnected: boolean,
+  stateInfo?: Value<Converters, "stateInfo">
+) {
+  if (!isConnected) return <em>Disconnected</em>;
+  if (!stateInfo) return <em>Loading</em>;
+  if (stateInfo.state === "sleep") return "Turn on";
+  return "Turn on";
+}
 
 export default PowerButton;

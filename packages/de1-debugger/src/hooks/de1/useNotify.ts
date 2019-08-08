@@ -4,27 +4,32 @@ import de1 from ".";
 
 export default function useNotify<N extends keyof Converters>(
   name: N
-): [() => Promise<void>, () => Promise<void>, boolean, Value<Converters, N>[]] {
-  const [values, setValues] = useState([]);
+): [
+  Value<Converters, N> | undefined,
+  () => Promise<void>,
+  () => Promise<void>,
+  boolean
+] {
+  const [value, setValue] = useState<Value<Converters, N> | undefined>(
+    undefined
+  );
   const [isNotifiying, setIsNotifiying] = useState(false);
 
-  const listener = (value: any) => {
-    setValues(values => values.concat(value));
-  };
+  const listener = (value: Value<Converters, N>) => setValue(value);
 
   const [[persistedListener]] = useState([listener]);
 
-  const start = () =>
-    de1
-      .getBleService()
-      .on(name, persistedListener)
-      .then(() => setIsNotifiying(true));
+  const start = async () => {
+    if (isNotifiying) return;
+    await de1.getBleService().on(name, persistedListener);
+    return setIsNotifiying(true);
+  };
 
-  const stop = () =>
-    de1
-      .getBleService()
-      .off(name, persistedListener)
-      .then(() => setIsNotifiying(false));
+  const stop = async () => {
+    if (!isNotifiying) return;
+    await de1.getBleService().off(name, persistedListener);
+    return setIsNotifiying(false);
+  };
 
-  return [start, stop, isNotifiying, values];
+  return [value, start, stop, isNotifiying];
 }
