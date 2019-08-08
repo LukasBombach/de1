@@ -1,7 +1,7 @@
 import React from "react";
 import { Row, Col, Button, List } from "antd";
 import { Converters } from "de1";
-import useNotify from "../hooks/de1/useNotify";
+import useNotify from "../../hooks/de1/useNotify";
 
 interface NotifyProps {
   name: keyof Converters;

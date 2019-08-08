@@ -1,6 +1,6 @@
 import React from "react";
 import { converters, Converters } from "de1";
-import Control from "../components/Control";
+import Control from "../components/Dashboard/Control";
 import "./Dashboard.css";
 
 interface DashboardProps {
