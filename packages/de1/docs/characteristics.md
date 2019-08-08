@@ -2,6 +2,7 @@
 
 ## Current assessment and implementation status
 
+```markdown
 - [x]   A001   [R]    [Versions]          `parse_binary_version_desc`     confirmed         although there are a bunch of zeros as FW versions
 - [x]   A002   [RW]   [RequestedState]    `parse_state_change`            confirmed         lets read read and set states but not substates, also cannot be subscribed to. maybe for setting states only while A00E is for reading and notifications?
 - [x]   A003   [RW]   [SetTime]           _not used on tcl source code_   deprecated maybe  reading this gives you a bunch of zeros
@@ -20,10 +21,36 @@
 - [x]   A010   [RW]   [FrameWrite]        `parse_binary_shotframe`        unclear           this seems to be in use and the code is readable, I am not sure what this is used for though
 - [x]   A011   [RW]   [WaterLevels]       `parse_binary_water_level`      confirmed         returns the current water level and the one the machine started with
 - [x]   A012   [RW]   [Calibration]       `calibration_ble_received`      unclear           for receiving calibration notifications, whatever that means
+```
+
+## Specifics on implemented Characteristics
+
+### a00d
+| UUID | Name       |
+|------|------------|
+| a00d | Shot Value |
+
+
+| Type  | Name             | Parse                                            | Description |
+|-------|------------------|--------------------------------------------------|-------------|
+| short | timer            | `Math.round(100 * (v / (herz * 2)))` `herz = 50` |             |
+| short | groupPressure    | `v / 4096`                                       |             |
+| short | groupFlow        | `v / 4096`                                       |             |
+| short | mixTemp          | `v / 256`                                        |             |
+| char  | headTemp1        |                                                  |             |
+| char  | headTemp2        |                                                  |             |
+| char  | headTemp3        |                                                  |             |
+| short | setMixTemp       | `v / 256`                                        |             |
+| short | setHeadTemp      | `v / 256`                                        |             |
+| char  | setGroupPressure | `v / 16`                                         |             |
+| char  | setGroupFlow     | `v / 16`                                         |             |
+| char  | frameNumber      |                                                  |             |
+| char  | steamTemp        |                                                  |             |
 
 
 ## Info from the basecamp docs
 
+```markdown
 static T_Versions        I_Versions        = VERSIONINFO; // A001 A R    Versions See T_Versions
 static T_RequestedState  I_RequestedState ; // A002 B RW   RequestedState See T_RequestedState
 static T_SetTime         I_SetTime        ; // A003 C RW   SetTime Set current time
@@ -42,3 +69,4 @@ static T_HeaderWrite     I_HeaderWrite    ; // A00F O RW   HeaderWrite Use this 
 static T_FrameWrite      I_FrameWrite     ; // A010 P RW   FrameWrite Use this to change a single frame in the current shot description
 static T_WaterLevels     I_WaterLevels    ; // A011 Q RW   WaterLevels Use this to adjust and read water level settings
 static T_Calibration     I_Calibration    ; // A012 R RW   Calibration Use this to adjust and read calibration
+```
