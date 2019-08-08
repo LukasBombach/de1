@@ -16,21 +16,7 @@ const PowerButton: React.FC<PowerButtonProps> = ({ isConnected }) => {
   const stateInfo = stateInfos.reverse()[0] || {};
   const isOn = stateInfo.state !== offState;
 
-  console.log(
-    "connected, notifying, stateInfo",
-    isConnected,
-    isNotifiying,
-    stateInfo
-  );
-
-  if (isConnected && !isNotifiying) {
-    console.log("Starting Notifications");
-    notify();
-  } else if (!isConnected) {
-    console.log("Not Starting Notifications, not Connected");
-  } else if (isNotifiying) {
-    console.log("Not Starting Notifications, already Notifiying");
-  }
+  if (isConnected && !isNotifiying) notify();
 
   const buttonText = !isConnected ? (
     <em>Disconnected</em>
