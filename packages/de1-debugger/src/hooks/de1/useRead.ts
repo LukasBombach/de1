@@ -4,8 +4,8 @@ import de1 from ".";
 
 export default function useRead<N extends keyof Converters>(
   name: N
-): [Value<Converters, N> | null, boolean, () => Promise<void>] {
-  const [value, setValue] = useState(null);
+): [Value<Converters, N> | undefined, boolean, () => Promise<void>] {
+  const [value, setValue] = useState(undefined);
   const [loading, setLoading] = useState(false);
 
   const readValue = async () => {

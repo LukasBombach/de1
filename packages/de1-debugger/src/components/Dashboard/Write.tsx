@@ -19,7 +19,7 @@ function Write<N extends keyof Converters>({
 
   return (
     <Row>
-      <Col span={12}>
+      <Col span={6}>
         <Button
           loading={loading}
           disabled={!connected}
@@ -28,7 +28,7 @@ function Write<N extends keyof Converters>({
           Write
         </Button>
       </Col>
-      <Col span={12}>
+      <Col span={18}>
         {values ? (
           <ValueSelect
             values={values}

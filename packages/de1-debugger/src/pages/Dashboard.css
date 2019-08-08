@@ -16,8 +16,8 @@
   }
 }
 
-/* md	≥768px */
-@media only screen and (min-width: 768px) {
+/* lg	≥992px */
+@media only screen and (min-width: 1200px) {
   .dashboard__grid {
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 360px);
@@ -25,9 +25,9 @@
 }
 
 /* lg	≥992px */
-@media only screen and (min-width: 992px) {
+/* @media only screen and (min-width: 992px) {
   .dashboard__grid {
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(3, 360px);
   }
-}
+} */

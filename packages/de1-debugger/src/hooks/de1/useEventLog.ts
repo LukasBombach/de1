@@ -1,3 +1,4 @@
+import { useState } from "react";
 import de1 from ".";
 
 const events: any[] = [
@@ -24,9 +25,11 @@ const events: any[] = [
 ];
 
 export default function useEventLog(): void {
-  if (de1.isConnected()) {
+  const [isLogging, setIsLogging] = useState(false);
+  if (!isLogging && de1.isConnected()) {
     for (const event of events) {
-      de1.getBleService().on(event, (...args) => console.info(...args));
+      de1.getBleService().on(event, (...args) => console.info(event, args));
     }
+    setIsLogging(true);
   }
 }

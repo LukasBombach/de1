@@ -1,6 +1,7 @@
 import React from "react";
-import { Row, Col, Button, List } from "antd";
+import { Row, Col, Button } from "antd";
 import { Converters } from "de1";
+import ReactJson from "react-json-view";
 import useNotify from "../../hooks/de1/useNotify";
 
 interface NotifyProps {
@@ -8,19 +9,17 @@ interface NotifyProps {
   connected?: boolean;
 }
 
+interface DataViewProps {
+  name?: keyof Converters;
+  value?: any;
+}
+
 const Notify: React.FC<NotifyProps> = ({ name, connected }) => {
   const [value, start, stop, isNotifiying] = useNotify(name);
 
-  const listStyle = {
-    height: 190,
-    overflow: "auto"
-  };
-
-  // if (value) console.info(`%cNotification for ${name}`, "color: green;", value);
-
   return (
     <Row>
-      <Col span={12}>
+      <Col span={6}>
         <Button disabled={!connected || isNotifiying} onClick={() => start()}>
           Start
         </Button>
@@ -28,23 +27,27 @@ const Notify: React.FC<NotifyProps> = ({ name, connected }) => {
           Stop
         </Button>
       </Col>
-      <Col span={12}>
-        <List
-          size="small"
-          bordered
-          dataSource={[value]}
-          style={listStyle}
-          renderItem={(value: any) => {
-            value =
-              typeof value === "object"
-                ? JSON.stringify(value, null, 2)
-                : value;
-            return <List.Item>{value}</List.Item>;
-          }}
-        />
+      <Col span={18}>
+        <DataView value={value} />
       </Col>
     </Row>
   );
+};
+
+const DataView: React.FC<DataViewProps> = ({ name, value }) => {
+  if (typeof value === "object")
+    return (
+      <ReactJson
+        name={name}
+        src={value}
+        collapsed={false}
+        enableClipboard={false}
+        displayObjectSize={false}
+        displayDataTypes={false}
+        style={{ fontSize: 12, width: 300, minHeight: 32 }}
+      />
+    );
+  return <span>{JSON.stringify(value)}</span>;
 };
 
 export default Notify;

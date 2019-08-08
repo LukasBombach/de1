@@ -1,6 +1,7 @@
 import React from "react";
 import { Card } from "antd";
 import { Converter, Converters } from "de1";
+import ErrorBoundary from "../../ErrorBoundary";
 import Read from "./Read";
 import Write from "./Write";
 import Notify from "./Notify";
@@ -19,9 +20,11 @@ const Control: React.FC<ControlProps<any>> = ({
   const { uuid, encode, decode, values } = converter;
   return (
     <Card title={`${name} ${uuid}`}>
-      {decode && <Read name={name} connected={connected} />}
-      {encode && <Write name={name} values={values} connected={connected} />}
-      {decode && <Notify name={name} connected={connected} />}
+      <ErrorBoundary>
+        {decode && <Read name={name} connected={connected} />}
+        {encode && <Write name={name} values={values} connected={connected} />}
+        {decode && <Notify name={name} connected={connected} />}
+      </ErrorBoundary>
     </Card>
   );
 };

@@ -8,6 +8,7 @@ import {
 import { Layout, Menu } from "antd";
 import useConnection from "./hooks/de1/useConnection";
 import useAutoConnect from "./hooks/de1/useAutoConnect";
+// import useEventLog from "./hooks/de1/useEventLog";
 import ErrorBoundary from "./ErrorBoundary";
 import UserApp from "./pages/UserApp";
 import Dashboard from "./pages/Dashboard";
@@ -17,6 +18,7 @@ import "./App.css";
 const App: React.FC = () => {
   const [isConnected, connect] = useConnection();
   useAutoConnect(isConnected, connect);
+  // useEventLog();
 
   return (
     <Router>
@@ -26,7 +28,7 @@ const App: React.FC = () => {
             <Route
               path="/"
               exact
-              render={props => <Redirect from="/" to="app" />}
+              render={() => <Redirect from="/" to="app" />}
             />
             <Route
               path="/app/"
