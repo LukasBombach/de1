@@ -22,7 +22,7 @@ export const subStates: SubStates = {
   preinfusion: 0x04,
   pouring: 0x05,
   ending: 0x06,
-  refill: 0x17
+  refill: 0x11
 };
 
 export interface StateInfo {
@@ -32,19 +32,20 @@ export interface StateInfo {
 
 function decode(data: Buffer): StateInfo {
   return new Parser<StateInfo>(data)
-    .char("state", v => getKeyFromValue(states, v))
-    .char("substate", v => getKeyFromValue(subStates, v))
+    .char("state", v => getKeyFromValue("state", states, v))
+    .char("substate", v => getKeyFromValue("subState", subStates, v))
     .vars();
 }
 
 function getKeyFromValue<Map extends States | SubStates>(
+  type: string,
   map: Map,
   value: number
 ): Map extends States ? State : SubState {
   const values = Object.values(map);
   const keys = Object.keys(map);
   const valueIndex = values.indexOf(value);
-  if (valueIndex === -1) throw new Error(`Invalid state value "${value}"`);
+  if (valueIndex === -1) throw new Error(`Invalid ${type} value "${value}"`);
   return keys[valueIndex] as Map extends States ? State : SubState;
 }
 

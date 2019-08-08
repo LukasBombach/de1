@@ -20,7 +20,8 @@
     "react-dom": "16.8.6",
     "react-json-tree": "0.11.2",
     "react-json-view": "1.19.1",
-    "react-scripts": "3.0.1"
+    "react-scripts": "3.0.1",
+    "react-vis": "1.11.7"
   },
   "devDependencies": {
     "@rescripts/cli": "0.0.11",

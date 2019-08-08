@@ -11,6 +11,7 @@ import useAutoConnect from "./hooks/de1/useAutoConnect";
 // import useEventLog from "./hooks/de1/useEventLog";
 import ErrorBoundary from "./ErrorBoundary";
 import UserApp from "./pages/UserApp";
+import Lab from "./pages/Lab";
 import Dashboard from "./pages/Dashboard";
 import PowerButton from "./components/PowerButton";
 import "./App.css";
@@ -28,11 +29,15 @@ const App: React.FC = () => {
             <Route
               path="/"
               exact
-              render={() => <Redirect from="/" to="app" />}
+              render={() => <Redirect from="/" to="lab" />}
             />
             <Route
               path="/app/"
               render={props => <UserApp {...props} isConnected={isConnected} />}
+            />
+            <Route
+              path="/lab/"
+              render={props => <Lab {...props} isConnected={isConnected} />}
             />
             <Route
               path="/dashboard/"
@@ -45,7 +50,7 @@ const App: React.FC = () => {
           <Menu
             theme="dark"
             mode="horizontal"
-            defaultSelectedKeys={["home"]}
+            defaultSelectedKeys={["lab"]}
             style={{
               lineHeight: "64px",
               position: "fixed",
@@ -59,6 +64,9 @@ const App: React.FC = () => {
             </Menu.Item>
             <Menu.Item key="app">
               <Link to="/app">App</Link>
+            </Menu.Item>
+            <Menu.Item key="lab">
+              <Link to="/lab">Lab</Link>
             </Menu.Item>
             <Menu.Item key="dashboard">
               <Link to="/dashboard/">Dashboard</Link>
