@@ -2,6 +2,7 @@ import React from "react";
 import { Row, Col } from "antd";
 import Watch from "../components/Lab/Watch";
 import Control, { ControlButtonProps } from "../components/Lab/Control";
+import Chart from "../components/Lab/Chart";
 import "./Lab.css";
 
 interface UserAppProps {
@@ -21,24 +22,32 @@ const espressoButtons: ControlButtonProps<any>[] = [
 const UserApp: React.FC<UserAppProps> = ({ isConnected }) => {
   return (
     <section>
-      <Row gutter={16}>
-        <Col span={6}>
-          <Row gutter={16}>
+      <Row>
+        <Col span={12}>
+          <Row>
             <Watch name="shot" isConnected={isConnected} />
           </Row>
-          <Row gutter={16}>
+          <Row>
             <Watch name="water" isConnected={isConnected} />
           </Row>
         </Col>
-        <Col span={6}>
-          <Row gutter={16}>
+        <Col span={12}>
+          <Row>
             <Watch name="stateInfo" isConnected={isConnected} />
           </Row>
-          <Row gutter={16}>
+          <Row>
             <Control buttons={powerButtons} isConnected={isConnected} />
           </Row>
-          <Row gutter={16}>
+          <Row>
             <Control buttons={espressoButtons} isConnected={isConnected} />
+          </Row>
+          <Row>
+            <Chart
+              name="shot"
+              valueName="Temperature"
+              parseValue={(v: any) => v.mixTemp}
+              isConnected={isConnected}
+            />
           </Row>
         </Col>
       </Row>
