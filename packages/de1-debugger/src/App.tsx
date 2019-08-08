@@ -1,7 +1,13 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Redirect
+} from "react-router-dom";
 import { Layout, Menu } from "antd";
 import ErrorBoundary from "./ErrorBoundary";
+import UserApp from "./pages/UserApp";
 import Dashboard from "./pages/Dashboard";
 import Connection from "./components/Connection";
 import "./App.css";
@@ -17,9 +23,11 @@ const App: React.FC = () => {
             <Route
               path="/"
               exact
-              render={props => (
-                <Dashboard {...props} isConnected={isConnected} />
-              )}
+              render={props => <Redirect from="/" to="app" />}
+            />
+            <Route
+              path="/app/"
+              render={props => <UserApp {...props} isConnected={isConnected} />}
             />
             <Route
               path="/dashboard/"
@@ -43,6 +51,9 @@ const App: React.FC = () => {
           >
             <Menu.Item key="home">
               <Link to="/">Home</Link>
+            </Menu.Item>
+            <Menu.Item key="app">
+              <Link to="/app">App</Link>
             </Menu.Item>
             <Menu.Item key="dashboard">
               <Link to="/dashboard/">Dashboard</Link>

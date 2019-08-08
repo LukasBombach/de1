@@ -5,6 +5,7 @@
   grid-column-gap: 16px;
   grid-row-gap: 16px;
   padding: 16px;
+  min-height: 100%;
 }
 
 /* sm	≥576px */
