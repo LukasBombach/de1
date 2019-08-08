@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { Converters } from "de1";
+import { Converters, Value } from "de1";
 import de1 from ".";
 
-export default function useNotify(
-  name: keyof Converters
-): [() => Promise<void>, () => Promise<void>, boolean, any[]] {
+export default function useNotify<N extends keyof Converters>(
+  name: N
+): [() => Promise<void>, () => Promise<void>, boolean, Value<Converters, N>[]] {
   const [values, setValues] = useState([]);
   const [isNotifiying, setIsNotifiying] = useState(false);
 

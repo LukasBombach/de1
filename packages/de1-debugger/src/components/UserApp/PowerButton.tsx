@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "antd";
-import useRead from "../../hooks/de1/useRead";
+import useNotify from "../../hooks/de1/useNotify";
 import useWrite from "../../hooks/de1/useWrite";
 
 interface PowerButtonProps {
@@ -8,12 +8,13 @@ interface PowerButtonProps {
 }
 
 const PowerButton: React.FC<PowerButtonProps> = ({ isConnected }) => {
-  const [stateInfo, reading, readStateInfo] = useRead("stateInfo");
+  const [start, stop, isNotifiying, stateInfos] = useNotify("stateInfo");
   const [writing, setState] = useWrite("state");
 
   const idleState = "idle";
   const offState = "sleep";
-  const isOn = stateInfo && stateInfo.state !== offState;
+  const stateInfo = stateInfos.reverse()[0] || {};
+  const isOn = stateInfo.state !== offState;
 
   console.log(stateInfo);
 
