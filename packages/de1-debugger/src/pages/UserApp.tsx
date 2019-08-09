@@ -121,19 +121,26 @@ const Espresso: React.FC<{ isConnected: boolean }> = ({ isConnected }) => {
   if (isConnected) notifyShot();
 
   const isTurnedOff = !stateInfo || stateInfo.state === "sleep";
+  const isReady = stateInfo && stateInfo.substate === "ready";
   const isPouring = stateInfo && stateInfo.state === "espresso";
 
   useEffect(() => {
-    if (shot) setShotData(data => data.concat(shot));
+    if (shot && isPouring) setShotData(data => data.concat(shot));
   }, [isPouring, shot]);
 
   return (
     <Card>
       <Button.Group style={{ marginBottom: 16 }}>
-        <Button onClick={() => de1.startEspresso()} disabled={isTurnedOff}>
+        <Button
+          onClick={() => de1.startEspresso()}
+          disabled={isTurnedOff || !isReady}
+        >
           Start Espresso
         </Button>
-        <Button onClick={() => de1.stopEspresso()} disabled={isTurnedOff}>
+        <Button
+          onClick={() => de1.stopEspresso()}
+          disabled={isTurnedOff || !isReady}
+        >
           Stop Espresso
         </Button>
       </Button.Group>
