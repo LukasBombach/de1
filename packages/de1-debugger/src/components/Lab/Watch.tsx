@@ -63,7 +63,7 @@ const DataView: React.FC<DataViewProps> = ({ name, value }) => {
         enableClipboard={false}
         displayObjectSize={false}
         displayDataTypes={false}
-        style={{ fontSize: 12, width: 300, minHeight: 32 }}
+        style={{ fontSize: 12, width: 450, minHeight: 32 }}
       />
     );
   return <span>{JSON.stringify(value)}</span>;

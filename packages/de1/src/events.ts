@@ -8,8 +8,7 @@ export interface De1Events {
     goal: number;
     temp: number;
     timeElapsed: number;
-    timeLeft?: number;
-    tempPerSecond?: number;
+    debug?: Record<string, any>;
   };
   waterlevel: number;
 }
@@ -33,11 +32,6 @@ interface LastShot {
   time: number;
 }
 
-interface HeatingValue {
-  time: number;
-  value: number;
-}
-
 export default class Events {
   private de1: DE1;
   private emitter = new EventEmitter();
@@ -45,6 +39,7 @@ export default class Events {
   private lastSubState?: LastSubState;
   private lastShot?: LastShot;
   private heatingStarted?: number;
+  private heatingHistory: number[] = [];
 
   constructor(de1: DE1) {
     this.de1 = de1;
@@ -110,21 +105,36 @@ export default class Events {
     const temp = shot.mixTemp;
     const goal = shot.setHeadTemp;
     const timeElapsed = Date.now() - (this.heatingStarted || 0);
+    const { heatingHistory } = this;
     if (!this.lastShot) return { goal, temp, timeElapsed };
-    const diffs = this.getHeatingDiffs(this.lastShot, shot);
-    return { goal, temp, timeElapsed, ...diffs };
-  }
-
-  private getHeatingDiffs(
-    lastShot: LastShot,
-    shot: Shot
-  ): { tempPerSecond: number; timeLeft: number } {
-    const tempDiff = shot.mixTemp - lastShot.shot.mixTemp;
-    const secondsEleapsed = (Date.now() - lastShot.time) / 1000;
-    const tempPerSecond = tempDiff / secondsEleapsed;
-    const timeUntilGoal = (shot.mixTemp / shot.setHeadTemp) * tempPerSecond;
-    const timeLeft = Math.abs(Math.floor(timeUntilGoal * 1000));
-    return { tempPerSecond, timeLeft };
+    const timeBetweenShots = (Date.now() - this.lastShot.time) / 1000;
+    const tempBetweenShots = shot.mixTemp - this.lastShot.shot.mixTemp;
+    const tempPerSecond = tempBetweenShots / timeBetweenShots;
+    if (tempPerSecond > 0) {
+      if (heatingHistory.length >= 40) heatingHistory.shift();
+      heatingHistory.push(tempPerSecond);
+    }
+    const tempPerSecondSum = heatingHistory.reduce((a, b) => a + b, 0);
+    const tempPerSecondAvg = tempPerSecondSum / heatingHistory.length;
+    const tempToGo = shot.setHeadTemp - shot.mixTemp;
+    const timeLeft = Math.floor(tempToGo / Math.abs(tempPerSecondAvg));
+    const timeLeftMinutes = (timeLeft / 60).toFixed(2);
+    return {
+      goal,
+      temp,
+      timeElapsed,
+      debug: {
+        timeBetweenShots,
+        tempBetweenShots,
+        tempPerSecond,
+        tempPerSecondSum,
+        tempPerSecondAvg,
+        tempToGo,
+        timeLeft,
+        timeLeftMinutes,
+        heatingHistory
+      }
+    };
   }
 
   private updateLastShot(shot: Shot): void {
