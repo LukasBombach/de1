@@ -4,6 +4,10 @@ import { StateInfo, State, SubState, Shot } from "./converters";
 
 export interface De1Events {
   state: De1State;
+  temperature: {
+    goal: number;
+    temp: number;
+  };
   heating: {
     goal: number;
     temp: number;
@@ -95,10 +99,17 @@ export default class Events {
   }
 
   private onShot(shot: Shot): void {
+    this.emitter.emit("temperature", this.getTemperatureParams(shot));
     if (this.lastSubState && this.lastSubState.substate === "heating") {
       this.emitter.emit("heating", this.getHeatingParams(shot));
     }
     this.updateLastShot(shot);
+  }
+
+  private getTemperatureParams(shot: Shot): De1Events["temperature"] {
+    const temp = shot.mixTemp;
+    const goal = shot.setHeadTemp;
+    return { temp, goal };
   }
 
   private getHeatingParams(shot: Shot): De1Events["heating"] {
