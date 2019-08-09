@@ -1,0 +1,17 @@
+.user_app__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(6, 360px);
+  grid-column-gap: 16px;
+  grid-row-gap: 16px;
+  padding: 16px;
+  min-height: 100%;
+}
+
+/* sm	≥576px */
+@media only screen and (min-width: 576px) {
+  .user_app__grid {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(1, 1fr);
+  }
+}
