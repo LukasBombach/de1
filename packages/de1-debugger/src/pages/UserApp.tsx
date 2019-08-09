@@ -208,7 +208,7 @@ const Chart: React.FC<{
             />
           ))}
 
-          <CartesianGrid strokeDasharray="3 3" />
+          <CartesianGrid strokeDasharray="2 2" />
           <YAxis dataKey={dataKey} unit={unit} />
           <XAxis tick={false} />
         </LineChart>
