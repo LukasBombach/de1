@@ -1,5 +1,6 @@
 import React from "react";
-import { Row, Col, Card, Descriptions, Button, Statistic } from "antd";
+import { Row, Col, Card, Descriptions, Button, Statistic, Icon } from "antd";
+import { blue } from "@ant-design/colors";
 import useNotify from "../hooks/de1/useNotify";
 import useEvent from "../hooks/de1/useEvent";
 import de1 from "../hooks/de1/";
@@ -19,6 +20,7 @@ const UserApp: React.FC<UserAppProps> = ({ isConnected }) => {
 
   const isTurnedOn = !stateInfo || stateInfo.state !== "sleep";
   const isTurnedOff = !stateInfo || stateInfo.state === "sleep";
+  const isHeating = stateInfo && stateInfo.substate === "heating";
 
   return (
     <section>
@@ -48,6 +50,8 @@ const UserApp: React.FC<UserAppProps> = ({ isConnected }) => {
             <Statistic
               title="Temp"
               value={temperature && temperature.temp}
+              prefix={isHeating && <Icon type="up-circle" theme="twoTone" />}
+              valueStyle={isHeating ? { color: blue.primary } : undefined}
               precision={2}
             />
             <Statistic title="Goal" value={temperature && temperature.goal} />

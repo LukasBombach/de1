@@ -12,7 +12,7 @@
   resolved "https://spring.jfrog.io/spring/api/npm/npm-red/7zip/-/7zip-0.0.6.tgz#9cafb171af82329490353b4816f03347aa150a30"
   integrity sha1-nK+xca+CMpSQNTtIFvAzR6oVCjA=
 
-"@ant-design/colors@^3.1.0":
+"@ant-design/colors@3.1.0", "@ant-design/colors@^3.1.0":
   version "3.1.0"
   resolved "https://spring.jfrog.io/spring/api/npm/npm-red/@ant-design/colors/-/colors-3.1.0.tgz#b7e2cc61a4e86d3d109494034acfb1222dacaa3c"
   integrity sha1-t+LMYaTobT0QlJQDSs+xIi2sqjw=
