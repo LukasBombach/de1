@@ -9,4 +9,6 @@ export {
   ShotSettings,
   StateInfo
 } from "./converters";
+
+export { De1Events, De1Listener } from "./events";
 export { Converter, Value } from "sblendid";

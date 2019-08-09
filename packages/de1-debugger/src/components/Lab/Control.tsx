@@ -18,8 +18,8 @@ export interface ControlButtonProps<N extends keyof Converters> {
 const Control: React.FC<ControlProps> = ({ buttons, isConnected }) => {
   return (
     <Card>
-      {buttons.map(button => (
-        <ControlButton isConnected={isConnected} {...button} />
+      {buttons.map((button, key) => (
+        <ControlButton key={key} isConnected={isConnected} {...button} />
       ))}
     </Card>
   );

@@ -1,7 +1,7 @@
 import React from "react";
 import { Row, Col } from "antd";
-import Watch from "../components/Lab/Watch";
 import Control, { ControlButtonProps } from "../components/Lab/Control";
+import Watch from "../components/Lab/Watch";
 import Chart from "../components/Lab/Chart";
 import "./Lab.css";
 
@@ -29,6 +29,9 @@ const UserApp: React.FC<UserAppProps> = ({ isConnected }) => {
           </Row>
           <Row>
             <Watch name="water" isConnected={isConnected} />
+          </Row>
+          <Row>
+            <Watch event="heating" isConnected={isConnected} />
           </Row>
         </Col>
         <Col span={12}>

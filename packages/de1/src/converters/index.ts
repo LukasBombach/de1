@@ -16,7 +16,7 @@ export { Water } from "./water";
 export { Versions } from "./versions";
 export { Shot } from "./shot";
 export { ShotSettings } from "./shotSettings";
-export { StateInfo } from "./stateInfo";
+export { StateInfo, SubState } from "./stateInfo";
 export { ShotDescriptionHeader } from "./shotDescriptionHeader";
 export { ShotFrame } from "./shotFrame";
 export { Calibrate } from "./calibrate";

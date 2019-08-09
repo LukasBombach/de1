@@ -1,24 +1,23 @@
 import Sblendid, { Peripheral, Service, Adapter, Value } from "sblendid";
 import converters, { Converters } from "./converters";
+import Events, { De1Events, De1Listener } from "./events";
 
-// type De1State =
-//   | "disconnected"
-//   | "sleep"
-//   | "heating"
-//   | "cooling"
-//   | "idle"
-//   | "espresso"
-//   | "steam"
-//   | "hotWater"
-//   | "flushing"
-//   | "descale";
-
-// type De1Event = "state" | "temperature" | "waterlevel";
-// type De1Listener = () => Promise<void> | void;
+export type De1State =
+  | "disconnected"
+  | "sleep"
+  | "heating"
+  | "cooling"
+  | "idle"
+  | "espresso"
+  | "steam"
+  | "hotWater"
+  | "flushing"
+  | "descale";
 
 export default class DE1 {
   private machine?: Peripheral;
   private service?: Service<Converters>;
+  private events: Events = new Events(this);
 
   static async connect(): Promise<DE1> {
     const de1 = new DE1();
@@ -30,6 +29,7 @@ export default class DE1 {
     if (this.isConnected()) return;
     this.machine = await Sblendid.connect("DE1");
     this.service = await this.machine.getService("a000", converters);
+    this.events.setUpListeners();
   }
 
   async disconnect(): Promise<void> {
@@ -37,6 +37,7 @@ export default class DE1 {
     await this.machine!.disconnect();
     this.machine = undefined;
     this.service = undefined;
+    // this.events.removeListeners();
   }
 
   async turnOn(): Promise<void> {
@@ -46,6 +47,10 @@ export default class DE1 {
 
   async turnOff(): Promise<void> {
     await this.write("state", "sleep");
+  }
+
+  async stopEverything(): Promise<void> {
+    await this.write("state", "idle");
   }
 
   async startEspresso(): Promise<void> {
@@ -93,33 +98,37 @@ export default class DE1 {
     if (currentState === "descale") await this.write("state", "idle");
   }
 
-  // async getState(): Promise<De1State> {}
-
-  // async getTemperature(): Promise<number> {}
+  async getState(): Promise<De1State> {
+    if (!this.isConnected()) return "disconnected";
+    const { state, substate } = await this.read("stateInfo");
+    if (state === "sleep") return "sleep";
+    if (substate === "heating") return "heating";
+    if (state === "espresso") return "espresso";
+    if (state === "steam") return "steam";
+    if (state === "hotWater") return "hotWater";
+    if (state === "hotWaterRinse") return "flushing";
+    if (state === "descale") return "descale";
+    return "idle";
+  }
 
   async getWaterlevel(): Promise<number> {
     const { level } = await this.read("water");
     return level;
   }
 
-  // async getEspressoSettings(): Promise<De1EspressoSettings> {}
-  // async setEspressoSettings(settings: De1EspressoSettings): Promise<void> {}
+  public on<E extends keyof De1Events>(
+    event: E,
+    listener: De1Listener<E>
+  ): void {
+    this.events.on(event, listener);
+  }
 
-  // async getSteamSettings(): Promise<De1SteamSettings> {}
-  // async setSteamSettings(settings: De1SteamSettings): Promise<void> {}
-
-  // async getHotWaterSettings(): Promise<De1HotWaterSettings> {}
-  // async setHotWaterSettings(settings: De1HotWaterSettings): Promise<void> {}
-
-  // public async on<E extends keyof Converters>(
-  //   event: De1Event,
-  //   listener: Listener<Converters, E>
-  // ): Promise<void> {}
-
-  // public async off<E extends keyof Converters>(
-  //   event: De1Event,
-  //   listener: Listener<Converters, E>
-  // ): Promise<void> {}
+  public off<E extends keyof De1Events>(
+    event: E,
+    listener: De1Listener<E>
+  ): void {
+    this.events.off(event, listener);
+  }
 
   public isConnected(): boolean {
     if (!this.machine) return false;
