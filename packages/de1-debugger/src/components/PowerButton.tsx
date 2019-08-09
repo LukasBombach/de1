@@ -33,10 +33,11 @@ function getButtonText(
   isConnected: boolean,
   stateInfo?: Value<Converters, "stateInfo">
 ) {
+  console.log(isConnected, stateInfo);
   if (!isConnected) return <em>Disconnected</em>;
   if (!stateInfo) return <em>Loading</em>;
   if (stateInfo.state === "sleep") return "Turn on";
-  return "Turn on";
+  return "Turn off";
 }
 
 export default PowerButton;

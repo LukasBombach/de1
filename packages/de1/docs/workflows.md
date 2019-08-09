@@ -1,4 +1,18 @@
-Commands
+# Docs
+
+## Workflows
+
+### Turn on machine
+
+- turn on machine - `command`
+- machine is heating - _feedback_
+- it as a target temperature - _feedback_
+- it increases the current temperature until the target
+- it can tell you the current temperature - _feedback_
+- it could tell you the estimated time until it's ready - _feedback_
+- it tells you when it is ready - _feedback_
+
+## Commands
 
 - flush
 - espresso
@@ -9,16 +23,7 @@ Commands
 - clean???
 - calibrate???
 
-Turn on machine
-
-- machine is heating - _feedback_
-- it as a target temperature - _feedback_
-- it increases the current temperature until the target
-- it can tell you the current temperature - _feedback_
-- it could tell you the estimated time until it's ready - _feedback_
-- it tells you when it is ready - _feedback_
-
-general available info
+## generally available info
 
 - ble scale is connected
 - water temperature
@@ -28,7 +33,7 @@ general available info
 - selected profile
 - settings
 
-info while pouring
+## info while pouring
 
 - pressure
 - flow
