@@ -65,10 +65,23 @@ export default class Events {
       this.heatStart = undefined;
     }
     if (this.isHeating() && substate !== "heating") {
-      const file =
-        "/Users/lbombach/Projekte/DecentEspresso/de1/packages/de1/src/heatinglog.txt";
-      const data = { start: this.heatStart, end: this.heatEnd };
-      await fs.promises.appendFile(file, JSON.stringify(data) + "\n");
+      const folder =
+        "/Users/lbombach/Projekte/DecentEspresso/de1/packages/de1/src/";
+      const heatingLog = `${folder}heatinglog.txt`;
+      const heatingLogClean = `${folder}heatinglogClean.csv`;
+      const heatingLogData = JSON.stringify({
+        start: this.heatStart,
+        end: this.heatEnd
+      });
+      const startTemp = this.heatStart!.shot.mixTemp;
+      const endTemp = this.heatEnd!.shot.mixTemp;
+      const startTime = this.heatStart!.time;
+      const endTime = this.heatEnd!.time;
+      const tempDiff = endTemp - startTemp;
+      const timeDiff = endTime - startTime;
+      const heatingLogCleanData = `${tempDiff},${timeDiff},${startTemp},${endTemp},${startTime},${endTime}`;
+      await fs.promises.appendFile(heatingLog, heatingLogData + "\n");
+      await fs.promises.appendFile(heatingLogClean, heatingLogCleanData + "\n");
     }
     this.lastStateInfo = { state, substate, time: Date.now() };
   }
