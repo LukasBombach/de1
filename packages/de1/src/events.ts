@@ -1,8 +1,7 @@
-import fs from "fs";
-import path from "path";
 import { EventEmitter } from "events";
 import DE1 from "./de1";
 import { StateInfo, State, SubState, Shot } from "./converters";
+import HeatLogger from "./development/heatLogger";
 
 export interface De1Events {
   heating: {
@@ -33,6 +32,7 @@ export default class Events {
   private heatHistory: { time: number; shot: Shot }[] = [];
   private heatStart?: { time: number; shot: Shot };
   private heatEnd?: { time: number; shot: Shot };
+  private heatLogger: HeatLogger = new HeatLogger();
 
   constructor(de1: DE1) {
     this.de1 = de1;
@@ -60,33 +60,16 @@ export default class Events {
   }
 
   private async onStateInfo({ state, substate }: StateInfo): Promise<void> {
+    this.heatLogger.onStateChange({ state, substate });
     if (!this.isHeating() && substate === "heating") {
       this.heatHistory = [];
       this.heatStart = undefined;
-    }
-    if (this.isHeating() && substate !== "heating") {
-      const folder =
-        "/Users/lbombach/Projekte/DecentEspresso/de1/packages/de1/src/";
-      const heatingLog = `${folder}heatinglog.txt`;
-      const heatingLogClean = `${folder}heatinglogClean.csv`;
-      const heatingLogData = JSON.stringify({
-        start: this.heatStart,
-        end: this.heatEnd
-      });
-      const startTemp = this.heatStart!.shot.mixTemp;
-      const endTemp = this.heatEnd!.shot.mixTemp;
-      const startTime = this.heatStart!.time;
-      const endTime = this.heatEnd!.time;
-      const tempDiff = endTemp - startTemp;
-      const timeDiff = endTime - startTime;
-      const heatingLogCleanData = `${tempDiff},${timeDiff},${startTemp},${endTemp},${startTime},${endTime}`;
-      await fs.promises.appendFile(heatingLog, heatingLogData + "\n");
-      await fs.promises.appendFile(heatingLogClean, heatingLogCleanData + "\n");
     }
     this.lastStateInfo = { state, substate, time: Date.now() };
   }
 
   private onShot(shot: Shot): void {
+    this.heatLogger.onShot(shot);
     if (typeof this.heatStart === "undefined") {
       this.heatStart = { shot, time: Date.now() };
     }
