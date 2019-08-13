@@ -25,13 +25,15 @@ export interface ExpecetedShotToBeImplenented {
 
 export default class HeatLogger {
   private shots: ExpecetedShotToBeImplenented[] = [];
+  private lastSubState?: string;
 
   public async onStateChange(stateInfo: StateInfo) {
     if (stateInfo.substate === "heating") {
       this.startLogging();
-    } else {
+    } else if (this.lastSubState === "heating") {
       await this.stopLogging();
     }
+    this.lastSubState = stateInfo.substate;
   }
 
   public onShot(shot: ExpecetedShotToBeImplenented) {

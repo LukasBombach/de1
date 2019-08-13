@@ -15,12 +15,14 @@ export interface Shot {
   setGroupFlow: number;
   frameNumber: number;
   steamTemp: number;
+  time: number;
 }
 
 export const herz = 50;
 
 function decode(data: Buffer): Shot {
-  return new Parser<Shot>(data)
+  const time = Date.now();
+  const vars = new Parser<Shot>(data)
     .short("timer", v => Math.round(100 * (v / (herz * 2))))
     .short("groupPressure", v => v / 4096)
     .short("groupFlow", v => v / 4096)
@@ -34,8 +36,8 @@ function decode(data: Buffer): Shot {
     .char("setGroupFlow", v => v / 16)
     .char("frameNumber")
     .char("steamTemp")
-
     .vars();
+  return { ...vars, time };
 }
 
 const converter: Converter<Shot> = {

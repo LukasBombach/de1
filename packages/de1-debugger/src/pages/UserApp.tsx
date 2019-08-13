@@ -114,7 +114,7 @@ const Temperature: React.FC<{ isConnected: boolean }> = ({ isConnected }) => {
       />
       <Statistic
         title="Time Left"
-        value={heatingInfo && MMSS(heatingInfo.timeRemaining || 0)}
+        value={heatingInfo && MMSS(heatingInfo.experimentalTimeRemaining || 0)}
         precision={2}
         suffix="m"
       />

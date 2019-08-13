@@ -8,7 +8,7 @@ export interface De1Events {
     goal: number;
     temp: number;
     timeElapsed: number;
-    timeRemainingExperimental?: number;
+    experimentalTimeRemaining?: number;
     debug?: Record<string, any>;
   };
 }
@@ -92,7 +92,7 @@ export default class Events {
     const heatDiff = temp - startTemp;
     const heatPerSecond = heatDiff / timeDiff;
     const heatRemaining = goal - temp;
-    const timeRemainingExperimental = Math.floor(heatRemaining / heatPerSecond);
+    const experimentalTimeRemaining = Math.floor(heatRemaining / heatPerSecond);
 
     function MMSS(millis: number) {
       var minutes = Math.floor(millis / 60000);
@@ -107,11 +107,11 @@ export default class Events {
       heatDiff,
       heatPerSecond,
       heatRemaining,
-      timeRemainingExperimental,
-      timeRemainingMinutes: MMSS(timeRemainingExperimental),
+      experimentalTimeRemaining,
+      timeRemainingMinutes: MMSS(experimentalTimeRemaining),
       heatHistoryLength: this.heatHistory.length
     };
-    const event = { goal, temp, timeElapsed, timeRemainingExperimental, debug };
+    const event = { goal, temp, timeElapsed, experimentalTimeRemaining, debug };
     this.emitter.emit("heating", event);
     this.heatEnd = { time, shot };
   }
