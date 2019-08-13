@@ -7,6 +7,7 @@ export interface De1Events {
   heating: {
     goal: number;
     temp: number;
+    tempRemaining: number;
     timeElapsed: number;
     experimentalTimeRemaining?: number;
     debug?: Record<string, any>;
@@ -77,8 +78,9 @@ export default class Events {
 
   private emitHeating(shot: Shot): void {
     const time = Date.now();
-    const goal = shot.setHeadTemp;
+    const goal = shot.setMixTemp;
     const temp = shot.mixTemp;
+    const tempRemaining = goal - temp;
     const timeElapsed = time - this.lastStateInfo!.time;
 
     this.heatHistory.push({ time, shot });
@@ -92,7 +94,13 @@ export default class Events {
     const heatRemaining = goal - temp;
     const experimentalTimeRemaining = Math.floor(heatRemaining / heatPerSecond);
 
-    const event = { goal, temp, timeElapsed, experimentalTimeRemaining };
+    const event = {
+      goal,
+      temp,
+      tempRemaining,
+      timeElapsed,
+      experimentalTimeRemaining
+    };
     this.emitter.emit("heating", event);
   }
 
