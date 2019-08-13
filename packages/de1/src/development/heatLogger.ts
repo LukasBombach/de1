@@ -45,7 +45,7 @@ export default class HeatLogger {
   }
 
   private async stopLogging() {
-    const filename = new Date().toLocaleString().replace(":", ".");
+    const filename = new Date().toLocaleString();
     const file = path.resolve(dir, `${filename}.json`);
     const serializedShots = JSON.stringify(this.shots);
     await fs.promises.writeFile(file, serializedShots);

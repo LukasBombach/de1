@@ -31,7 +31,6 @@ export default class Events {
   private lastStateInfo?: LastStateInfo;
   private heatHistory: { time: number; shot: Shot }[] = [];
   private heatStart?: { time: number; shot: Shot };
-  private heatEnd?: { time: number; shot: Shot };
   private heatLogger: HeatLogger = new HeatLogger();
 
   constructor(de1: DE1) {
@@ -87,33 +86,14 @@ export default class Events {
 
     const startTime = this.heatStart!.time;
     const startTemp = this.heatStart!.shot.mixTemp;
-
     const timeDiff = time - startTime;
     const heatDiff = temp - startTemp;
     const heatPerSecond = heatDiff / timeDiff;
     const heatRemaining = goal - temp;
     const experimentalTimeRemaining = Math.floor(heatRemaining / heatPerSecond);
 
-    function MMSS(millis: number) {
-      var minutes = Math.floor(millis / 60000);
-      var seconds = Math.floor((millis % 60000) / 1000);
-      return minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
-    }
-
-    const debug = {
-      startTime,
-      startTemp,
-      timeDiff,
-      heatDiff,
-      heatPerSecond,
-      heatRemaining,
-      experimentalTimeRemaining,
-      timeRemainingMinutes: MMSS(experimentalTimeRemaining),
-      heatHistoryLength: this.heatHistory.length
-    };
-    const event = { goal, temp, timeElapsed, experimentalTimeRemaining, debug };
+    const event = { goal, temp, timeElapsed, experimentalTimeRemaining };
     this.emitter.emit("heating", event);
-    this.heatEnd = { time, shot };
   }
 
   private isHeating(): boolean {
