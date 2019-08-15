@@ -8,8 +8,11 @@ export default function useConnection(): [
 ] {
   const [isConnnected, setIsConnected] = useState(de1.isConnected());
 
-  const connect = () => de1.connect().then(() => setIsConnected(true));
-  const disconnect = () => de1.disconnect().then(() => setIsConnected(false));
+  de1.on("connected", () => setIsConnected(true));
+  de1.on("disconnected", () => setIsConnected(false));
+
+  const connect = () => de1.connect();
+  const disconnect = () => de1.disconnect();
 
   return [isConnnected, connect, disconnect];
 }

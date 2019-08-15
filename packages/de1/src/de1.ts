@@ -29,7 +29,8 @@ export default class DE1 {
     if (this.isConnected()) return;
     this.machine = await Sblendid.connect("DE1");
     this.service = await this.machine.getService("a000", converters);
-    this.events.setUpListeners();
+    this.events.addListeners();
+    this.events.emit("connected", undefined);
   }
 
   async disconnect(): Promise<void> {
@@ -37,7 +38,8 @@ export default class DE1 {
     await this.machine!.disconnect();
     this.machine = undefined;
     this.service = undefined;
-    // this.events.removeListeners();
+    this.events.emit("disconnected", undefined);
+    this.events.removeListeners();
   }
 
   async turnOn(): Promise<void> {

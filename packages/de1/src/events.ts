@@ -4,6 +4,8 @@ import { StateInfo, State, SubState, Shot } from "./converters";
 import HeatLogger from "./development/heatLogger";
 
 export interface De1Events {
+  connected: void;
+  disconnected: void;
   heating: {
     goal: number;
     temp: number;
@@ -39,13 +41,13 @@ export default class Events {
   }
 
   // todo this should happen automatically on connect / disconnect
-  public setUpListeners(): void {
+  public addListeners(): void {
     const service = this.de1.getBleService();
     service.on("stateInfo", this.onStateInfo.bind(this));
     service.on("shot", this.onShot.bind(this));
   }
 
-  public unloadListeners(): void {
+  public removeListeners(): void {
     const service = this.de1.getBleService();
     service.off("stateInfo", this.onStateInfo.bind(this));
     service.off("shot", this.onShot.bind(this));
@@ -57,6 +59,10 @@ export default class Events {
 
   public off<N extends De1EventName>(event: N, listener: De1Listener<N>): void {
     this.emitter.off(event, listener);
+  }
+
+  public emit<N extends De1EventName>(event: N, params: De1Events[N]): void {
+    this.emitter.emit(event, params);
   }
 
   private async onStateInfo({ state, substate }: StateInfo): Promise<void> {
