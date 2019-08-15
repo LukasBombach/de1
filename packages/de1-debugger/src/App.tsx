@@ -1,25 +1,18 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Redirect
-} from "react-router-dom";
-import { Layout, Menu } from "antd";
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import { Layout } from "antd";
 import useConnection from "./hooks/de1/useConnection";
 import useAutoConnect from "./hooks/de1/useAutoConnect";
-// import useEventLog from "./hooks/de1/useEventLog";
 import ErrorBoundary from "./ErrorBoundary";
 import UserApp from "./pages/UserApp";
 import Lab from "./pages/Lab";
 import Dashboard from "./pages/Dashboard";
-import PowerButton from "./components/PowerButton";
+import AppMenu from "./components/App/Menu";
 import "./App.css";
 
 const App: React.FC = () => {
   const [isConnected, connect] = useConnection();
   useAutoConnect(isConnected, connect);
-  // useEventLog();
 
   return (
     <Router>
@@ -47,34 +40,7 @@ const App: React.FC = () => {
             />
           </Layout.Content>
 
-          <Menu
-            theme="dark"
-            mode="horizontal"
-            defaultSelectedKeys={["lab"]}
-            style={{
-              lineHeight: "64px",
-              position: "fixed",
-              bottom: 0,
-              zIndex: 1,
-              width: "100%"
-            }}
-          >
-            <Menu.Item key="home">
-              <Link to="/">Home</Link>
-            </Menu.Item>
-            <Menu.Item key="app">
-              <Link to="/app">App</Link>
-            </Menu.Item>
-            <Menu.Item key="lab">
-              <Link to="/lab">Lab</Link>
-            </Menu.Item>
-            <Menu.Item key="dashboard">
-              <Link to="/dashboard/">Dashboard</Link>
-            </Menu.Item>
-            <Menu.Item key="power" disabled={true} style={{ float: "right" }}>
-              <PowerButton isConnected={isConnected} />
-            </Menu.Item>
-          </Menu>
+          <AppMenu isConnected={isConnected} />
         </Layout>
       </ErrorBoundary>
     </Router>
