@@ -7,7 +7,7 @@ import useWrite from "../../hooks/useWrite";
 
 const PowerButton: React.FC = () => {
   const isConnected = useConnection();
-  const [stateInfo] = useNotify("stateInfo");
+  const stateInfo = useNotify("stateInfo");
   const [writing, setState] = useWrite("state");
 
   const idleState = "idle";
