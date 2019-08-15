@@ -1,6 +1,6 @@
 import fs from "fs";
 import React, { useState, useEffect } from "react";
-import { Card, Statistic, Icon } from "antd";
+import { Card, Statistic, Descriptions, Icon } from "antd";
 import { blue } from "@ant-design/colors";
 import useNotify from "../../hooks/de1/useNotify";
 import useEvent from "../../hooks/de1/useEvent";
@@ -9,14 +9,27 @@ import { Shot } from "de1/lib/src";
 const Temperature: React.FC<{ isConnected: boolean }> = ({ isConnected }) => {
   const [heatingInfo, listenHeating] = useEvent("heating");
   const [stateInfo, notifyAboutStates] = useNotify("stateInfo");
+  const [estimatedDeadline, setEstimatedDeadline] = useState(0);
+  const [estimatedMiss, setEstimatedMiss] = useState(0);
   const [avg] = useHeatLogs();
 
   if (isConnected) notifyAboutStates();
   if (isConnected) listenHeating();
 
   const isHeating = stateInfo && stateInfo.substate === "heating";
+  /* const estimatedTimeLeft =
+    heatingInfo && avg ? (heatingInfo.tempRemaining / avg) * 1000 : 0;
+
+  if (isHeating && heatingInfo && avg && estimatedTimeLeftOnce === "") {
+    setEstimatedTimeLeftOnce(MMSS(estimatedTimeLeft));
+  } */
+
   const estimatedTimeLeft =
     heatingInfo && avg ? (heatingInfo.tempRemaining / avg) * 1000 : 0;
+
+  if (heatingInfo && avg && estimatedDeadline === 0) {
+    setEstimatedDeadline(Date.now() + (heatingInfo.tempRemaining / avg) * 1000);
+  }
 
   return (
     <Card>
@@ -46,6 +59,17 @@ const Temperature: React.FC<{ isConnected: boolean }> = ({ isConnected }) => {
         precision={2}
         suffix="m"
       />
+      <Statistic.Countdown
+        title="Estimated Time Left Once"
+        value={estimatedDeadline}
+        format="HH:mm:ss:SSS"
+        onFinish={() => setEstimatedMiss(Date.now() - estimatedDeadline)}
+      />
+      <Descriptions>
+        <Descriptions.Item label="Missed by">
+          {MMSS(estimatedMiss)}
+        </Descriptions.Item>
+      </Descriptions>
     </Card>
   );
 };
