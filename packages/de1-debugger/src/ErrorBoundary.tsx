@@ -17,7 +17,7 @@ export default class ErrorBoundary extends React.Component<Props, State> {
 
   render() {
     return (
-      <React.Fragment errorCount={this.state.errorCount}>
+      <React.Fragment key={this.state.errorCount}>
         {this.props.children}
       </React.Fragment>
     );
