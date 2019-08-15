@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { message } from "antd";
-import de1 from ".";
+import de1 from "../lib/de1";
 
 export default function useAutoConnect(): void {
   const [hide, setHide] = useState<Function | undefined>(undefined);

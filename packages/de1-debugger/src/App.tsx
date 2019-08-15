@@ -1,7 +1,7 @@
 import React from "react";
 import { Layout } from "antd";
 import { BrowserRouter } from "react-router-dom";
-import useAutoConnect from "./hooks/de1/useAutoConnect";
+import useAutoConnect from "./hooks/useAutoConnect";
 import ErrorBoundary from "./ErrorBoundary";
 import Routes from "./Routes";
 import AppMenu from "./components/Layout/AppMenu";

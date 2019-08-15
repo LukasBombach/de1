@@ -2,8 +2,8 @@ import React from "react";
 import { Row, Col, Button } from "antd";
 import { Converters } from "de1";
 import ReactJson from "react-json-view";
-import useNotify from "../../hooks/de1/useNotify";
-import useConnection from "../../hooks/de1/useConnection";
+import useNotify from "../../hooks/useNotify";
+import useConnection from "../../hooks/useConnection";
 
 interface NotifyProps {
   name: keyof Converters;

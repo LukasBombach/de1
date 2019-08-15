@@ -1,15 +1,10 @@
 import { useState } from "react";
 import { Converters, Value } from "de1";
-import de1 from ".";
+import de1 from "../lib/de1";
 
 export default function useNotify<N extends keyof Converters>(
   name: N
-): [
-  Value<Converters, N> | undefined,
-  () => Promise<void>,
-  () => Promise<void>,
-  boolean
-] {
+): Value<Converters, N> | undefined {
   const [value, setValue] = useState<Value<Converters, N> | undefined>(
     undefined
   );
@@ -33,5 +28,5 @@ export default function useNotify<N extends keyof Converters>(
 
   if (de1.isConnected()) start();
 
-  return [value, start, stop, isNotifiying];
+  return value;
 }

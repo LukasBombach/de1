@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { De1Events, De1Listener } from "de1";
-import de1 from ".";
+import de1 from "../lib/de1";
 
 export default function useEvent<N extends keyof De1Events>(
   name: N

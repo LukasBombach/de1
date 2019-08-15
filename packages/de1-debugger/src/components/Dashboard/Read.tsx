@@ -2,8 +2,8 @@ import React from "react";
 import { Row, Col, Button } from "antd";
 import { Converters } from "de1";
 import ReactJson from "react-json-view";
-import useConnection from "../../hooks/de1/useConnection";
-import useRead from "../../hooks/de1/useRead";
+import useConnection from "../../hooks/useConnection";
+import useRead from "../../hooks/useRead";
 
 interface ReadProps {
   name: keyof Converters;

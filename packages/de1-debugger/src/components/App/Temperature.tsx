@@ -2,8 +2,8 @@ import fs from "fs";
 import React, { useState, useEffect } from "react";
 import { Card, Statistic, Descriptions, Icon } from "antd";
 import { blue } from "@ant-design/colors";
-import useNotify from "../../hooks/de1/useNotify";
-import useEvent from "../../hooks/de1/useEvent";
+import useNotify from "../../hooks/useNotify";
+import useEvent from "../../hooks/useEvent";
 import { Shot } from "de1/lib/src";
 
 const Temperature: React.FC = () => {

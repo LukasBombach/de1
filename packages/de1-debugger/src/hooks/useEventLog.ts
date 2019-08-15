@@ -1,5 +1,5 @@
 import { useState } from "react";
-import de1 from ".";
+import de1 from "../lib/de1";
 
 const events: any[] = [
   "stateChange",

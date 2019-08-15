@@ -2,8 +2,8 @@ import React from "react";
 import { Card } from "antd";
 import { Converters, De1Events } from "de1";
 import ReactJson from "react-json-view";
-import useNotify from "../../hooks/de1/useNotify";
-import useEvent from "../../hooks/de1/useEvent";
+import useNotify from "../../hooks/useNotify";
+import useEvent from "../../hooks/useEvent";
 
 interface WatchProps {
   name?: keyof Converters;

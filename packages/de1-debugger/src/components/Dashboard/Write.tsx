@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Row, Col, Button, Input, Select } from "antd";
 import { Converters, Value } from "de1";
-import useWrite from "../../hooks/de1/useWrite";
-import useConnection from "../../hooks/de1/useConnection";
+import useWrite from "../../hooks/useWrite";
+import useConnection from "../../hooks/useConnection";
 
 interface WriteProps<N extends keyof Converters> {
   name: N;

@@ -3,7 +3,7 @@ import { Card } from "antd";
 import { Converters, Value } from "de1";
 import { LineChart, Line, XAxis, YAxis, Legend } from "recharts";
 
-import useNotify from "../../hooks/de1/useNotify";
+import useNotify from "../../hooks/useNotify";
 
 interface ChartProps<N extends keyof Converters> {
   name: N;

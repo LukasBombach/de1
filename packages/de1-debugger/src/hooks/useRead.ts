@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Converters, Value } from "de1";
-import de1 from ".";
+import de1 from "../lib/de1";
 
 export default function useRead<N extends keyof Converters>(
   name: N

@@ -1,8 +1,8 @@
 import React from "react";
 import { Card, Button } from "antd";
 import { Converters, Value } from "de1";
-import useConnection from "../../hooks/de1/useConnection";
-import useWrite from "../../hooks/de1/useWrite";
+import useConnection from "../../hooks/useConnection";
+import useWrite from "../../hooks/useWrite";
 
 interface ControlProps {
   buttons: ControlButtonProps<keyof Converters>[];

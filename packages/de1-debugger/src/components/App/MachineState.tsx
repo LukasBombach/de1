@@ -1,10 +1,10 @@
 import React from "react";
-import de1 from "../../hooks/de1";
 import { Card, Descriptions, Button } from "antd";
-import useNotify from "../../hooks/de1/useNotify";
+import useNotify from "../../hooks/useNotify";
+import de1 from "../../lib/de1";
 
 const MachineState: React.FC = () => {
-  const [stateInfo] = useNotify("stateInfo");
+  const stateInfo = useNotify("stateInfo");
 
   const isTurnedOn = !stateInfo || stateInfo.state !== "sleep";
   const isTurnedOff = !stateInfo || stateInfo.state === "sleep";
