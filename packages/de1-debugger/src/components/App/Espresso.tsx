@@ -3,7 +3,7 @@ import { Card, Button } from "antd";
 import { green, blue, red } from "@ant-design/colors";
 import { Shot } from "de1";
 import useNotify from "../../hooks/de1/useNotify";
-import de1 from "../../hooks/de1/";
+import de1 from "../../hooks/de1";
 import Chart from "./Chart";
 
 const Espresso: React.FC = () => {

@@ -1,5 +1,5 @@
 import React from "react";
-import de1 from "../../hooks/de1/";
+import de1 from "../../hooks/de1";
 import { Card, Descriptions, Button } from "antd";
 import useNotify from "../../hooks/de1/useNotify";
 
