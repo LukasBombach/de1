@@ -2,18 +2,15 @@ import React, { useState } from "react";
 import { Row, Col, Button, Input, Select } from "antd";
 import { Converters, Value } from "de1";
 import useWrite from "../../hooks/de1/useWrite";
+import useConnection from "../../hooks/de1/useConnection";
 
 interface WriteProps<N extends keyof Converters> {
   name: N;
   values?: any[];
-  connected?: boolean;
 }
 
-function Write<N extends keyof Converters>({
-  name,
-  values,
-  connected
-}: WriteProps<N>) {
+function Write<N extends keyof Converters>({ name, values }: WriteProps<N>) {
+  const [isConnected] = useConnection();
   const [inputValue, setInputValue] = useState("");
   const [loading, writeValue] = useWrite(name);
 
@@ -22,7 +19,7 @@ function Write<N extends keyof Converters>({
       <Col span={6}>
         <Button
           loading={loading}
-          disabled={!connected}
+          disabled={!isConnected}
           onClick={() => writeValue(inputValue as Value<Converters, N>)}
         >
           Write
@@ -33,13 +30,13 @@ function Write<N extends keyof Converters>({
           <ValueSelect
             values={values}
             onChange={setInputValue}
-            connected={connected}
+            connected={isConnected}
           />
         ) : (
           <ValueInput
             value={inputValue}
             onChange={setInputValue}
-            connected={connected}
+            connected={isConnected}
           />
         )}
       </Col>

@@ -3,10 +3,10 @@ import { Row, Col, Button } from "antd";
 import { Converters } from "de1";
 import ReactJson from "react-json-view";
 import useNotify from "../../hooks/de1/useNotify";
+import useConnection from "../../hooks/de1/useConnection";
 
 interface NotifyProps {
   name: keyof Converters;
-  connected?: boolean;
 }
 
 interface DataViewProps {
@@ -14,16 +14,17 @@ interface DataViewProps {
   value?: any;
 }
 
-const Notify: React.FC<NotifyProps> = ({ name, connected }) => {
+const Notify: React.FC<NotifyProps> = ({ name }) => {
+  const [isConnected] = useConnection();
   const [value, start, stop, isNotifiying] = useNotify(name);
 
   return (
     <Row>
       <Col span={6}>
-        <Button disabled={!connected || isNotifiying} onClick={() => start()}>
+        <Button disabled={!isConnected || isNotifiying} onClick={() => start()}>
           Start
         </Button>
-        <Button disabled={!connected || !isNotifiying} onClick={() => stop()}>
+        <Button disabled={!isConnected || !isNotifiying} onClick={() => stop()}>
           Stop
         </Button>
       </Col>

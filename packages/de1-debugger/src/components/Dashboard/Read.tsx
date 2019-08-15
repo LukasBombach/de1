@@ -2,7 +2,7 @@ import React from "react";
 import { Row, Col, Button } from "antd";
 import { Converters } from "de1";
 import ReactJson from "react-json-view";
-
+import useConnection from "../../hooks/de1/useConnection";
 import useRead from "../../hooks/de1/useRead";
 
 interface ReadProps {
@@ -15,6 +15,7 @@ interface DataViewProps {
 }
 
 const Read: React.FC<ReadProps> = ({ name }) => {
+  const [isConnected] = useConnection();
   const [value, loading, readValue] = useRead(name);
 
   if (value) console.info(`%cParsed value for ${name}`, "color: blue;", value);
@@ -24,7 +25,7 @@ const Read: React.FC<ReadProps> = ({ name }) => {
       <Col span={6}>
         <Button
           loading={loading}
-          disabled={!connected}
+          disabled={!isConnected}
           onClick={() => readValue()}
         >
           Read
