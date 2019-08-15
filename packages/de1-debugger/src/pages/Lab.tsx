@@ -2,12 +2,7 @@ import React from "react";
 import { Row, Col } from "antd";
 import Control, { ControlButtonProps } from "../components/Lab/Control";
 import Watch from "../components/Lab/Watch";
-import Chart from "../components/Lab/Chart";
 import "./Lab.css";
-
-interface UserAppProps {
-  isConnected: boolean;
-}
 
 const powerButtons: ControlButtonProps<any>[] = [
   { name: "state", value: "idle", label: "Turn on" },
@@ -19,38 +14,30 @@ const espressoButtons: ControlButtonProps<any>[] = [
   { name: "state", value: "idle", label: "Go Idle" }
 ];
 
-const UserApp: React.FC<UserAppProps> = ({ isConnected }) => {
+const UserApp: React.FC = () => {
   return (
     <section>
       <Row>
         <Col span={12}>
           <Row>
-            <Watch name="shot" isConnected={isConnected} />
+            <Watch name="shot" />
           </Row>
           <Row>
-            <Watch name="water" isConnected={isConnected} />
+            <Watch name="water" />
           </Row>
           <Row>
-            <Watch event="heating" isConnected={isConnected} />
+            <Watch event="heating" />
           </Row>
         </Col>
         <Col span={12}>
           <Row>
-            <Watch name="stateInfo" isConnected={isConnected} />
+            <Watch name="stateInfo" />
           </Row>
           <Row>
-            <Control buttons={powerButtons} isConnected={isConnected} />
+            <Control buttons={powerButtons} />
           </Row>
           <Row>
-            <Control buttons={espressoButtons} isConnected={isConnected} />
-          </Row>
-          <Row>
-            <Chart
-              name="shot"
-              valueName="Temperature"
-              parseValue={(v: any) => v.mixTemp}
-              isConnected={isConnected}
-            />
+            <Control buttons={espressoButtons} />
           </Row>
         </Col>
       </Row>

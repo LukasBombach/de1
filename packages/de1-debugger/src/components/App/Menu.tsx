@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Menu } from "antd";
 import PowerButton from "./PowerButton";
 
-const AppMenu: React.FC<{ isConnected: boolean }> = ({ isConnected }) => {
+const AppMenu: React.FC = () => {
   return (
     <Menu
       theme="dark"
@@ -29,7 +29,7 @@ const AppMenu: React.FC<{ isConnected: boolean }> = ({ isConnected }) => {
         <Link to="/dashboard/">Dashboard</Link>
       </Menu.Item>
       <Menu.Item key="power" disabled={true} style={{ float: "right" }}>
-        <PowerButton isConnected={isConnected} />
+        <PowerButton />
       </Menu.Item>
     </Menu>
   );

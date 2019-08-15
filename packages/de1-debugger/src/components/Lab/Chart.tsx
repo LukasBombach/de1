@@ -9,7 +9,6 @@ interface ChartProps<N extends keyof Converters> {
   name: N;
   valueName: string;
   parseValue: (value: Value<Converters, N>) => number;
-  isConnected?: boolean;
 }
 
 interface DataRecord {
@@ -19,14 +18,11 @@ interface DataRecord {
 const Chart: React.FC<ChartProps<keyof Converters>> = ({
   name,
   valueName,
-  parseValue,
-  isConnected
+  parseValue
 }) => {
   const [data, setData] = useState<DataRecord[]>([]);
   const [initialTime] = useState(Date.now());
-  const [value, start] = useNotify(name);
-
-  if (isConnected) start();
+  const [value] = useNotify(name);
 
   const elapsedTime = Math.floor((Date.now() - initialTime) / 1000);
 

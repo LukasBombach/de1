@@ -31,5 +31,7 @@ export default function useNotify<N extends keyof Converters>(
     return setIsNotifiying(false);
   };
 
+  if (de1.isConnected()) start();
+
   return [value, start, stop, isNotifiying];
 }

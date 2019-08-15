@@ -3,11 +3,7 @@ import { converters, Converters } from "de1";
 import Control from "../components/Dashboard/Control";
 import "./Dashboard.css";
 
-interface DashboardProps {
-  isConnected: boolean;
-}
-
-const Dashboard: React.FC<DashboardProps> = ({ isConnected }) => {
+const Dashboard: React.FC = () => {
   const fullHeight = { height: "100%" };
 
   return (
@@ -17,7 +13,6 @@ const Dashboard: React.FC<DashboardProps> = ({ isConnected }) => {
           key={converter.uuid}
           name={name as keyof Converters}
           converter={converter}
-          connected={isConnected}
         />
       ))}
     </section>

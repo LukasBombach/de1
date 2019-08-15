@@ -6,13 +6,10 @@ import useNotify from "../../hooks/de1/useNotify";
 import de1 from "../../hooks/de1/";
 import Chart from "./Chart";
 
-const Espresso: React.FC<{ isConnected: boolean }> = ({ isConnected }) => {
-  const [stateInfo, notifyAboutStates] = useNotify("stateInfo");
-  const [shot, notifyShot] = useNotify("shot");
+const Espresso: React.FC = () => {
+  const [stateInfo] = useNotify("stateInfo");
+  const [shot] = useNotify("shot");
   const [shotData, setShotData] = useState<Shot[]>([]);
-
-  if (isConnected) notifyAboutStates();
-  if (isConnected) notifyShot();
 
   const isTurnedOff = !stateInfo || stateInfo.state === "sleep";
   const isReady = stateInfo && stateInfo.substate === "ready";

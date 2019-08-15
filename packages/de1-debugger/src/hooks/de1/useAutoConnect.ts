@@ -1,19 +1,17 @@
 import { useEffect } from "react";
 import { message } from "antd";
+import de1 from ".";
 
 let hide: Function | null = null;
 
-export default function useAutoConnect(
-  isConnected: boolean,
-  connect: () => Promise<void>
-): void {
+export default function useAutoConnect(): void {
   useEffect(() => {
-    if (!isConnected) {
+    if (!de1.isConnected()) {
       hide = message.loading("Connecting...", 0);
-      connect();
+      de1.connect();
     }
 
-    if (isConnected && hide) {
+    if (de1.isConnected() && hide) {
       hide();
     }
   });

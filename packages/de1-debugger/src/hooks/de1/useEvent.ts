@@ -3,8 +3,7 @@ import { De1Events, De1Listener } from "de1";
 import de1 from ".";
 
 export default function useEvent<N extends keyof De1Events>(
-  name: N,
-  startListening = false
+  name: N
 ): [De1Events[N] | undefined, () => void, () => void] {
   const [isListening, setIsListening] = useState(false);
   const [value, setValue] = useState<De1Events[N] | undefined>(undefined);
@@ -24,7 +23,7 @@ export default function useEvent<N extends keyof De1Events>(
     return setIsListening(false);
   };
 
-  if (startListening) start();
+  if (de1.isConnected()) start();
 
   return [value, start, stop];
 }

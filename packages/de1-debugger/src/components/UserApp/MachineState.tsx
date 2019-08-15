@@ -3,9 +3,8 @@ import de1 from "../../hooks/de1/";
 import { Card, Descriptions, Button } from "antd";
 import useNotify from "../../hooks/de1/useNotify";
 
-const MachineState: React.FC<{ isConnected: boolean }> = ({ isConnected }) => {
-  const [stateInfo, notifyAboutStates] = useNotify("stateInfo");
-  if (isConnected) notifyAboutStates();
+const MachineState: React.FC = () => {
+  const [stateInfo] = useNotify("stateInfo");
 
   const isTurnedOn = !stateInfo || stateInfo.state !== "sleep";
   const isTurnedOff = !stateInfo || stateInfo.state === "sleep";

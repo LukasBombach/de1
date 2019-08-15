@@ -7,7 +7,6 @@ import useRead from "../../hooks/de1/useRead";
 
 interface ReadProps {
   name: keyof Converters;
-  connected?: boolean;
 }
 
 interface DataViewProps {
@@ -15,7 +14,7 @@ interface DataViewProps {
   value?: any;
 }
 
-const Read: React.FC<ReadProps> = ({ name, connected }) => {
+const Read: React.FC<ReadProps> = ({ name }) => {
   const [value, loading, readValue] = useRead(name);
 
   if (value) console.info(`%cParsed value for ${name}`, "color: blue;", value);

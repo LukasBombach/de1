@@ -6,24 +6,14 @@ import useNotify from "../../hooks/de1/useNotify";
 import useEvent from "../../hooks/de1/useEvent";
 import { Shot } from "de1/lib/src";
 
-const Temperature: React.FC<{ isConnected: boolean }> = ({ isConnected }) => {
-  const [heatingInfo, listenHeating] = useEvent("heating");
-  const [stateInfo, notifyAboutStates] = useNotify("stateInfo");
+const Temperature: React.FC = () => {
+  const [heatingInfo] = useEvent("heating");
+  const [stateInfo] = useNotify("stateInfo");
   const [estimatedDeadline, setEstimatedDeadline] = useState(0);
   const [estimatedMiss, setEstimatedMiss] = useState(0);
   const [avg] = useHeatLogs();
 
-  if (isConnected) notifyAboutStates();
-  if (isConnected) listenHeating();
-
   const isHeating = stateInfo && stateInfo.substate === "heating";
-  /* const estimatedTimeLeft =
-    heatingInfo && avg ? (heatingInfo.tempRemaining / avg) * 1000 : 0;
-
-  if (isHeating && heatingInfo && avg && estimatedTimeLeftOnce === "") {
-    setEstimatedTimeLeftOnce(MMSS(estimatedTimeLeft));
-  } */
-
   const estimatedTimeLeft =
     heatingInfo && avg ? (heatingInfo.tempRemaining / avg) * 1000 : 0;
 

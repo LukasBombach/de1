@@ -1,22 +1,18 @@
 import React from "react";
 import { Button } from "antd";
 import { Converters, Value } from "de1";
-import useNotify from "../hooks/de1/useNotify";
-import useWrite from "../hooks/de1/useWrite";
+import useConnection from "../../hooks/de1/useConnection";
+import useNotify from "../../hooks/de1/useNotify";
+import useWrite from "../../hooks/de1/useWrite";
 
-interface PowerButtonProps {
-  isConnected: boolean;
-}
-
-const PowerButton: React.FC<PowerButtonProps> = ({ isConnected }) => {
-  const [stateInfo, notify] = useNotify("stateInfo");
+const PowerButton: React.FC = () => {
+  const [isConnected] = useConnection();
+  const [stateInfo] = useNotify("stateInfo");
   const [writing, setState] = useWrite("state");
 
   const idleState = "idle";
   const offState = "sleep";
   const isOn = stateInfo && stateInfo.state !== offState;
-
-  if (isConnected) notify();
 
   return (
     <Button

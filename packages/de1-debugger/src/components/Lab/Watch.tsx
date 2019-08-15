@@ -8,7 +8,6 @@ import useEvent from "../../hooks/de1/useEvent";
 interface WatchProps {
   name?: keyof Converters;
   event?: keyof De1Events;
-  isConnected?: boolean;
 }
 
 interface DataViewProps {
@@ -16,23 +15,16 @@ interface DataViewProps {
   value?: any;
 }
 
-interface NameOrEventParams {
-  name?: keyof Converters;
-  event?: keyof De1Events;
-}
-
-const Watch: React.FC<WatchProps> = ({ name, event, isConnected }) => {
-  if (name) return <WatchName name={name} isConnected={isConnected} />;
-  if (event) return <WatchEvent event={event} isConnected={isConnected} />;
+const Watch: React.FC<WatchProps> = ({ name, event }) => {
+  if (name) return <WatchName name={name} />;
+  if (event) return <WatchEvent event={event} />;
   return null;
 };
 
 const WatchName: React.FC<{
   name: keyof Converters;
-  isConnected?: boolean;
-}> = ({ name, isConnected }) => {
-  const [value, start] = useNotify(name);
-  if (isConnected) start();
+}> = ({ name }) => {
+  const [value] = useNotify(name);
   return (
     <Card>
       <DataView value={value} />
@@ -42,10 +34,8 @@ const WatchName: React.FC<{
 
 const WatchEvent: React.FC<{
   event: keyof De1Events;
-  isConnected?: boolean;
-}> = ({ event, isConnected }) => {
-  const [value, start] = useEvent(event);
-  if (isConnected) start();
+}> = ({ event }) => {
+  const [value] = useEvent(event);
   return (
     <Card>
       <DataView value={value} />
