@@ -15,7 +15,7 @@ interface DataViewProps {
 }
 
 const Notify: React.FC<NotifyProps> = ({ name }) => {
-  const [isConnected] = useConnection();
+  const isConnected = useConnection();
   const [value, start, stop, isNotifiying] = useNotify(name);
 
   return (

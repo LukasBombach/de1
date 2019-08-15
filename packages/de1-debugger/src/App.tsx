@@ -4,7 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import useAutoConnect from "./hooks/de1/useAutoConnect";
 import ErrorBoundary from "./ErrorBoundary";
 import Routes from "./Routes";
-import AppMenu from "./components/App/Menu";
+import AppMenu from "./components/App/AppMenu";
 
 const App: React.FC = () => {
   useAutoConnect();

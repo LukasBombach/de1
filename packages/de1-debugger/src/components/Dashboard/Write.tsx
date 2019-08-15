@@ -10,7 +10,7 @@ interface WriteProps<N extends keyof Converters> {
 }
 
 function Write<N extends keyof Converters>({ name, values }: WriteProps<N>) {
-  const [isConnected] = useConnection();
+  const isConnected = useConnection();
   const [inputValue, setInputValue] = useState("");
   const [loading, writeValue] = useWrite(name);
 

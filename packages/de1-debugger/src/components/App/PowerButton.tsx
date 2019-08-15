@@ -6,7 +6,7 @@ import useNotify from "../../hooks/de1/useNotify";
 import useWrite from "../../hooks/de1/useWrite";
 
 const PowerButton: React.FC = () => {
-  const [isConnected] = useConnection();
+  const isConnected = useConnection();
   const [stateInfo] = useNotify("stateInfo");
   const [writing, setState] = useWrite("state");
 

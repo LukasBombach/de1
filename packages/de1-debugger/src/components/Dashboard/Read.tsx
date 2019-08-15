@@ -15,7 +15,7 @@ interface DataViewProps {
 }
 
 const Read: React.FC<ReadProps> = ({ name }) => {
-  const [isConnected] = useConnection();
+  const isConnected = useConnection();
   const [value, loading, readValue] = useRead(name);
 
   if (value) console.info(`%cParsed value for ${name}`, "color: blue;", value);

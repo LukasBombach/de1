@@ -1,20 +1,25 @@
 import React from "react";
-import { Button, message } from "antd";
+import { message } from "antd";
 
-export default class ErrorBoundary extends React.Component {
-  state = { error: false };
+interface Props {}
+interface State {
+  errorCount: number;
+}
+
+export default class ErrorBoundary extends React.Component<Props, State> {
+  state = { errorCount: 0 };
 
   componentDidCatch(error: Error) {
     console.error(error);
     message.error("An error occured. Please check the console.");
-    this.setState({ error: true });
+    this.setState(({ errorCount }) => ({ errorCount: ++errorCount }));
   }
 
   render() {
-    return this.state.error ? (
-      <Button onClick={() => this.setState({ error: false })}>Reset</Button>
-    ) : (
-      this.props.children
+    return (
+      <React.Fragment errorCount={this.state.errorCount}>
+        {this.props.children}
+      </React.Fragment>
     );
   }
 }

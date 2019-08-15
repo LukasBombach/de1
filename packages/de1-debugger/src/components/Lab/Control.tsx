@@ -29,7 +29,7 @@ const ControlButton: React.FC<ControlButtonProps<keyof Converters>> = ({
   value,
   label
 }) => {
-  const [isConnected] = useConnection();
+  const isConnected = useConnection();
   const [loading, writeValue] = useWrite(name);
 
   return (
