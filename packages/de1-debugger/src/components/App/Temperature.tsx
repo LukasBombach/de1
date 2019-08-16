@@ -7,8 +7,8 @@ import useEvent from "../../hooks/useEvent";
 import { Shot } from "de1/lib/src";
 
 const Temperature: React.FC = () => {
-  const [heatingInfo] = useEvent("heating");
-  const [stateInfo] = useNotify("stateInfo");
+  const heatingInfo = useEvent("heating");
+  const stateInfo = useNotify("stateInfo");
   const [estimatedDeadline, setEstimatedDeadline] = useState(0);
   const [estimatedMiss, setEstimatedMiss] = useState(0);
   const [avg] = useHeatLogs();

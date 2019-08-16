@@ -26,6 +26,9 @@ export default function useNotify<N extends keyof Converters>(
     return setIsNotifiying(false);
   };
 
+  de1.on("connected", () => start());
+  de1.on("disconnected", () => stop());
+
   if (de1.isConnected()) start();
 
   return value;

@@ -4,7 +4,7 @@ import de1 from "../lib/de1";
 
 export default function useEvent<N extends keyof De1Events>(
   name: N
-): [De1Events[N] | undefined, () => void, () => void] {
+): De1Events[N] | undefined {
   const [isListening, setIsListening] = useState(false);
   const [value, setValue] = useState<De1Events[N] | undefined>(undefined);
 
@@ -23,7 +23,10 @@ export default function useEvent<N extends keyof De1Events>(
     return setIsListening(false);
   };
 
+  de1.on("connected", () => start());
+  de1.on("disconnected", () => stop());
+
   if (de1.isConnected()) start();
 
-  return [value, start, stop];
+  return value;
 }
