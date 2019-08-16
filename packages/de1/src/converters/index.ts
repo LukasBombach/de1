@@ -1,4 +1,4 @@
-import { Converter } from "sblendid";
+import { Converter, Value } from "sblendid";
 import state, { State } from "./state";
 import water, { Water } from "./water";
 import versions, { Versions } from "./versions";
@@ -20,6 +20,9 @@ export { StateInfo, SubState } from "./stateInfo";
 export { ShotDescriptionHeader } from "./shotDescriptionHeader";
 export { ShotFrame } from "./shotFrame";
 export { Calibrate } from "./calibrate";
+
+export type ConverterKey = keyof Converters;
+export type ConverterValue<N extends ConverterKey> = Value<Converters, N>;
 
 export interface Converters {
   state: Converter<State>;

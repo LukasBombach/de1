@@ -2,6 +2,8 @@ export { default } from "./de1";
 export {
   default as converters,
   Converters,
+  ConverterKey as Feature,
+  ConverterValue as Value,
   State,
   Water,
   Versions,
@@ -11,4 +13,3 @@ export {
 } from "./converters";
 
 export { De1Events, De1Listener } from "./events";
-export { Converter, Value } from "sblendid";
