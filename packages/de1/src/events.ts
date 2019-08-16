@@ -17,6 +17,7 @@ export interface De1Events {
 }
 
 export type De1EventName = keyof De1Events;
+export type De1EventValue<E extends De1EventName> = De1Events[E];
 
 export type De1Listener<N extends De1EventName> = (
   value: De1Events[N]

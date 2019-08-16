@@ -12,4 +12,8 @@ export {
   StateInfo
 } from "./converters";
 
-export { De1Events, De1Listener } from "./events";
+export {
+  De1EventName as Event,
+  De1Listener as Listener,
+  De1EventValue as EventValue
+} from "./events";
