@@ -57,6 +57,13 @@ export default class Events {
     this.emitter.on(event, listener);
   }
 
+  public once<N extends De1EventName>(
+    event: N,
+    listener: De1Listener<N>
+  ): void {
+    this.emitter.once(event, listener);
+  }
+
   public off<N extends De1EventName>(event: N, listener: De1Listener<N>): void {
     this.emitter.off(event, listener);
   }

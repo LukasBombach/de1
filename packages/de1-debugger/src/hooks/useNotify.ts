@@ -2,29 +2,15 @@ import { useState } from "react";
 import { Converters, Value } from "de1";
 import de1 from "../lib/de1";
 
-export default function useNotify<N extends keyof Converters>(
-  name: N
-): Value<Converters, N> | undefined {
-  const [value, setValue] = useState<Value<Converters, N> | undefined>(
-    undefined
-  );
-  const [isNotifiying, setIsNotifiying] = useState(false);
+type ConverterKey = keyof Converters;
+type ConverterValue<N extends ConverterKey> = Value<Converters, N>;
+type NotifyValue<N extends ConverterKey> = ConverterValue<N> | undefined;
 
-  const listener = (value: Value<Converters, N>) => setValue(value);
+function useNotify<N extends ConverterKey>(name: N): NotifyValue<N> {
+  const [value, setValue] = useState<NotifyValue<N>>();
 
-  const [[persistedListener]] = useState([listener]);
-
-  const start = async () => {
-    if (isNotifiying) return;
-    await de1.getBleService().on(name, persistedListener);
-    return setIsNotifiying(true);
-  };
-
-  const stop = async () => {
-    if (!isNotifiying) return;
-    await de1.getBleService().off(name, persistedListener);
-    return setIsNotifiying(false);
-  };
+  const start = () => de1.getBleService().on(name, setValue);
+  const stop = () => de1.getBleService().off(name, setValue);
 
   de1.on("connected", () => start());
   de1.on("disconnected", () => stop());
@@ -33,3 +19,5 @@ export default function useNotify<N extends keyof Converters>(
 
   return value;
 }
+
+export default useNotify;

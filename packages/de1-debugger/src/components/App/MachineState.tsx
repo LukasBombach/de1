@@ -14,9 +14,6 @@ const MachineState: React.FC = () => {
   const state = stateInfo ? stateInfo.state : <em>loading…</em>;
   const substate = stateInfo ? stateInfo.substate : <em>loading…</em>;
 
-  const turnOn = () => de1.turnOn();
-  const turnOff = () => de1.turnOff();
-
   return (
     <Card>
       <Descriptions title="Machine State" layout="vertical">
@@ -24,10 +21,10 @@ const MachineState: React.FC = () => {
         <Item label="SubState">{substate}</Item>
       </Descriptions>
       <Button.Group>
-        <Button onClick={turnOn} disabled={isTurnedOn}>
+        <Button onClick={de1.turnOn} disabled={isTurnedOn}>
           Turn on
         </Button>
-        <Button onClick={turnOff} disabled={isTurnedOff}>
+        <Button onClick={de1.turnOff} disabled={isTurnedOff}>
           Turn off
         </Button>
       </Button.Group>

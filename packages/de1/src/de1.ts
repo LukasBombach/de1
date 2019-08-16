@@ -125,6 +125,13 @@ export default class DE1 {
     this.events.on(event, listener);
   }
 
+  public once<E extends keyof De1Events>(
+    event: E,
+    listener: De1Listener<E>
+  ): void {
+    this.events.once(event, listener);
+  }
+
   public off<E extends keyof De1Events>(
     event: E,
     listener: De1Listener<E>
