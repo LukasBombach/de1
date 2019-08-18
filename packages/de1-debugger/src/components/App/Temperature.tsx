@@ -4,7 +4,7 @@ import { Card, Statistic, Descriptions, Icon } from "antd";
 import { blue } from "@ant-design/colors";
 import useNotify from "../../hooks/useNotify";
 import useEvent from "../../hooks/useEvent";
-import { Shot } from "de1/lib/src";
+import { Shot } from "de1";
 
 const Temperature: React.FC = () => {
   const heatingInfo = useEvent("heating");

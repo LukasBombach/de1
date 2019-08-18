@@ -1,6 +1,6 @@
 import Sblendid, { Peripheral, Service, Adapter, Value } from "sblendid";
 import converters, { Converters } from "./converters";
-import Events, { De1Events, De1Listener } from "./events";
+import EventEmitter, { Events, Listener } from "./events";
 
 export type De1State =
   | "disconnected"
@@ -17,7 +17,7 @@ export type De1State =
 export default class DE1 {
   private machine?: Peripheral;
   private service?: Service<Converters>;
-  private events: Events = new Events(this);
+  private events: EventEmitter = new EventEmitter();
 
   static async connect(): Promise<DE1> {
     const de1 = new DE1();
@@ -29,17 +29,17 @@ export default class DE1 {
     if (this.isConnected()) return;
     this.machine = await Sblendid.connect("DE1");
     this.service = await this.machine.getService("a000", converters);
-    this.events.addListeners();
+    this.events.addEventListeners(this.service!);
     this.events.emit("connected", undefined);
   }
 
   async disconnect(): Promise<void> {
     if (!this.isConnected()) return;
     await this.machine!.disconnect();
+    this.events.removeEventListeners(this.service!);
+    this.events.emit("disconnected", undefined);
     this.machine = undefined;
     this.service = undefined;
-    this.events.emit("disconnected", undefined);
-    this.events.removeListeners();
   }
 
   async turnOn(): Promise<void> {
@@ -118,24 +118,15 @@ export default class DE1 {
     return level;
   }
 
-  public on<E extends keyof De1Events>(
-    event: E,
-    listener: De1Listener<E>
-  ): void {
+  public on<E extends keyof Events>(event: E, listener: Listener<E>): void {
     this.events.on(event, listener);
   }
 
-  public once<E extends keyof De1Events>(
-    event: E,
-    listener: De1Listener<E>
-  ): void {
+  public once<E extends keyof Events>(event: E, listener: Listener<E>): void {
     this.events.once(event, listener);
   }
 
-  public off<E extends keyof De1Events>(
-    event: E,
-    listener: De1Listener<E>
-  ): void {
+  public off<E extends keyof Events>(event: E, listener: Listener<E>): void {
     this.events.off(event, listener);
   }
 
