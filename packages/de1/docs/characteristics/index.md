@@ -16,12 +16,12 @@
 
 ## Deprecated
 
-| uuid   | Name                | Operations | Encoding     | TCL /TK Implementation        | Description                                                                 |
-| ------ | ------------------- | ---------- | ------------ | ----------------------------- | --------------------------------------------------------------------------- |
-| `a003` | _Set Time_          | `R` / `W`  | _deprecated_ | _not used on tcl source code_ | deprecated maybe reading this gives you a bunch of zeros                    |
-| `a004` | _Shot Directory_    | `R`        | _deprecated_ | _not used on tcl source code_ | deprecated maybe reading this gives you a bunch of zeros                    |
-| `a005` | _Read From Memory_  | `R`        | _deprecated_ | _not used on tcl source code_ | deprecated maybe reading this gives you a bunch of zeros                    |
-| `a007` | _Shot Map Request_  | `-` / `W`  | _deprecated_ | _not used on tcl source code_ | deprecated maybe                                                            |
-| `a008` | _Delete Shot Range_ | `-` / `W`  | _deprecated_ | _not used on tcl source code_ | deprecated maybe                                                            |
-| `a00a` | _Temperatures_      | `R`        | _deprecated_ | _not used on tcl source code_ | deprecated maybe reading this gives you a bunch of zeros                    |
-| `a00c` | _Deprecated_        | `R` / `W`  | _deprecated_ | `parse_binary_shot_desc`      | _unclear_ docs say it's deprecated, reading this gives you a bunch of zeros |
+| uuid   | Name                | Operations     | Encoding     | TCL /TK Implementation        | Description                                                                 |
+| ------ | ------------------- | -------------- | ------------ | ----------------------------- | --------------------------------------------------------------------------- |
+| `a003` | _Set Time_          | `R` / `W`/ `-` | _deprecated_ | _not used on tcl source code_ | deprecated maybe reading this gives you a bunch of zeros                    |
+| `a004` | _Shot Directory_    | `R` / `-`/ `-` | _deprecated_ | _not used on tcl source code_ | deprecated maybe reading this gives you a bunch of zeros                    |
+| `a005` | _Read From Memory_  | `R` / `-`/ `-` | _deprecated_ | _not used on tcl source code_ | deprecated maybe reading this gives you a bunch of zeros                    |
+| `a007` | _Shot Map Request_  | `-` / `W`/ `-` | _deprecated_ | _not used on tcl source code_ | deprecated maybe                                                            |
+| `a008` | _Delete Shot Range_ | `-` / `W`/ `-` | _deprecated_ | _not used on tcl source code_ | deprecated maybe                                                            |
+| `a00a` | _Temperatures_      | `R` / `-`/ `-` | _deprecated_ | _not used on tcl source code_ | deprecated maybe reading this gives you a bunch of zeros                    |
+| `a00c` | _Deprecated_        | `R` / `W`/ `-` | _deprecated_ | `parse_binary_shot_desc`      | _unclear_ docs say it's deprecated, reading this gives you a bunch of zeros |
