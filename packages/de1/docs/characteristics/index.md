@@ -1,6 +1,6 @@
 # Characteristics
 
-| UUID   | Name                        | Operations      | Encoding                                             | TCL /TK Implementation        | Description                                                                                                                                |
+| UUID   | Name                        | Operations      | Encoding                                             | TCL / TK Implementation       | Description                                                                                                                                |
 | ------ | --------------------------- | --------------- | ---------------------------------------------------- | ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
 | `a001` | **Versions**                | `R` / `-` / `-` | [Detailed Documentation](./versions.md)              | `parse_binary_version_desc`   | Version descriptons for Bluetooth and the firmware                                                                                         |
 | `a002` | **State**                   | `R` / `W` / `-` | [Detailed Documentation](./state.md)                 | `parse_state_change`          | Lets read read and set states (but not substates), cannot be subscribed to. Mainly use for setting state (ie. start espresso or steam etc) |
@@ -16,7 +16,7 @@
 
 ## Deprecated
 
-| UUID   | Name                | Operations     | Encoding     | TCL /TK Implementation        | Description                                                                 |
+| UUID   | Name                | Operations     | Encoding     | TCL / TK Implementation       | Description                                                                 |
 | ------ | ------------------- | -------------- | ------------ | ----------------------------- | --------------------------------------------------------------------------- |
 | `a003` | _Set Time_          | `R` / `W`/ `-` | _deprecated_ | _not used on tcl source code_ | deprecated maybe reading this gives you a bunch of zeros                    |
 | `a004` | _Shot Directory_    | `R` / `-`/ `-` | _deprecated_ | _not used on tcl source code_ | deprecated maybe reading this gives you a bunch of zeros                    |
