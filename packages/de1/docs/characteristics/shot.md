@@ -1,7 +1,9 @@
 # Shot
 
 **UUID**: `a00d`
+
 **Operations**: `R` / `N`
+
 **Description**: --
 
 #### Encoding

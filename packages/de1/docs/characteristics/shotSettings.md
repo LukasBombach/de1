@@ -1,7 +1,9 @@
 # Shot Settings
 
 **UUID**: `a00b`
+
 **Operations**: `R` / `W`
+
 **Description**: --
 
 #### Encoding

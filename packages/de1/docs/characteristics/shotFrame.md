@@ -1,7 +1,9 @@
 # Shot Frame
 
 **UUID**: `a010`
+
 **Operations**: `R`
+
 **Description**: --
 
 #### Encoding

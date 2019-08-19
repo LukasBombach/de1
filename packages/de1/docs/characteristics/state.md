@@ -1,7 +1,9 @@
 # State
 
 **UUID**: `a002`
+
 **Operations**: `R` / `W`
+
 **Description**: --
 
 #### Encoding

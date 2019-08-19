@@ -1,7 +1,9 @@
 # Shot Description Header
 
 **UUID**: `a00f`
+
 **Operations**: --
+
 **Description**: --
 
 #### Encoding
