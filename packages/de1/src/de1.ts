@@ -1,18 +1,6 @@
-import Sblendid, { Peripheral, Service, Adapter, Value } from "sblendid";
+import Sblendid, { Peripheral, Service, Adapter } from "sblendid";
 import converters, { Converters } from "./converters";
-import EventEmitter, { Events, Listener } from "./events";
-
-export type De1State =
-  | "disconnected"
-  | "sleep"
-  | "heating"
-  | "cooling"
-  | "idle"
-  | "espresso"
-  | "steam"
-  | "hotWater"
-  | "flushing"
-  | "descale";
+import EventEmitter, { Event, Value, Listener } from "./events";
 
 export default class DE1 {
   private machine?: Peripheral;
@@ -100,7 +88,14 @@ export default class DE1 {
     if (currentState === "descale") await this.write("state", "idle");
   }
 
-  async getState(): Promise<De1State> {
+  public async getPressure(): Promise<number> {}
+  public async getFlow(): Promise<number> {}
+  public async getTempature(): Promise<{
+    mix: number;
+    steam: number;
+  }> {}
+
+  async getState(): Promise<Value<"state">> {
     if (!this.isConnected()) return "disconnected";
     const { state, substate } = await this.read("stateInfo");
     if (state === "sleep") return "sleep";
@@ -118,15 +113,15 @@ export default class DE1 {
     return level;
   }
 
-  public on<E extends keyof Events>(event: E, listener: Listener<E>): void {
+  public on<E extends Event>(event: E, listener: Listener<E>): void {
     this.events.on(event, listener);
   }
 
-  public once<E extends keyof Events>(event: E, listener: Listener<E>): void {
+  public once<E extends Event>(event: E, listener: Listener<E>): void {
     this.events.once(event, listener);
   }
 
-  public off<E extends keyof Events>(event: E, listener: Listener<E>): void {
+  public off<E extends Event>(event: E, listener: Listener<E>): void {
     this.events.off(event, listener);
   }
 

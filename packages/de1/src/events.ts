@@ -3,9 +3,22 @@ import { Service } from "sblendid";
 import { Converters } from "./converters";
 import { Shot } from "./converters";
 
+export type State =
+  | "disconnected"
+  | "sleep"
+  | "heating"
+  | "cooling"
+  | "idle"
+  | "espresso"
+  | "steam"
+  | "hotWater"
+  | "flushing"
+  | "descale";
+
 export interface Events {
   connected: void;
   disconnected: void;
+  state: State;
   temperature: {
     goal: number;
     temperature: number;
