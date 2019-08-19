@@ -1,29 +1,25 @@
 # Shot
 
-#### UUID
-
-`a00d`
-
-#### Description
-
-???
+**UUID**: `a00d`
+**Operations**: `R` / `N`
+**Description**: --
 
 #### Encoding
 
-| Name             | Description | Operations | Type  | Binary Type | Parsed Type | How to Parse                              |
-| ---------------- | ----------- | ---------- | ----- | ----------- | ----------- | ----------------------------------------- |
-| timer            | number      | `R` / `N`  | short |             |             | `v => Math.round(100 * (v / (herz * 2)))` |
-| groupPressure    | number      | `R` / `N`  | short |             |             | `v => v / 4096`                           |
-| groupFlow        | number      | `R` / `N`  | short |             |             | `v => v / 4096`                           |
-| mixTemp          | number      | `R` / `N`  | short |             |             | `v => v / 256`                            |
-| headTemp1        | number      | `R` / `N`  | char  |             |             |                                           |
-| headTemp2        | number      | `R` / `N`  | char  |             |             |                                           |
-| headTemp3        | number      | `R` / `N`  | char  |             |             |                                           |
-| setMixTemp       | number      | `R` / `N`  | short |             |             | `v => v / 256`                            |
-| setHeadTemp      | number      | `R` / `N`  | short |             |             | `v => v / 256`                            |
-| setGroupPressure | number      | `R` / `N`  | char  |             |             | `v => v / 16`                             |
-| setGroupFlow     | number      | `R` / `N`  | char  |             |             | `v => v / 16`                             |
-| frameNumber      | number      | `R` / `N`  | char  |             |             |                                           |
-| steamTemp        | number      | `R` / `N`  | char  |             |             |                                           |
+| Name             | Description | Type  | Binary Type | Parsed Type | How to Parse                              |
+| ---------------- | ----------- | ----- | ----------- | ----------- | ----------------------------------------- |
+| timer            |             | short |             | number      | `v => Math.round(100 * (v / (herz * 2)))` |
+| groupPressure    |             | short |             | number      | `v => v / 4096`                           |
+| groupFlow        |             | short |             | number      | `v => v / 4096`                           |
+| mixTemp          |             | short |             | number      | `v => v / 256`                            |
+| headTemp1        |             | char  |             | number      |                                           |
+| headTemp2        |             | char  |             | number      |                                           |
+| headTemp3        |             | char  |             | number      |                                           |
+| setMixTemp       |             | short |             | number      | `v => v / 256`                            |
+| setHeadTemp      |             | short |             | number      | `v => v / 256`                            |
+| setGroupPressure |             | char  |             | number      | `v => v / 16`                             |
+| setGroupFlow     |             | char  |             | number      | `v => v / 16`                             |
+| frameNumber      |             | char  |             | number      |                                           |
+| steamTemp        |             | char  |             | number      |                                           |
 
 `herz = 50`

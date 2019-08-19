@@ -1,24 +1,20 @@
 # Shot Frame
 
-#### UUID
-
-`a010`
-
-#### Description
-
-???
+**UUID**: `a010`
+**Operations**: `R`
+**Description**: --
 
 #### Encoding
 
-| Name         | Description | Operations | Type  | Binary Type | Parsed Type          | How to Parse             |
-| ------------ | ----------- | ---------- | ----- | ----------- | -------------------- | ------------------------ |
-| frameToWrite |             | `R`        | char  |             | frameToWrite: number |                          |
-| flag         |             | `R`        | char  |             | flag: number         |                          |
-| setVal       |             | `R`        | char  |             | setVal: number       | `v => v / 16`            |
-| temp         |             | `R`        | char  |             | temp: number         | `v => v / 2`             |
-| frameLen     |             | `R`        | char  |             | frameLen: number     | `convertF817ToFloat`     |
-| triggerVal   |             | `R`        | char  |             | triggerVal: number   | `v => v / 16`            |
-| maxVol       |             | `R`        | short |             | maxVol: number       | `convertBottom10OfU10P0` |
+| Name         | Description | Type  | Binary Type | Parsed Type          | How to Parse             |
+| ------------ | ----------- | ----- | ----------- | -------------------- | ------------------------ |
+| frameToWrite |             | char  |             | frameToWrite: number |                          |
+| flag         |             | char  |             | flag: number         |                          |
+| setVal       |             | char  |             | setVal: number       | `v => v / 16`            |
+| temp         |             | char  |             | temp: number         | `v => v / 2`             |
+| frameLen     |             | char  |             | frameLen: number     | `convertF817ToFloat`     |
+| triggerVal   |             | char  |             | triggerVal: number   | `v => v / 16`            |
+| maxVol       |             | short |             | maxVol: number       | `convertBottom10OfU10P0` |
 
 ```ts
 function convertF817ToFloat(value: number): number {

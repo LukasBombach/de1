@@ -1,27 +1,23 @@
 # Versions
 
-#### UUID
-
-`a001`
-
-#### Description
-
-???
+**UUID**: `a001`
+**Operations**: `R`
+**Description**: --
 
 #### Encoding
 
-| Name                 | Description | Operations | Type  | Binary Type | Parsed Type | How to Parse          |
-| -------------------- | ----------- | ---------- | ----- | ----------- | ----------- | --------------------- |
-| bluetooth.apiVersion |             | `R`        | char  |             | number      |                       |
-| bluetooth.release    |             | `R`        | char  |             | number      |                       |
-| bluetooth.commits    |             | `R`        | short |             | number      |                       |
-| bluetooth.changes    |             | `R`        | char  |             | number      |                       |
-| bluetooth.sha        |             | `R`        | int   |             | string      | `v => v.toString(16)` |
-| firmware.apiVersion  |             | `R`        | char  |             | number      |                       |
-| firmware.release     |             | `R`        | char  |             | number      |                       |
-| firmware.commits     |             | `R`        | short |             | number      |                       |
-| firmware.changes     |             | `R`        | char  |             | number      |                       |
-| firmware.sha         |             | `R`        | int   |             | string      | `v => v.toString(16)` |
+| Name                 | Description | Type  | Binary Type | Parsed Type | How to Parse          |
+| -------------------- | ----------- | ----- | ----------- | ----------- | --------------------- |
+| bluetooth.apiVersion |             | char  |             | number      |                       |
+| bluetooth.release    |             | char  |             | number      |                       |
+| bluetooth.commits    |             | short |             | number      |                       |
+| bluetooth.changes    |             | char  |             | number      |                       |
+| bluetooth.sha        |             | int   |             | string      | `v => v.toString(16)` |
+| firmware.apiVersion  |             | char  |             | number      |                       |
+| firmware.release     |             | char  |             | number      |                       |
+| firmware.commits     |             | short |             | number      |                       |
+| firmware.changes     |             | char  |             | number      |                       |
+| firmware.sha         |             | int   |             | string      | `v => v.toString(16)` |
 
 > The data that the machine returns has the length containg all the above values, but
 > all firmware values are just zeros (`0`). This means you will get something like this:

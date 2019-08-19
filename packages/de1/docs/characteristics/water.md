@@ -1,16 +1,12 @@
 # Versions
 
-#### UUID
-
-`a011`
-
-#### Description
-
-???
+**UUID**: `a011`
+**Operations**: `R` / `N`
+**Description**: --
 
 #### Encoding
 
-| Name           | Description | Operations | Type  | Binary Type | Parsed Type | How to Parse   |
-| -------------- | ----------- | ---------- | ----- | ----------- | ----------- | -------------- |
-| level          |             | `R` / `N`  | short |             | number      | `v => v / 256` |
-| startFillLevel |             | `R` / `N`  | short |             | number      | `v => v / 256` |
+| Name           | Description | Type  | Binary Type | Parsed Type | How to Parse   |
+| -------------- | ----------- | ----- | ----------- | ----------- | -------------- |
+| level          |             | short |             | number      | `v => v / 256` |
+| startFillLevel |             | short |             | number      | `v => v / 256` |

@@ -1,22 +1,18 @@
 # Shot Settings
 
-#### UUID
-
-`a00b`
-
-#### Description
-
-???
+**UUID**: `a00b`
+**Operations**: `R` / `W`
+**Description**: --
 
 #### Encoding
 
-| Name                 | Description | Operations | Type  | Binary Type | Parsed Type | How to Parse   |
-| -------------------- | ----------- | ---------- | ----- | ----------- | ----------- | -------------- |
-| steamSettings        |             | `R` / `W`  | char  |             | number      |                |
-| targetSteamTemp      |             | `R` / `W`  | char  |             | number      |                |
-| targetSteamLength    |             | `R` / `W`  | char  |             | number      |                |
-| targetHotWaterTemp   |             | `R` / `W`  | char  |             | number      |                |
-| targetHotWaterVol    |             | `R` / `W`  | char  |             | number      |                |
-| targetHotWaterLength |             | `R` / `W`  | char  |             | number      |                |
-| targetEspressoVol    |             | `R` / `W`  | char  |             | number      |                |
-| targetGroupTemp      |             | `R` / `W`  | short |             | number      | `v => v / 256` |
+| Name                 | Description | Type  | Binary Type | Parsed Type | How to Parse   |
+| -------------------- | ----------- | ----- | ----------- | ----------- | -------------- |
+| steamSettings        |             | char  |             | number      |                |
+| targetSteamTemp      |             | char  |             | number      |                |
+| targetSteamLength    |             | char  |             | number      |                |
+| targetHotWaterTemp   |             | char  |             | number      |                |
+| targetHotWaterVol    |             | char  |             | number      |                |
+| targetHotWaterLength |             | char  |             | number      |                |
+| targetEspressoVol    |             | char  |             | number      |                |
+| targetGroupTemp      |             | short |             | number      | `v => v / 256` |

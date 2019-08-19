@@ -1,18 +1,14 @@
 # State
 
-#### UUID
-
-`a002`
-
-#### Description
-
-???
+**UUID**: `a002`
+**Operations**: `R` / `W`
+**Description**: --
 
 #### Encoding
 
-| Name  | Description | Operations | Type | Binary Type | Parsed Type | How to Parse |
-| ----- | ----------- | ---------- | ---- | ----------- | ----------- | ------------ |
-| state |             | `R` / `W`  | char |             |             |              |
+| Name  | Description | Type | Binary Type | Parsed Type | How to Parse |
+| ----- | ----------- | ---- | ----------- | ----------- | ------------ |
+| state |             | char |             |             |              |
 
 ##### State
 
