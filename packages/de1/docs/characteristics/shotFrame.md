@@ -6,15 +6,15 @@
 
 #### Encoding
 
-| Name         | Description | Type  | Binary Type | Parsed Type          | How to Parse             |
-| ------------ | ----------- | ----- | ----------- | -------------------- | ------------------------ |
-| frameToWrite |             | char  |             | frameToWrite: number |                          |
-| flag         |             | char  |             | flag: number         |                          |
-| setVal       |             | char  |             | setVal: number       | `v => v / 16`            |
-| temp         |             | char  |             | temp: number         | `v => v / 2`             |
-| frameLen     |             | char  |             | frameLen: number     | `convertF817ToFloat`     |
-| triggerVal   |             | char  |             | triggerVal: number   | `v => v / 16`            |
-| maxVol       |             | short |             | maxVol: number       | `convertBottom10OfU10P0` |
+| Name         | Description | Type  | Binary Type | Parsed Type | How to Parse             |
+| ------------ | ----------- | ----- | ----------- | ----------- | ------------------------ |
+| frameToWrite |             | char  | Uint8       | number      |                          |
+| flag         |             | char  | Uint8       | number      |                          |
+| setVal       |             | char  | Uint8       | number      | `v => v / 16`            |
+| temp         |             | char  | Uint8       | number      | `v => v / 2`             |
+| frameLen     |             | char  | Uint8       | number      | `convertF817ToFloat`     |
+| triggerVal   |             | char  | Uint8       | number      | `v => v / 16`            |
+| maxVol       |             | short | Uint16      | number      | `convertBottom10OfU10P0` |
 
 ```ts
 function convertF817ToFloat(value: number): number {

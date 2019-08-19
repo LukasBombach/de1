@@ -8,7 +8,7 @@
 
 | Name  | Description | Type | Binary Type | Parsed Type | How to Parse |
 | ----- | ----------- | ---- | ----------- | ----------- | ------------ |
-| state |             | char |             |             |              |
+| state |             | char | Uint8       | number      |              |
 
 ##### State
 

@@ -8,8 +8,8 @@
 
 | Name                    | Description | Type | Binary Type | Parsed Type | How to Parse  |
 | ----------------------- | ----------- | ---- | ----------- | ----------- | ------------- |
-| headerV                 |             | char |             | number      |               |
-| numberOfFrames          |             | char |             | number      |               |
-| numberOfPreinfuseFrames |             | char |             | number      |               |
-| minimumPressure         |             | char |             | number      | `v => v / 16` |
-| maximumFlow             |             | char |             | number      | `v => v / 16` |
+| headerV                 |             | char | Uint8       | number      |               |
+| numberOfFrames          |             | char | Uint8       | number      |               |
+| numberOfPreinfuseFrames |             | char | Uint8       | number      |               |
+| minimumPressure         |             | char | Uint8       | number      | `v => v / 16` |
+| maximumFlow             |             | char | Uint8       | number      | `v => v / 16` |
