@@ -88,13 +88,6 @@ export default class DE1 {
     if (currentState === "descale") await this.write("state", "idle");
   }
 
-  public async getPressure(): Promise<number> {}
-  public async getFlow(): Promise<number> {}
-  public async getTempature(): Promise<{
-    mix: number;
-    steam: number;
-  }> {}
-
   async getState(): Promise<Value<"state">> {
     if (!this.isConnected()) return "disconnected";
     const { state, substate } = await this.read("stateInfo");

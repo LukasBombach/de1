@@ -6,14 +6,18 @@ import { Shot } from "./converters";
 export type State =
   | "disconnected"
   | "sleep"
-  | "heating"
-  | "cooling"
   | "idle"
   | "espresso"
   | "steam"
   | "hotWater"
-  | "flushing"
-  | "descale";
+  | "descale"
+  | "hotWaterRinse"
+  | "steamRinse"
+  | "refill"
+  | "heating"
+  | "cooling";
+
+export type EspressoPhase = "finalHeating" | "preinfusion" | "pouring";
 
 export interface Events {
   connected: void;
