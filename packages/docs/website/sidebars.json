@@ -3,6 +3,6 @@
     "docs": ["docs"]
   },
   "api": {
-    "api": ["api"]
+    "Api Reference": ["api"]
   }
 }

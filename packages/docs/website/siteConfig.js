@@ -14,12 +14,12 @@ const siteConfig = {
     { blog: false, label: "Blog" }
   ],
 
-  headerIcon: "img/favicon.ico",
-  footerIcon: "img/favicon.ico",
-  favicon: "img/favicon.ico",
+  headerIcon: "img/espresso.png",
+  footerIcon: "img/espresso.png",
+  favicon: "img/espresso.png",
   colors: {
-    primaryColor: "#a5894c",
-    secondaryColor: "#735f35"
+    primaryColor: "#323039",
+    secondaryColor: "#18A0FB"
   },
   copyright: `Licensed under MIT`,
   highlight: {
