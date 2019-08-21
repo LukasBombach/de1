@@ -1,6 +1,6 @@
 {
   "docs": {
-    "Guides": ["intro"]
+    "Guides": ["getting-started", "turn-on-espresso"]
   },
   "api": {
     "Api Reference": ["api"]

@@ -5,11 +5,11 @@ const siteConfig = {
   title: "DE1 npm package",
   tagline: "A JavaScript Library to control DE1 Espresso Machines",
   url: "http://lukasbombach.de/",
-  baseUrl: "/de1/",
+  baseUrl: "/",
   projectName: "de1",
   organizationName: "LukasBombach",
   headerLinks: [
-    { doc: "intro", label: "Docs" },
+    { doc: "getting-started", label: "Docs" },
     { doc: "api", label: "API" },
     { blog: false, label: "Blog" }
   ],
