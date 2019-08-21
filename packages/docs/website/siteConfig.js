@@ -9,7 +9,7 @@ const siteConfig = {
   projectName: "de1",
   organizationName: "LukasBombach",
   headerLinks: [
-    { doc: "docs", label: "Docs" },
+    { doc: "intro", label: "Docs" },
     { doc: "api", label: "API" },
     { blog: false, label: "Blog" }
   ],

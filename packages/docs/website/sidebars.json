@@ -1,6 +1,6 @@
 {
   "docs": {
-    "docs": ["docs"]
+    "Guides": ["intro"]
   },
   "api": {
     "Api Reference": ["api"]

@@ -1,6 +1,6 @@
 ---
 id: api
-title: api
+title: API Reference
 ---
 
-api
+# Static methods
