@@ -22,7 +22,7 @@ const siteConfig = {
     primaryColor: "#FFC899",
     secondaryColor: "#18A0FB"
   },
-  copyright: `Licensed under MIT`,
+  copyright: `Made by Lukas Bombach. Licensed under MIT`,
   highlight: {
     theme: "default"
   },
