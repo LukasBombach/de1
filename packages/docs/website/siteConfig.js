@@ -9,16 +9,17 @@ const siteConfig = {
   projectName: "de1",
   organizationName: "LukasBombach",
   headerLinks: [
-    { doc: "getting-started", label: "Docs" },
-    { doc: "api", label: "API" },
-    { blog: false, label: "Blog" }
+    { doc: "getting-started", label: "Get Started" },
+    { doc: "getting-started", label: "Guides" },
+    { doc: "api", label: "API Reference" },
+    { href: "https://github.com/", label: "GitHub" }
   ],
 
   headerIcon: "img/espresso.png",
   footerIcon: "img/espresso.png",
   favicon: "img/espresso.png",
   colors: {
-    primaryColor: "#323039",
+    primaryColor: "#FFC899",
     secondaryColor: "#18A0FB"
   },
   copyright: `Licensed under MIT`,

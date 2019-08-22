@@ -13,13 +13,13 @@ Install via `npm` or `yarn`
 <!--npm-->
 
 ```bash
-npm install de1 --save-exact
+❯ npm install de1 --save-exact
 ```
 
 <!--yarn-->
 
 ```bash
-yarn add de1 --exact
+❯ yarn add de1 --exact
 ```
 
 <!--END_DOCUSAURUS_CODE_TABS-->
