@@ -1,4 +1,4 @@
-import Sblendid, { Peripheral, Service, Adapter } from "sblendid";
+import Sblendid, { Peripheral, Service, Adapter } from "@sblendid/sblendid";
 import converters, { Converters } from "./converters";
 import EventEmitter, { Event, Value, Listener } from "./events";
 

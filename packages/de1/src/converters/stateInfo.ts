@@ -1,4 +1,4 @@
-import { Converter } from "sblendid";
+import { Converter } from "@sblendid/sblendid";
 import Parser from "../parser";
 import { states, State, States } from "./state"; // todo this should be shared
 

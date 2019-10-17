@@ -1,4 +1,4 @@
-import { Converter } from "sblendid";
+import { Converter } from "@sblendid/sblendid";
 import Parser from "../parser";
 
 export interface Calibrate {

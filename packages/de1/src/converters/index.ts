@@ -1,4 +1,4 @@
-import { Converter, Value } from "sblendid";
+import { Converter, Value } from "@sblendid/sblendid";
 import state, { State } from "./state";
 import water, { Water } from "./water";
 import versions, { Versions } from "./versions";

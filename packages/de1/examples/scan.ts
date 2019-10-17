@@ -1,5 +1,5 @@
 import chalk from "chalk";
-import Sblendid from "sblendid";
+import Sblendid from "@sblendid/sblendid";
 
 (async () => {
   const sblendid = await Sblendid.powerOn();
