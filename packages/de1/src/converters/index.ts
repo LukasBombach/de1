@@ -22,9 +22,10 @@ export { ShotFrame } from "./shotFrame";
 export { Calibrate } from "./calibrate";
 
 export type ConverterKey = keyof Converters;
-export type ConverterValue<N extends ConverterKey> = Value<Converters, N>;
+export type ConverterValue = Value<Converters>;
 
 export interface Converters {
+  [key: string]: Converter<any>
   state: Converter<State>;
   water: Converter<Water>;
   versions: Converter<Versions>;

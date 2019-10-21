@@ -1,6 +1,6 @@
-import Sblendid, { Peripheral, Service, Adapter } from "@sblendid/sblendid";
-import converters, { Converters } from "./converters";
-import EventEmitter, { Event, Value, Listener } from "./events";
+import Sblendid, { Peripheral, Service } from "@sblendid/sblendid";
+import converters, { Converters, ConverterKey, ConverterValue } from "./converters";
+import EventEmitter, { Event, Listener } from "./events";
 
 export default class DE1 {
   private machine?: Peripheral;
@@ -88,7 +88,7 @@ export default class DE1 {
     if (currentState === "descale") await this.write("state", "idle");
   }
 
-  async getState(): Promise<Value<"state">> {
+  async getState(): Promise<string> {
     if (!this.isConnected()) return "disconnected";
     const { state, substate } = await this.read("stateInfo");
     if (state === "sleep") return "sleep";
@@ -128,20 +128,20 @@ export default class DE1 {
     return this.service;
   }
 
-  public getBleAdapterforDebugging(): Adapter {
+  public getBleAdapterforDebugging(): Peripheral["adapter"] {
     if (!this.machine) throw new Error("DE1 is not connected yet");
     return this.machine.adapter;
   }
 
   private async read<N extends keyof Converters>(
     name: N
-  ): Promise<Value<Converters, N>> {
+  ): Promise<ConverterValue> {
     return await this.getBleService().read(name);
   }
 
-  private async write<N extends keyof Converters>(
-    name: N,
-    value: Value<Converters, N>
+  private async write(
+    name: string,
+    value: ConverterKey
   ): Promise<void> {
     await this.getBleService().write(name, value);
   }
