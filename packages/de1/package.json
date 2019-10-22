@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "build": "rollup -c rollup.config.ts",
-    "dev": "rollup -c -w",
+    "dev": "rollup -w -c rollup.config.ts",
     "example": "ts-node --project tsconfig.json"
   },
   "dependencies": {
