@@ -84,7 +84,6 @@ const converter: Converter<State> = {
   uuid: "a002",
   encode,
   decode,
-  values: Object.keys(states) as State[]
 };
 
 export default converter;
