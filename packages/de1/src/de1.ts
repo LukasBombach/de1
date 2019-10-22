@@ -133,16 +133,16 @@ export default class DE1 {
     return this.machine.adapter;
   }
 
-  private async read<N extends keyof Converters>(
-    name: N
-  ): Promise<ConverterValue> {
+  private async read(
+    name: string
+  ) {
     return await this.getBleService().read(name);
   }
 
   private async write(
     name: string,
-    value: ConverterKey
-  ): Promise<void> {
+    value: string
+  ) {
     await this.getBleService().write(name, value);
   }
 }
