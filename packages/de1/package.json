@@ -6,12 +6,13 @@
   "types": "lib/src",
   "license": "MIT",
   "scripts": {
-    "build": "rollup -c",
-    "dev": "rollup -c -w",
+    "build": "rollup -c rollup.config.ts",
+    "dev": "rollup -w -c rollup.config.ts",
     "example": "ts-node --project tsconfig.json"
   },
   "dependencies": {
-    "sblendid": "1.0.0"
+    "@sblendid/adapter-node": "^0.2.0",
+    "@sblendid/sblendid": "^0.2.0"
   },
   "devDependencies": {
     "@types/web-bluetooth": "0.0.4",

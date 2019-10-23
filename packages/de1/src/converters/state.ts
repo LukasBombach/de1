@@ -1,4 +1,4 @@
-import { Converter } from "sblendid";
+import { Converter } from "@sblendid/sblendid";
 import Parser from "../parser";
 import Serializer from "../serializer";
 
@@ -84,7 +84,6 @@ const converter: Converter<State> = {
   uuid: "a002",
   encode,
   decode,
-  values: Object.keys(states) as State[]
 };
 
 export default converter;

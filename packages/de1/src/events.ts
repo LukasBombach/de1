@@ -1,5 +1,5 @@
 import { EventEmitter } from "events";
-import { Service } from "sblendid";
+import { Service } from "@sblendid/sblendid";
 import { Converters } from "./converters";
 import { Shot } from "./converters";
 
