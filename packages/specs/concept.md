@@ -77,6 +77,35 @@ the very beginning of the project.
 > This here is a placeholder for a decision matrix on a design system, but frankly, I suggest we use material-ui just
 > because of the maturity and feature-richness of this framework
 
-## Features
+## App Code
+
+Since this is just a draft, I want to add this quick note and add a proper paragraph later. This is what I would do:
+
+- React with hooks
+- Material UI
+- GraphQL Backend
+- Write hooks for the DE1 functions (that will trigger the GraphQL backend)
+
+As described in the Flowchart I would write the app so that it works solely as a SPA using Web Bluetooth and check if
+
+- A backend is available and possibly improve the UI / UX / functionality
+- Check if I am in an app and improve the UI / UX / functionality
+- Even in an app I would run a GraphQL backend
+
+The last point might seen op, but my reasoning would be that the app itself could run a GraphQL server that provides the
+functionality. Now other devices, like a phone could also connect to that GraphQL server, simultaneously with the app
+on the tablet. I already have 2 use cases for this:
+
+- You can have a remote control app on your phone. So when in bed in the morning you can remote-control turn on the DE1.
+  You can get feedback on how long the heating will take, see its progress and get a push notification when it's ready.
+- Setting up settings on a tablet can be tedious. You could open a website in your browser on your laptop that would let
+  you change settings easier with a mouse and a keyboard.
 
 ## TypeScript
+
+I want to write some notes here to convice you to use TypeScript, because it makes code much safer and bug- and worry-free.
+Even though it has an admittedly steep learning curve and gets you frustrated at times.
+
+## Features
+
+_A place to discuss features_
