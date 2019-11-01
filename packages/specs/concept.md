@@ -36,7 +36,7 @@ _Draft of the idea:_
 
 [check out this svg's source figma file](https://www.figma.com/file/chZa76r9t1l4oq5UAFYMZW/Sblendid-Architecture?node-id=2%3A5&viewport=199%2C181%2C1)
 
-![](https://raw.githubusercontent.com/LukasBombach/de1/app-concept/packages/specs/concept-flowchart.svg)
+![](https://raw.githubusercontent.com/LukasBombach/de1/app-concept/packages/specs/concept-flowchart.svg?sanitize=true)
 
 <!-- todo replace with local link once this is merged -->
 
