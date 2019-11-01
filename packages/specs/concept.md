@@ -40,7 +40,7 @@ benefits and disadvantages relevant to the DE1 app.
 
 ## Design & UX Concepts
 
-_**tl;dr** let's use Material UI_
+> _**tl;dr** let's use Material UI_
 
 The design and UX of the app is a crutial effort in making this app. It should be a vast improvement over the stock app.
 Apart from the generally clear benefits of having a well-deigned user interface and a thought through user experience,
