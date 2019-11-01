@@ -109,3 +109,9 @@ Even though it has an admittedly steep learning curve and gets you frustrated at
 ## Features
 
 _A place to discuss features_
+
+## Repo, GitHub & CI
+
+I would suggest working with a Monorepo, Github Actions as a CI tool. I would scrap the current packages in the current
+monorepo except for the de1 lib, refactor it like crazy (or start from new there too, I would not mind) and create separate
+packages for the app and other stuff.
