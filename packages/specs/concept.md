@@ -17,14 +17,14 @@ exaclty 4 ways (called "platforms" from hereon) to work with BLE.
 Each of these ways come with up- and downsides, capabilities and limitations. The following list shall depict the
 benefits and disadvantages relevant to the DE1 app.
 
-| Platform                            | Web Bluetooth |  Node.js   | Mobile App Wrapper | React Native / NativeScript |
-| :---------------------------------- | :-----------: | :--------: | :----------------: | :-------------------------: |
-| Can be run without installation     |      ✅       |     -      |         -          |              -              |
-| Can be run without permission       |       -       |     ✅     |         ✅         |             ✅              |
-| Can control the screen's brightness |       -       |     -      |         ✅         |             ✅              |
-| Can control the sleep state         |       -       |     -      |         ✅         |             ✅              |
-| Can read the battery level          |       -       |     -      |         ✅         |             ✅              |
-| _incomplete_                        |  _add more_   | _add more_ |     _add more_     |         _add more_          |
+| Platform                            | Web Bluetooth | Node.js | Mobile App Wrapper | React Native / NativeScript |
+| :---------------------------------- | :-----------: | :-----: | :----------------: | :-------------------------: |
+| Can be run without installation     |      ✅       |    -    |         -          |              -              |
+| Can be run without permission       |       -       |   ✅    |         ✅         |             ✅              |
+| Can control the screen's brightness |       -       |    -    |         ✅         |             ✅              |
+| Can control the sleep state         |       -       |    -    |         ✅         |             ✅              |
+| Can read the battery level          |       -       |    -    |         ✅         |             ✅              |
+| _incomplete_                        |      ...      |   ...   |        ...         |             ...             |
 
 ## Progessive enhancement
 
