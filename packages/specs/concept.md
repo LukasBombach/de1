@@ -14,7 +14,8 @@ exaclty 4 ways (called "platforms" from hereon) to work with BLE.
 - Using a mobile app wrapper that provides native APIs to a web view
 - Using React Native or NativeScript
 
-Each of these ways come with up- and downsides, capabilities and limitations.
+Each of these ways come with up- and downsides, capabilities and limitations. The following list shall depict the
+benefits and disadvantages relevant to the DE1 app.
 
 | Platform                        | Web Bluetooth | Node.js | Mobile App Wrapper | React Native / NativeScript |
 | :------------------------------ | :-----------: | :-----: | :----------------: | :-------------------------: |
@@ -31,7 +32,5 @@ Each of these ways come with up- and downsides, capabilities and limitations.
 |                                 |               |         |                    |                             |
 |                                 |               |         |                    |                             |
 |                                 |               |         |                    |                             |
-
-<sup>1</sup>: Will ask users for permission every time the page is opened and requires them to select the DE1 from a pop up
 
 ## TypeScript
