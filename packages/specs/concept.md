@@ -24,6 +24,8 @@ benefits and disadvantages relevant to the DE1 app.
 | Can control the screen's brightness |       -       |    -    |         ✅         |             ✅              |
 | Can control the sleep state         |       -       |    -    |         ✅         |             ✅              |
 | Can read the battery level          |       -       |    -    |         ✅         |             ✅              |
+| Has appropriate performance         |       ?       |    -    |         ?          |             ✅              |
+| Has the best performance            |       -       |    -    |         -          |             ✅              |
 | _incomplete_                        |      ...      |   ...   |        ...         |             ...             |
 
 ## Progessive enhancement
@@ -40,11 +42,6 @@ _Draft of the idea:_
 
 <!-- todo replace with local link once this is merged -->
 
-## Performance
-
-- Native Apps tend to have better performance
-- Animations should be 60fps
-
 ## Design & UX Concepts
 
 > _**tl;dr** let's use Material UI_
@@ -54,7 +51,7 @@ Apart from the generally clear benefits of having a well-deigned user interface 
 hopefully other users of the DE1 can be convinced to use this app for its joy of use. The goals for the UI include
 
 - Eye candy - The app should be pretty to look at be pleasant to use
-- Appropriate usage of animations to make the app fun to use
+- Appropriate usage of animations to make the app fun to use and they should be 60fps
 - Most of us have already uttered they'd like to see a "dark" app
 - Let's postpone the topic of theming for some time in the future?
 
