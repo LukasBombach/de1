@@ -4,7 +4,7 @@
 
 The purpose of this document is to find a common idea of the technological architecture and the purpose of such.
 
-## Core Concepts
+## Technological possibilites
 
 The DE1 can be controlled wirelessly via Bluetooth Low Energy (BLE). This app being based on JavaScript there are
 exaclty 4 ways (called "platforms" from hereon) to work with BLE.
@@ -24,14 +24,17 @@ benefits and disadvantages relevant to the DE1 app.
 | Can control the screen's brightness |       -       |    -    |         ✅         |             ✅              |
 | Can control the sleep state         |       -       |    -    |         ✅         |             ✅              |
 | Can read the battery level          |       -       |    -    |         ✅         |             ✅              |
-|                                     |               |         |                    |                             |
-|                                     |               |         |                    |                             |
-|                                     |               |         |                    |                             |
-|                                     |               |         |                    |                             |
-|                                     |               |         |                    |                             |
-|                                     |               |         |                    |                             |
-|                                     |               |         |                    |                             |
-|                                     |               |         |                    |                             |
+| _incomplete_                        |               |         |                    |                             |
+
+## Progessive enhancement
+
+To make the most use of the advantages possible with each platform while dealing with the disadvantages in the best
+possible manner we can go the way of progrssive enhancement. This means we can implement and architecture the can be
+used on each platform and enhances with the capabilities the platform provides.
+
+[draft of the idea:]
+
+![](./concept-flowchart.svg)
 
 ## Performance
 
