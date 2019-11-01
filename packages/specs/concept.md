@@ -32,7 +32,9 @@ To make the most use of the advantages possible with each platform while dealing
 possible manner we can go the way of progrssive enhancement. This means we can implement and architecture the can be
 used on each platform and enhances with the capabilities the platform provides.
 
-[draft of the idea:]
+_Draft of the idea:_
+
+[check out this svg's source figma file](https://www.figma.com/file/chZa76r9t1l4oq5UAFYMZW/Sblendid-Architecture?node-id=2%3A5&viewport=199%2C181%2C1)
 
 ![](./concept-flowchart.svg)
 
