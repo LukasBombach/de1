@@ -44,10 +44,12 @@ benefits and disadvantages relevant to the DE1 app.
 
 The design and UX of the app is a crutial effort in making this app. It should be a vast improvement over the stock app.
 Apart from the generally clear benefits of having a well-deigned user interface and a thought through user experience,
-hopefully other users of the DE1 can be convinced to use this app for its joy of use.
+hopefully other users of the DE1 can be convinced to use this app for its joy of use. The goals for the UI include
 
-- Eye candy
-- Appropriate usage of animations
+- Eye candy - The app should be pretty to look at be pleasant to use
+- Appropriate usage of animations to make the app fun to use
+- Most of us have already uttered they'd like to see a "dark" app
+- Let's postpone the topic of theming for some time in the future?
 
 By the beginning of a project developers and designers tend to be very excited of the opportunities that can be taken in
 this new endeavour. From this, actually good ideas get spawned and the motivation to make these ideas a reality are honest.
