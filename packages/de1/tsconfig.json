@@ -6,6 +6,9 @@
     "strict": true,
     "strictPropertyInitialization": true,
     "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "module": "ESNext"
   }
 }
