@@ -1,6 +1,7 @@
 import commonjs from "@rollup/plugin-commonjs";
 import resolve from "@rollup/plugin-node-resolve";
-import typescript from "@rollup/plugin-typescript";
+import typescript from "rollup-plugin-typescript2";
+import autoExternal from "rollup-plugin-auto-external";
 import pkg from "./package.json";
 
 export default {
@@ -17,5 +18,10 @@ export default {
       sourcemap: true
     }
   ],
-  plugins: [resolve(), commonjs(), typescript()]
+  plugins: [
+    resolve({ preferBuiltins: true }),
+    autoExternal(),
+    commonjs(),
+    typescript()
+  ]
 };
