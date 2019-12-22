@@ -1,9 +1,6 @@
-import typescript from "typescript";
-import commonjs from "rollup-plugin-commonjs";
-import resolve from "rollup-plugin-node-resolve";
-import typescriptPlugin from "rollup-plugin-typescript2";
-import autoExternal from "rollup-plugin-auto-external";
-
+import commonjs from "@rollup/plugin-commonjs";
+import resolve from "@rollup/plugin-node-resolve";
+import typescript from "@rollup/plugin-typescript";
 import pkg from "./package.json";
 
 export default {
@@ -12,20 +9,13 @@ export default {
     {
       file: pkg.main,
       format: "cjs",
-      preferBuiltins: true,
       sourcemap: true
     },
     {
       file: pkg.module,
       format: "es",
-      preferBuiltins: true,
       sourcemap: true
     }
   ],
-  plugins: [
-    autoExternal(),
-    resolve({ preferBuiltins: true }),
-    commonjs(),
-    typescriptPlugin({ typescript })
-  ]
+  plugins: [resolve(), commonjs(), typescript()]
 };
