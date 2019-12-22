@@ -7,8 +7,5 @@
     ],
     "repository": "git@github.com:LukasBombach/sblendid.git",
     "author": "Lukas Bombach <lukas.bombach@googlemail.com>",
-    "license": "MIT",
-    "devDependencies": {
-        "husky": "3.0.1"
-    }
+    "license": "MIT"
 }
