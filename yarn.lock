@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@rollup/plugin-commonjs@11.0.0":
-  version "11.0.0"
-  resolved "https://registry.yarnpkg.com/@rollup/plugin-commonjs/-/plugin-commonjs-11.0.0.tgz#a6675e56094ac9c797c19a3986378289396a9dd5"
-  integrity sha512-jnm//T5ZWOZ6zmJ61fReSCBOif+Ax8dHVoVggA+d2NA7T4qCWgQ3KYr+zN2faGEYLpe1wa03IzvhR+sqVLxUWg==
+"@rollup/plugin-commonjs@11.0.1":
+  version "11.0.1"
+  resolved "https://registry.yarnpkg.com/@rollup/plugin-commonjs/-/plugin-commonjs-11.0.1.tgz#6056a6757286901cc6c1599123e6680a78cad6c2"
+  integrity sha512-SaVUoaLDg3KnIXC5IBNIspr1APTYDzk05VaYcI6qz+0XX3ZlSCwAkfAhNSOxfd5GAdcm/63Noi4TowOY9MpcDg==
   dependencies:
     "@rollup/pluginutils" "^3.0.0"
     estree-walker "^0.6.1"
@@ -13,10 +13,10 @@
     magic-string "^0.25.2"
     resolve "^1.11.0"
 
-"@rollup/plugin-node-resolve@6.0.0":
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/@rollup/plugin-node-resolve/-/plugin-node-resolve-6.0.0.tgz#f351e29b45c007c17df4e28a0efd0d1f5662f59b"
-  integrity sha512-GqWz1CfXOsqpeVMcoM315+O7zMxpRsmhWyhJoxLFHVSp9S64/u02i7len/FnbTNbmgYs+sZyilasijH8UiuboQ==
+"@rollup/plugin-node-resolve@6.1.0":
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/@rollup/plugin-node-resolve/-/plugin-node-resolve-6.1.0.tgz#0d2909f4bf606ae34d43a9bc8be06a9b0c850cf0"
+  integrity sha512-Cv7PDIvxdE40SWilY5WgZpqfIUEaDxFxs89zCAHjqyRwlTSuql4M5hjIuc5QYJkOH0/vyiyNXKD72O+LhRipGA==
   dependencies:
     "@rollup/pluginutils" "^3.0.0"
     "@types/resolve" "0.0.8"
@@ -31,15 +31,15 @@
   dependencies:
     estree-walker "^0.6.1"
 
-"@sblendid/adapter-node@0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@sblendid/adapter-node/-/adapter-node-0.2.0.tgz#195cbc06375578b21ae4f4354b14c3bcfe6dcdd6"
-  integrity sha512-SmXiZtLlySGI+BXxQwPA6AcCDWx+RYYiWplwY+gQZArkOxbu88pVp4RwNwXLfETMTARQ6ouzcNUAXabe8oRJAQ==
+"@sblendid/adapter-node@0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@sblendid/adapter-node/-/adapter-node-0.3.0.tgz#77e13e29650f6bcd45ee20abd7cecbd77f3d48b0"
+  integrity sha512-3t1kWybo5Xwe3XKx0hH6rD9ziO8IzPvHcKzG8vPZtXgXW8DekQJml4dzHMQmZZrWTOTuxAXIIV4GIRv7BjANDQ==
 
-"@sblendid/sblendid@0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@sblendid/sblendid/-/sblendid-0.2.0.tgz#d9bae557931c5cd5f497cdd6c2b2cdf2647a561b"
-  integrity sha512-CBTXHFX22Xe/8fLpPGiv8l6wTmJkppPJO3OXinI5H/4LZB0xLJ37eQ5+RuGOZacnc+sOOIzIO8ZUgN5U/D1Hjg==
+"@sblendid/sblendid@0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@sblendid/sblendid/-/sblendid-0.3.0.tgz#0fa8396a85ccc8b64aea4f658744f7f8567c49cc"
+  integrity sha512-S5zVaFT1JeX6UznLWbY8E5XiuO0AfDst1i5L7HnTtwo83iIjgzW4oXpCJx89oebgZnZkaHubBxItRlybTVFO4A==
 
 "@types/estree@*":
   version "0.0.40"
@@ -63,10 +63,10 @@
   dependencies:
     "@types/node" "*"
 
-"@types/web-bluetooth@0.0.4":
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/@types/web-bluetooth/-/web-bluetooth-0.0.4.tgz#107b7fc8666470035b541b194c933d320cd8fb47"
-  integrity sha512-C+BgVBBGY9c6ixcc5PsKAmGaCy3bswZ5zx/AWIAik9dgFuBkFsXBA3ze69jJi05xdZQ99QkfBSVIX6zl+6Tmww==
+"@types/web-bluetooth@0.0.5":
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/@types/web-bluetooth/-/web-bluetooth-0.0.5.tgz#f952d1481572798dd20a381135bef3d8b1ef305a"
+  integrity sha512-gaSAxNePCVJUR1a+4jKMaukjEzE4XuJd9fzSx/mAy6BrVoJXnACmfaBkaXU/K0frxJVfHvMDJx96hbNt4NXd9Q==
 
 acorn@^7.1.0:
   version "7.1.0"
@@ -335,10 +335,10 @@ rollup-pluginutils@2.8.1:
   dependencies:
     estree-walker "^0.6.1"
 
-rollup@1.27.13:
-  version "1.27.13"
-  resolved "https://registry.yarnpkg.com/rollup/-/rollup-1.27.13.tgz#d6d3500512daacbf8de54d2800de62d893085b90"
-  integrity sha512-hDi7M07MpmNSDE8YVwGVFA8L7n8jTLJ4lG65nMAijAyqBe//rtu4JdxjUBE7JqXfdpqxqDTbCDys9WcqdpsQvw==
+rollup@1.28.0:
+  version "1.28.0"
+  resolved "https://registry.yarnpkg.com/rollup/-/rollup-1.28.0.tgz#d576a6a0fd7490b2e1f531ef8b411795fb80da87"
+  integrity sha512-v2J/DmQi9+Nf6frGqzwZRvbiuTTrqH0yzoUF4Eybf8sONT4UpLZzJYnYzW96Zm9X1+4SJmijfnFBWCzHDAXYnQ==
   dependencies:
     "@types/estree" "*"
     "@types/node" "*"
