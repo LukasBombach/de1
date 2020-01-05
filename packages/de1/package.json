@@ -11,14 +11,14 @@
         "ts": "ts-node --project tsconfig.json"
     },
     "dependencies": {
-        "@sblendid/adapter-node": "0.2.0",
-        "@sblendid/sblendid": "0.2.0"
+        "@sblendid/adapter-node": "0.3.0",
+        "@sblendid/sblendid": "0.3.0"
     },
     "devDependencies": {
-        "@rollup/plugin-commonjs": "11.0.0",
-        "@rollup/plugin-node-resolve": "6.0.0",
-        "@types/web-bluetooth": "0.0.4",
-        "rollup": "1.27.13",
+        "@rollup/plugin-commonjs": "11.0.1",
+        "@rollup/plugin-node-resolve": "6.1.0",
+        "@types/web-bluetooth": "0.0.5",
+        "rollup": "1.28.0",
         "rollup-plugin-auto-external": "2.0.0",
         "rollup-plugin-typescript2": "0.25.3",
         "ts-node": "8.5.4",
