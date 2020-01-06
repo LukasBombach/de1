@@ -58,7 +58,7 @@ export default class De1EventEmitter {
     this.emitter.off(event, listener);
   }
 
-  public emit<N extends Event>(event: N, params: Events[N]): void {
+  public emit<N extends Event>(event: N, params?: Events[N]): void {
     this.emitter.emit(event, params);
   }
 

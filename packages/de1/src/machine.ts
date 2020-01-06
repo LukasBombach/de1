@@ -1,5 +1,5 @@
 import Sblendid, { Peripheral, Service } from "@sblendid/sblendid";
-import services, { Converters } from "./converters";
+import converters, { Converters } from "./converters";
 
 export default class Machine {
   private peripheral?: Peripheral;
@@ -7,8 +7,8 @@ export default class Machine {
 
   async connect(): Promise<void> {
     if (this.isConnected()) return;
-    this.peripheral = await Sblendid.connect("DE1", services);
-    this.service = await this.peripheral.getService("a000");
+    this.peripheral = await Sblendid.connect("DE1");
+    this.service = await this.peripheral.getService("a000", converters);
   }
 
   async disconnect(): Promise<void> {
@@ -19,10 +19,7 @@ export default class Machine {
   }
 
   getService(): Service<Converters> {
-    if (!this.service)
-      throw new Error(
-        "You need to connect to the DE1 before you can request its service"
-      );
+    if (!this.service) throw new Error("You need to connect to the DE1");
     return this.service;
   }
 

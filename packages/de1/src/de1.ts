@@ -1,11 +1,12 @@
-import Sblendid, { Peripheral, Service } from "@sblendid/sblendid";
-import services, { Converters } from "./converters";
+import { Service } from "@sblendid/sblendid";
+import { Converters } from "./converters";
 import Events, { Event, Listener } from "./events";
+import Machine from "./machine";
 
 export default class DE1 {
-  private machine?: Peripheral;
+  private machine = new Machine();
+  private events = new Events();
   private service?: Service<Converters>;
-  private events?: Events;
 
   static async connect(): Promise<DE1> {
     const de1 = new DE1();
@@ -14,20 +15,13 @@ export default class DE1 {
   }
 
   async connect(): Promise<void> {
-    if (this.isConnected()) return;
-    this.machine = await Sblendid.connect("DE1", services);
-    this.service = await this.machine.getService("a000");
-    this.events = new Events(this.service);
+    await this.machine.connect();
     this.events.emit("connected");
   }
 
   async disconnect(): Promise<void> {
-    if (!this.isConnected()) return;
-    await this.machine!.disconnect();
-    this.events!.emit("disconnected");
-    this.events = undefined;
-    this.machine = undefined;
-    this.service = undefined;
+    await this.machine.disconnect();
+    this.events.emit("disconnected");
   }
 
   async turnOn(): Promise<void> {
