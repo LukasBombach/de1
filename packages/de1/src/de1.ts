@@ -1,11 +1,11 @@
 import Sblendid, { Peripheral, Service } from "@sblendid/sblendid";
-import converters, { Converters, ConverterKey, ConverterValue } from "./converters";
-import EventEmitter, { Event, Listener } from "./events";
+import services, { Converters } from "./converters";
+import Events, { Event, Listener } from "./events";
 
 export default class DE1 {
   private machine?: Peripheral;
   private service?: Service<Converters>;
-  private events: EventEmitter = new EventEmitter();
+  private events?: Events;
 
   static async connect(): Promise<DE1> {
     const de1 = new DE1();
@@ -15,17 +15,17 @@ export default class DE1 {
 
   async connect(): Promise<void> {
     if (this.isConnected()) return;
-    this.machine = await Sblendid.connect("DE1");
-    this.service = await this.machine.getService("a000", converters);
-    this.events.addEventListeners(this.service!);
-    this.events.emit("connected", undefined);
+    this.machine = await Sblendid.connect("DE1", services);
+    this.service = await this.machine.getService("a000");
+    this.events = new Events(this.service);
+    this.events.emit("connected");
   }
 
   async disconnect(): Promise<void> {
     if (!this.isConnected()) return;
     await this.machine!.disconnect();
-    this.events.removeEventListeners(this.service!);
-    this.events.emit("disconnected", undefined);
+    this.events!.emit("disconnected");
+    this.events = undefined;
     this.machine = undefined;
     this.service = undefined;
   }
@@ -40,7 +40,8 @@ export default class DE1 {
   }
 
   async stopEverything(): Promise<void> {
-    await this.write("state", "idle");
+    const currentState = await this.read("state");
+    if (currentState !== "sleep") await this.write("state", "idle");
   }
 
   async startEspresso(): Promise<void> {
@@ -123,26 +124,16 @@ export default class DE1 {
     return this.machine.isConnected();
   }
 
-  public getBleService(): Service<Converters> {
-    if (!this.service) throw new Error("DE1 is not connected yet");
-    return this.service;
-  }
-
-  public getBleAdapterforDebugging(): Peripheral["adapter"] {
-    if (!this.machine) throw new Error("DE1 is not connected yet");
-    return this.machine.adapter;
-  }
-
-  private async read(
-    name: string
-  ) {
+  private async read(name: string) {
     return await this.getBleService().read(name);
   }
 
-  private async write(
-    name: string,
-    value: string
-  ) {
+  private async write(name: string, value: string) {
     await this.getBleService().write(name, value);
+  }
+
+  private getBleService(): Service<Converters> {
+    if (!this.service) throw new Error("DE1 is not connected yet");
+    return this.service;
   }
 }
