@@ -3,7 +3,6 @@ import State from "./state";
 import Events, { Event, Listener } from "./events";
 
 export default class DE1 {
-  private state = new State();
   private events = new Events();
 
   async connect(): Promise<void> {
@@ -23,51 +22,51 @@ export default class DE1 {
   }
 
   async startEspresso(): Promise<void> {
-    await this.state.start("espresso");
+    await State.start("espresso");
   }
 
   async stopEspresso(): Promise<void> {
-    await this.state.stop("espresso");
+    await State.stop("espresso");
   }
 
   async startSteam(): Promise<void> {
-    await this.state.start("steam");
+    await State.start("steam");
   }
 
   async stopSteam(): Promise<void> {
-    await this.state.stop("steam");
+    await State.stop("steam");
   }
 
   async startHotWater(): Promise<void> {
-    await this.state.start("hotWater");
+    await State.start("hotWater");
   }
 
   async stopHotWater(): Promise<void> {
-    await this.state.stop("hotWater");
+    await State.stop("hotWater");
   }
 
   async startFlushing(): Promise<void> {
-    await this.state.start("hotWaterRinse");
+    await State.start("hotWaterRinse");
   }
 
   async stopFlushing(): Promise<void> {
-    await this.state.stop("hotWaterRinse");
+    await State.stop("hotWaterRinse");
   }
 
   async startDescaling(): Promise<void> {
-    await this.state.start("descale");
+    await State.start("descale");
   }
 
   async stopDescaling(): Promise<void> {
-    await this.state.stop("descale");
+    await State.stop("descale");
   }
 
   async stopEverything(): Promise<void> {
-    this.state.stopEverything();
+    State.stopEverything();
   }
 
   async getState(): Promise<string> {
-    return await this.state.getState();
+    return await State.getState();
   }
 
   async getWaterlevel(): Promise<number> {
