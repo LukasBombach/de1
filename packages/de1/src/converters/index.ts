@@ -1,4 +1,4 @@
-import { Converter, Value } from "@sblendid/sblendid";
+import { Converter, Names, PickValue } from "@sblendid/sblendid";
 import state, { State } from "./state";
 import water, { Water } from "./water";
 import versions, { Versions } from "./versions";
@@ -11,18 +11,8 @@ import shotDescriptionHeader, {
 import shotFrame, { ShotFrame } from "./shotFrame";
 import calibrate, { Calibrate } from "./calibrate";
 
-export { State } from "./state";
-export { Water } from "./water";
-export { Versions } from "./versions";
-export { Shot } from "./shot";
-export { ShotSettings } from "./shotSettings";
-export { StateInfo, SubState } from "./stateInfo";
-export { ShotDescriptionHeader } from "./shotDescriptionHeader";
-export { ShotFrame } from "./shotFrame";
-export { Calibrate } from "./calibrate";
-
-export type ConverterKey = keyof Converters;
-export type ConverterValue = Value<Converters>;
+export type Name = Names<Converters>;
+export type Value<N extends Name> = PickValue<Converters, N>;
 
 export type Converters = {
   state: Converter<State>;

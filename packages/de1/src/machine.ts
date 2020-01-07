@@ -1,10 +1,5 @@
-import Sblendid, {
-  Peripheral,
-  Service,
-  Names,
-  PickValue
-} from "@sblendid/sblendid";
-import converters, { Converters } from "./converters";
+import Sblendid, { Peripheral, Service } from "@sblendid/sblendid";
+import converters, { Converters, Name, Value } from "./converters";
 
 export default class Machine {
   private peripheral?: Peripheral;
@@ -32,17 +27,12 @@ export default class Machine {
     await this.write("state", "sleep");
   }
 
-  public async read<N extends Names<Converters>>(
-    name: N
-  ): Promise<PickValue<Converters, N>> {
+  public async read<N extends Name>(name: N): Promise<Value<N>> {
     const service = this.getService();
     return await service.read(name);
   }
 
-  public async write<N extends Names<Converters>>(
-    name: N,
-    value: PickValue<Converters, N>
-  ): Promise<void> {
+  public async write<N extends Name>(name: N, value: Value<N>): Promise<void> {
     const service = this.getService();
     await service.write(name, value);
   }
