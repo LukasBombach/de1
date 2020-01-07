@@ -2,9 +2,11 @@ import { Service } from "@sblendid/sblendid";
 import { Converters } from "./converters";
 import Events, { Event, Listener } from "./events";
 import Machine from "./machine";
+import State from "./state";
 
 export default class DE1 {
   private machine = new Machine();
+  private state = new State();
   private events = new Events();
   private service?: Service<Converters>;
 
@@ -25,79 +27,64 @@ export default class DE1 {
   }
 
   async turnOn(): Promise<void> {
-    const currentState = await this.read("state");
-    if (currentState === "sleep") await this.write("state", "idle");
+    const currentState = await this.state.read();
+    if (currentState === "sleep") await this.state.write("idle");
   }
 
   async turnOff(): Promise<void> {
-    await this.write("state", "sleep");
-  }
-
-  async stopEverything(): Promise<void> {
-    const currentState = await this.read("state");
-    if (currentState !== "sleep") await this.write("state", "idle");
+    await this.state.write("sleep");
   }
 
   async startEspresso(): Promise<void> {
-    await this.write("state", "espresso");
+    await this.state.start("espresso");
   }
 
   async stopEspresso(): Promise<void> {
-    const currentState = await this.read("state");
-    if (currentState === "espresso") await this.write("state", "idle");
+    await this.state.stop("espresso");
   }
 
   async startSteam(): Promise<void> {
-    await this.write("state", "steam");
+    await this.state.start("steam");
   }
 
   async stopSteam(): Promise<void> {
-    const currentState = await this.read("state");
-    if (currentState === "steam") await this.write("state", "idle");
+    await this.state.stop("steam");
   }
 
   async startHotWater(): Promise<void> {
-    await this.write("state", "hotWater");
+    await this.state.start("hotWater");
   }
 
   async stopHotWater(): Promise<void> {
-    const currentState = await this.read("state");
-    if (currentState === "hotWater") await this.write("state", "idle");
+    await this.state.stop("hotWater");
   }
 
   async startFlushing(): Promise<void> {
-    await this.write("state", "hotWaterRinse");
+    await this.state.start("hotWaterRinse");
   }
 
   async stopFlushing(): Promise<void> {
-    const currentState = await this.read("state");
-    if (currentState === "hotWaterRinse") await this.write("state", "idle");
+    await this.state.stop("hotWaterRinse");
   }
 
   async startDescaling(): Promise<void> {
-    await this.write("state", "descale");
+    await this.state.start("descale");
   }
 
   async stopDescaling(): Promise<void> {
-    const currentState = await this.read("state");
-    if (currentState === "descale") await this.write("state", "idle");
+    await this.state.stop("descale");
+  }
+
+  async stopEverything(): Promise<void> {
+    this.state.stopEverything();
   }
 
   async getState(): Promise<string> {
-    if (!this.isConnected()) return "disconnected";
-    const { state, substate } = await this.read("stateInfo");
-    if (state === "sleep") return "sleep";
-    if (substate === "heating") return "heating";
-    if (state === "espresso") return "espresso";
-    if (state === "steam") return "steam";
-    if (state === "hotWater") return "hotWater";
-    if (state === "hotWaterRinse") return "flushing";
-    if (state === "descale") return "descale";
-    return "idle";
+    return await this.state.getState();
   }
 
   async getWaterlevel(): Promise<number> {
-    const { level } = await this.read("water");
+    const { level } = await this.service.read("water");
     return level;
   }
 
@@ -116,18 +103,5 @@ export default class DE1 {
   public isConnected(): boolean {
     if (!this.machine) return false;
     return this.machine.isConnected();
-  }
-
-  private async read(name: string) {
-    return await this.getBleService().read(name);
-  }
-
-  private async write(name: string, value: string) {
-    await this.getBleService().write(name, value);
-  }
-
-  private getBleService(): Service<Converters> {
-    if (!this.service) throw new Error("DE1 is not connected yet");
-    return this.service;
   }
 }
