@@ -1,8 +1,10 @@
-import Sblendid, { Peripheral, Service } from "@sblendid/sblendid";
+import Sblendid, {
+  Peripheral,
+  Service,
+  Names,
+  PickValue
+} from "@sblendid/sblendid";
 import converters, { Converters } from "./converters";
-
-type FIXME = string;
-type FIXME2 = any;
 
 export default class Machine {
   private peripheral?: Peripheral;
@@ -30,12 +32,17 @@ export default class Machine {
     await this.write("state", "sleep");
   }
 
-  public async read(name: FIXME): Promise<FIXME2> {
+  public async read<N extends Names<Converters>>(
+    name: N
+  ): Promise<PickValue<Converters, N>> {
     const service = this.getService();
     return await service.read(name);
   }
 
-  public async write(name: FIXME, value: string): Promise<FIXME2> {
+  public async write<N extends Names<Converters>>(
+    name: N,
+    value: PickValue<Converters, N>
+  ): Promise<void> {
     const service = this.getService();
     await service.write(name, value);
   }

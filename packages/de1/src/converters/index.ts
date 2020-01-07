@@ -24,8 +24,7 @@ export { Calibrate } from "./calibrate";
 export type ConverterKey = keyof Converters;
 export type ConverterValue = Value<Converters>;
 
-export interface Converters {
-  [key: string]: Converter<any>
+export type Converters = {
   state: Converter<State>;
   water: Converter<Water>;
   versions: Converter<Versions>;
@@ -35,9 +34,9 @@ export interface Converters {
   shotDescriptionHeader: Converter<ShotDescriptionHeader>;
   shotFrame: Converter<ShotFrame>;
   calibrate: Converter<Calibrate>;
-}
+};
 
-const converters: Converters = {
+export default {
   state,
   water,
   versions,
@@ -48,5 +47,3 @@ const converters: Converters = {
   shotFrame,
   calibrate
 };
-
-export default converters;
