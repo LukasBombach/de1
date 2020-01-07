@@ -6,12 +6,6 @@ export default class DE1 {
   private state = new State();
   private events = new Events();
 
-  static async connect(): Promise<DE1> {
-    const de1 = new DE1();
-    await de1.connect();
-    return de1;
-  }
-
   async connect(): Promise<void> {
     await Machine.connect();
     this.events.emit("connected");
