@@ -3,21 +3,21 @@ import Machine from "./machine";
 type DE1State = string;
 
 export default class State {
-  public async start(state: DE1State): Promise<void> {
-    await this.write(state);
+  public static async start(state: DE1State): Promise<void> {
+    await State.write(state);
   }
 
-  public async stop(state: DE1State): Promise<void> {
-    const currentState = await this.read();
-    if (currentState === state) await this.write("idle");
+  public static async stop(state: DE1State): Promise<void> {
+    const currentState = await State.read();
+    if (currentState === state) await State.write("idle");
   }
 
-  async stopEverything(): Promise<void> {
-    const currentState = await this.read();
-    if (currentState !== "sleep") await this.write("idle");
+  public static async stopEverything(): Promise<void> {
+    const currentState = await State.read();
+    if (currentState !== "sleep") await State.write("idle");
   }
 
-  async getState(): Promise<string> {
+  public static async getState(): Promise<string> {
     if (!Machine.isConnected()) return "disconnected";
     const { state, substate } = await Machine.read("stateInfo");
     if (state === "sleep") return "sleep";
@@ -30,11 +30,11 @@ export default class State {
     return "idle";
   }
 
-  public async read() {
+  public static async read() {
     return await Machine.read("state");
   }
 
-  public async write(value: string) {
+  public static async write(value: string) {
     await Machine.write("state", value);
   }
 }
