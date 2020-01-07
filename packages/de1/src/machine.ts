@@ -5,48 +5,48 @@ type FIXME = string;
 type FIXME2 = any;
 
 export default class Machine {
-  private static peripheral?: Peripheral;
-  private static service?: Service<Converters>;
+  private peripheral?: Peripheral;
+  private service?: Service<Converters>;
 
-  public static async connect(): Promise<void> {
-    if (Machine.isConnected()) return;
-    Machine.peripheral = await Sblendid.connect("DE1");
-    Machine.service = await Machine.peripheral.getService("a000", converters);
+  public async connect(): Promise<void> {
+    if (this.isConnected()) return;
+    this.peripheral = await Sblendid.connect("DE1");
+    this.service = await this.peripheral.getService("a000", converters);
   }
 
-  public static async disconnect(): Promise<void> {
-    if (!Machine.isConnected()) return;
-    await Machine.peripheral!.disconnect();
-    Machine.peripheral = undefined;
-    Machine.service = undefined;
+  public async disconnect(): Promise<void> {
+    if (!this.isConnected()) return;
+    await this.peripheral!.disconnect();
+    this.peripheral = undefined;
+    this.service = undefined;
   }
 
-  public static async turnOn(): Promise<void> {
-    const currentState = await Machine.read("state");
-    if (currentState === "sleep") await Machine.write("state", "idle");
+  public async turnOn(): Promise<void> {
+    const currentState = await this.read("state");
+    if (currentState === "sleep") await this.write("state", "idle");
   }
 
-  public static async turnOff(): Promise<void> {
-    await Machine.write("state", "sleep");
+  public async turnOff(): Promise<void> {
+    await this.write("state", "sleep");
   }
 
-  public static async read(name: FIXME): Promise<FIXME2> {
-    const service = Machine.getService();
+  public async read(name: FIXME): Promise<FIXME2> {
+    const service = this.getService();
     return await service.read(name);
   }
 
-  public static async write(name: FIXME, value: string): Promise<FIXME2> {
-    const service = Machine.getService();
+  public async write(name: FIXME, value: string): Promise<FIXME2> {
+    const service = this.getService();
     await service.write(name, value);
   }
 
-  public static isConnected(): boolean {
-    return Boolean(Machine.peripheral?.isConnected());
+  public isConnected(): boolean {
+    return Boolean(this.peripheral?.isConnected());
   }
 
-  private static getService(): Service<Converters> {
+  private getService(): Service<Converters> {
     const msg = "Not connected to the DE1 (service undefined)";
-    if (!Machine.service) throw new Error(msg);
-    return Machine.service;
+    if (!this.service) throw new Error(msg);
+    return this.service;
   }
 }

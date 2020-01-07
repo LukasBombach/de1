@@ -3,23 +3,29 @@ import Machine from "./machine";
 type DE1State = string;
 
 export default class State {
-  public static async start(state: DE1State): Promise<void> {
-    await State.write(state);
+  private machine: Machine;
+
+  constructor(machine: Machine) {
+    this.machine = machine;
   }
 
-  public static async stop(state: DE1State): Promise<void> {
-    const currentState = await State.read();
-    if (currentState === state) await State.write("idle");
+  public async start(state: DE1State): Promise<void> {
+    await this.write(state);
   }
 
-  public static async stopEverything(): Promise<void> {
-    const currentState = await State.read();
-    if (currentState !== "sleep") await State.write("idle");
+  public async stop(state: DE1State): Promise<void> {
+    const currentState = await this.read();
+    if (currentState === state) await this.write("idle");
   }
 
-  public static async getState(): Promise<string> {
-    if (!Machine.isConnected()) return "disconnected";
-    const { state, substate } = await Machine.read("stateInfo");
+  public async stopEverything(): Promise<void> {
+    const currentState = await this.read();
+    if (currentState !== "sleep") await this.write("idle");
+  }
+
+  public async getState(): Promise<string> {
+    if (!this.machine.isConnected()) return "disconnected";
+    const { state, substate } = await this.machine.read("stateInfo");
     if (state === "sleep") return "sleep";
     if (substate === "heating") return "heating";
     if (state === "espresso") return "espresso";
@@ -30,11 +36,11 @@ export default class State {
     return "idle";
   }
 
-  public static async read() {
-    return await Machine.read("state");
+  public async read() {
+    return await this.machine.read("state");
   }
 
-  public static async write(value: string) {
-    await Machine.write("state", value);
+  public async write(value: string) {
+    await this.machine.write("state", value);
   }
 }
