@@ -1,6 +1,10 @@
+import Machine from "./machine";
+
 type DE1State = string;
 
 export default class State {
+  private machine = Machine.getInstance();
+
   public async start(state: DE1State): Promise<void> {
     await this.write(state);
   }
@@ -16,8 +20,8 @@ export default class State {
   }
 
   async getState(): Promise<string> {
-    if (!this.isConnected()) return "disconnected";
-    const { state, substate } = await this.read("stateInfo");
+    if (!this.machine.isConnected()) return "disconnected";
+    const { state, substate } = await this.machine.read("stateInfo");
     if (state === "sleep") return "sleep";
     if (substate === "heating") return "heating";
     if (state === "espresso") return "espresso";
@@ -29,10 +33,10 @@ export default class State {
   }
 
   public async read() {
-    return await this.getBleService().read("state");
+    return await this.machine.read("state");
   }
 
   public async write(value: string) {
-    await this.getBleService().write(value);
+    await this.machine.write("state", value);
   }
 }

@@ -22,6 +22,8 @@ export type EspressoPhase = "finalHeating" | "preinfusion" | "pouring";
 export interface Events {
   connected: void;
   disconnected: void;
+  turnedOn: void;
+  turnedOff: void;
   state: State;
   temperature: {
     goal: number;
