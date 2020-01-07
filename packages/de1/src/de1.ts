@@ -1,5 +1,5 @@
 import Machine from "./machine";
-import State from "./state";
+import State, { ExtendedStates } from "./state";
 
 export default class DE1 {
   private machine = new Machine();
@@ -65,7 +65,7 @@ export default class DE1 {
     await this.state.stopEverything();
   }
 
-  async getState(): Promise<string> {
+  async getState(): Promise<ExtendedStates> {
     return await this.state.getState();
   }
 

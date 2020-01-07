@@ -1,6 +1,9 @@
+import { PickValue } from "@sblendid/sblendid";
 import Machine from "./machine";
+import { Converters } from "./converters";
 
-type DE1State = string;
+type StateValue = PickValue<Converters, "state">;
+export type ExtendedStates = StateValue | "disconnected" | "heating";
 
 export default class State {
   private machine: Machine;
@@ -9,11 +12,11 @@ export default class State {
     this.machine = machine;
   }
 
-  public async start(state: DE1State): Promise<void> {
+  public async start(state: StateValue): Promise<void> {
     await this.write(state);
   }
 
-  public async stop(state: DE1State): Promise<void> {
+  public async stop(state: StateValue): Promise<void> {
     const currentState = await this.read();
     if (currentState === state) await this.write("idle");
   }
@@ -23,24 +26,18 @@ export default class State {
     if (currentState !== "sleep") await this.write("idle");
   }
 
-  public async getState(): Promise<string> {
+  public async getState(): Promise<ExtendedStates> {
     if (!this.machine.isConnected()) return "disconnected";
     const { state, substate } = await this.machine.read("stateInfo");
-    if (state === "sleep") return "sleep";
     if (substate === "heating") return "heating";
-    if (state === "espresso") return "espresso";
-    if (state === "steam") return "steam";
-    if (state === "hotWater") return "hotWater";
-    if (state === "hotWaterRinse") return "flushing";
-    if (state === "descale") return "descale";
-    return "idle";
+    return state;
   }
 
-  public async read() {
+  public async read(): Promise<StateValue> {
     return await this.machine.read("state");
   }
 
-  public async write(value: string) {
+  public async write(value: StateValue): Promise<void> {
     await this.machine.write("state", value);
   }
 }
