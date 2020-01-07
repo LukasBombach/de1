@@ -21,7 +21,7 @@ function decode(data: Buffer): Calibrate {
 
 const converter: Converter<Calibrate> = {
   uuid: "a012",
-  decode
+  decode,
 };
 
 export default converter;
