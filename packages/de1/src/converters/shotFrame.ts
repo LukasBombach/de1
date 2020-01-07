@@ -34,7 +34,7 @@ function convertBottom10OfU10P0(value: number): number {
 
 const converter: Converter<ShotFrame> = {
   uuid: "a010",
-  decode
+  decode,
 };
 
 export default converter;

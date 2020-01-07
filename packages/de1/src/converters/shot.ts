@@ -42,7 +42,7 @@ function decode(data: Buffer): Shot {
 
 const converter: Converter<Shot> = {
   uuid: "a00d",
-  decode
+  decode,
 };
 
 export default converter;

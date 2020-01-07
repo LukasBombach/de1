@@ -42,7 +42,7 @@ function encode(shotSettings: ShotSettings): Buffer {
 const converter: Converter<ShotSettings> = {
   uuid: "a00b",
   encode,
-  decode
+  decode,
 };
 
 export default converter;

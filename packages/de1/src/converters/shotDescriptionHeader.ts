@@ -33,7 +33,7 @@ function encode(shotSettings: ShotDescriptionHeader): Buffer {
 const converter: Converter<ShotDescriptionHeader> = {
   uuid: "a00f",
   decode,
-  encode
+  encode,
 };
 
 export default converter;

@@ -6,7 +6,7 @@ import shot, { Shot } from "./shot";
 import shotSettings, { ShotSettings } from "./shotSettings";
 import stateInfo, { StateInfo } from "./stateInfo";
 import shotDescriptionHeader, {
-  ShotDescriptionHeader
+  ShotDescriptionHeader,
 } from "./shotDescriptionHeader";
 import shotFrame, { ShotFrame } from "./shotFrame";
 import calibrate, { Calibrate } from "./calibrate";
@@ -35,5 +35,5 @@ export default {
   stateInfo,
   shotDescriptionHeader,
   shotFrame,
-  calibrate
+  calibrate,
 };

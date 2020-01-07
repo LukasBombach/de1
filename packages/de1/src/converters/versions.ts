@@ -35,7 +35,7 @@ function decode(data: Buffer): Versions {
 
 const converter: Converter<Versions> = {
   uuid: "a001",
-  decode
+  decode,
 };
 
 export default converter;

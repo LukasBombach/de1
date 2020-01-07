@@ -15,7 +15,7 @@ function decode(data: Buffer): Water {
 
 const converter: Converter<Water> = {
   uuid: "a011",
-  decode
+  decode,
 };
 
 export default converter;
