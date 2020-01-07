@@ -16,7 +16,7 @@ export default class Machine {
 
   public async disconnect(): Promise<void> {
     if (!this.isConnected()) return;
-    await this.peripheral!.disconnect();
+    await this.getPeripheral().disconnect();
     this.peripheral = undefined;
     this.service = undefined;
   }
@@ -42,6 +42,12 @@ export default class Machine {
 
   public isConnected(): boolean {
     return Boolean(this.peripheral?.isConnected());
+  }
+
+  private getPeripheral(): Peripheral {
+    const msg = "Not connected to the DE1 (peripheral undefined)";
+    if (!this.peripheral) throw new Error(msg);
+    return this.peripheral;
   }
 
   private getService(): Service<Converters> {
