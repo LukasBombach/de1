@@ -5,10 +5,9 @@ import Machine from "./machine";
 import State from "./state";
 
 export default class DE1 {
-  private machine = new Machine();
+  private machine = Machine.getInstance();
   private state = new State();
   private events = new Events();
-  private service?: Service<Converters>;
 
   static async connect(): Promise<DE1> {
     const de1 = new DE1();
@@ -27,12 +26,13 @@ export default class DE1 {
   }
 
   async turnOn(): Promise<void> {
-    const currentState = await this.state.read();
-    if (currentState === "sleep") await this.state.write("idle");
+    await this.machine.turnOn();
+    this.events.emit("turnedOn");
   }
 
   async turnOff(): Promise<void> {
-    await this.state.write("sleep");
+    await this.machine.turnOff();
+    this.events.emit("turnedOff");
   }
 
   async startEspresso(): Promise<void> {
@@ -84,7 +84,7 @@ export default class DE1 {
   }
 
   async getWaterlevel(): Promise<number> {
-    const { level } = await this.service.read("water");
+    const { level } = await this.machine.read("water");
     return level;
   }
 
@@ -98,10 +98,5 @@ export default class DE1 {
 
   public off<E extends Event>(event: E, listener: Listener<E>): void {
     this.events.off(event, listener);
-  }
-
-  public isConnected(): boolean {
-    if (!this.machine) return false;
-    return this.machine.isConnected();
   }
 }
