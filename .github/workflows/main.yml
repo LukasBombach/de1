@@ -19,7 +19,7 @@ jobs:
       run: echo "::set-output name=dir::$(yarn cache dir)"
 
     - name: yarn install
-      run: yarn install
+      run: yarn install --frozen-lockfile
 
     - name: Build (de1)
       working-directory: packages/de1
@@ -42,7 +42,7 @@ jobs:
       run: echo "::set-output name=dir::$(yarn cache dir)"
 
     - name: yarn install
-      run: yarn install
+      run: yarn install  --frozen-lockfile
 
     - name: Code formatting
       run: yarn prettier
