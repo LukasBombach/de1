@@ -1,11 +1,8 @@
-import { Service } from "@sblendid/sblendid";
-import { Converters } from "./converters";
-import Events, { Event, Listener } from "./events";
 import Machine from "./machine";
 import State from "./state";
+import Events, { Event, Listener } from "./events";
 
 export default class DE1 {
-  private machine = Machine.getInstance();
   private state = new State();
   private events = new Events();
 
@@ -16,22 +13,22 @@ export default class DE1 {
   }
 
   async connect(): Promise<void> {
-    await this.machine.connect();
+    await Machine.connect();
     this.events.emit("connected");
   }
 
   async disconnect(): Promise<void> {
-    await this.machine.disconnect();
+    await Machine.disconnect();
     this.events.emit("disconnected");
   }
 
   async turnOn(): Promise<void> {
-    await this.machine.turnOn();
+    await Machine.turnOn();
     this.events.emit("turnedOn");
   }
 
   async turnOff(): Promise<void> {
-    await this.machine.turnOff();
+    await Machine.turnOff();
     this.events.emit("turnedOff");
   }
 
@@ -84,7 +81,7 @@ export default class DE1 {
   }
 
   async getWaterlevel(): Promise<number> {
-    const { level } = await this.machine.read("water");
+    const { level } = await Machine.read("water");
     return level;
   }
 
