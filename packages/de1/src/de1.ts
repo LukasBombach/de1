@@ -1,88 +1,76 @@
 import Machine from "./machine";
 import State from "./state";
-import Events, { Event, Listener } from "./events";
 
 export default class DE1 {
-  private events = new Events();
+  private machine = new Machine();
+  private state = new State(this.machine);
 
   async connect(): Promise<void> {
-    await Machine.connect();
+    await this.machine.connect();
   }
 
   async disconnect(): Promise<void> {
-    await Machine.disconnect();
+    await this.machine.disconnect();
   }
 
   async turnOn(): Promise<void> {
-    await Machine.turnOn();
+    await this.machine.turnOn();
   }
 
   async turnOff(): Promise<void> {
-    await Machine.turnOff();
+    await this.machine.turnOff();
   }
 
   async startEspresso(): Promise<void> {
-    await State.start("espresso");
+    await this.state.start("espresso");
   }
 
   async stopEspresso(): Promise<void> {
-    await State.stop("espresso");
+    await this.state.stop("espresso");
   }
 
   async startSteam(): Promise<void> {
-    await State.start("steam");
+    await this.state.start("steam");
   }
 
   async stopSteam(): Promise<void> {
-    await State.stop("steam");
+    await this.state.stop("steam");
   }
 
   async startHotWater(): Promise<void> {
-    await State.start("hotWater");
+    await this.state.start("hotWater");
   }
 
   async stopHotWater(): Promise<void> {
-    await State.stop("hotWater");
+    await this.state.stop("hotWater");
   }
 
   async startFlushing(): Promise<void> {
-    await State.start("hotWaterRinse");
+    await this.state.start("hotWaterRinse");
   }
 
   async stopFlushing(): Promise<void> {
-    await State.stop("hotWaterRinse");
+    await this.state.stop("hotWaterRinse");
   }
 
   async startDescaling(): Promise<void> {
-    await State.start("descale");
+    await this.state.start("descale");
   }
 
   async stopDescaling(): Promise<void> {
-    await State.stop("descale");
+    await this.state.stop("descale");
   }
 
   async stopEverything(): Promise<void> {
-    State.stopEverything();
+    await this.state.stopEverything();
   }
 
   async getState(): Promise<string> {
-    return await State.getState();
+    return await this.state.getState();
   }
 
   async getWaterlevel(): Promise<number> {
-    const { level } = await Machine.read("water");
+    const { level } = await this.machine.read("water");
     return level;
-  }
-
-  public on<E extends Event>(event: E, listener: Listener<E>): void {
-    this.events.on(event, listener);
-  }
-
-  public once<E extends Event>(event: E, listener: Listener<E>): void {
-    this.events.once(event, listener);
-  }
-
-  public off<E extends Event>(event: E, listener: Listener<E>): void {
-    this.events.off(event, listener);
   }
 }
