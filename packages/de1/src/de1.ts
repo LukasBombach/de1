@@ -8,22 +8,18 @@ export default class DE1 {
 
   async connect(): Promise<void> {
     await Machine.connect();
-    this.events.emit("connected");
   }
 
   async disconnect(): Promise<void> {
     await Machine.disconnect();
-    this.events.emit("disconnected");
   }
 
   async turnOn(): Promise<void> {
     await Machine.turnOn();
-    this.events.emit("turnedOn");
   }
 
   async turnOff(): Promise<void> {
     await Machine.turnOff();
-    this.events.emit("turnedOff");
   }
 
   async startEspresso(): Promise<void> {
