@@ -69,7 +69,7 @@ export default class DE1 {
     return await this.state.getState();
   }
 
-  async getWaterlevel(): Promise<number> {
+  async getWaterLevel(): Promise<number> {
     const { level } = await this.machine.read("water");
     return level;
   }
