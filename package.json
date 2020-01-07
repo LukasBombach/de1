@@ -9,7 +9,7 @@
   "author": "Lukas Bombach <lukas.bombach@googlemail.com>",
   "license": "MIT",
   "scripts": {
-    "prettier": "prettier --check packages/**/*.{js,ts,tsx}"
+    "prettier": "prettier --check packages/*/src/**/*.{js,ts,tsx}"
   },
   "devDependencies": {
     "prettier": "1.19.1"
