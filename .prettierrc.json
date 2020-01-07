@@ -1,0 +1,20 @@
+{
+	"printWidth": 80,
+	"useTabs": true,
+	"tabWidth": 4,
+	"singleQuote": true,
+	"trailingComma": "all",
+	"jsxBracketSameLine": false,
+	"quoteProps": "consistent",
+	"proseWrap": "always",
+	"overrides": [
+		{
+			"files": ["package.json", "tsconfig.json"],
+			"options": {
+				"printWidth": 10,
+				"tabWidth": 2,
+				"useTabs": false
+			}
+		}
+	]
+}

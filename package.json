@@ -1,11 +1,17 @@
 {
-    "name": "de1-monorepo",
-    "version": "1.0.0",
-    "private": true,
-    "workspaces": [
-        "packages/*"
-    ],
-    "repository": "git@github.com:LukasBombach/sblendid.git",
-    "author": "Lukas Bombach <lukas.bombach@googlemail.com>",
-    "license": "MIT"
+  "name": "de1-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "repository": "git@github.com:LukasBombach/sblendid.git",
+  "author": "Lukas Bombach <lukas.bombach@googlemail.com>",
+  "license": "MIT",
+  "scripts": {
+    "prettier": "prettier --check packages/de1/src/**/*.{js,ts} packages/de1-debugger/src/**/*.{js,ts,tsx}"
+  },
+  "devDependencies": {
+    "prettier": "^1.19.1"
+  }
 }
