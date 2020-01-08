@@ -1,9 +1,11 @@
 import Machine from "./machine";
 import State, { ExtendedStates } from "./state";
+import Events from "./events";
 
 export default class DE1 {
   private machine = new Machine();
   private state = new State(this.machine);
+  private events = new Events(this.machine);
 
   async connect(): Promise<void> {
     await this.machine.connect();
