@@ -1,6 +1,7 @@
 import Machine from "./machine";
 import State, { ExtendedStates } from "./state";
 import Events from "./events";
+import { Name, Listener } from "./converters";
 
 export default class DE1 {
   private machine = new Machine();
@@ -74,5 +75,13 @@ export default class DE1 {
   async getWaterLevel(): Promise<number> {
     const { level } = await this.machine.read("water");
     return level;
+  }
+
+  public on<N extends Name>(name: N, listener: Listener<N>): void {
+    this.events.on(name, listener);
+  }
+
+  public off<N extends Name>(name: N, listener: Listener<N>): void {
+    this.events.on(name, listener);
   }
 }
