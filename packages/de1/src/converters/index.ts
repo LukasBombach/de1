@@ -13,6 +13,7 @@ import calibrate, { Calibrate } from "./calibrate";
 
 export type Name = Names<Converters>;
 export type Value<N extends Name> = PickValue<Converters, N>;
+export type Listener<N extends Name> = (value: Value<N>) => void;
 
 export type Converters = {
   state: Converter<State>;
