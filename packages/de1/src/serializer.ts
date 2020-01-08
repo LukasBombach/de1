@@ -19,7 +19,7 @@ export default class Serializer<T> {
   private static bufferLengths: BufferLengths = {
     Uint8: 1,
     Uint16: 2,
-    Uint32: 4
+    Uint32: 4,
   };
 
   private values: Value[] = [];
