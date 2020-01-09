@@ -77,11 +77,11 @@ export default class DE1 {
     return level;
   }
 
-  public on<N extends Name>(name: N, listener: Listener<N>): void {
+  on<N extends Name>(name: N, listener: Listener<N>): void {
     this.events.on(name, listener);
   }
 
-  public off<N extends Name>(name: N, listener: Listener<N>): void {
+  off<N extends Name>(name: N, listener: Listener<N>): void {
     this.events.on(name, listener);
   }
 }
