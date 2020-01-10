@@ -11,7 +11,7 @@ export default class Machine {
     if (this.isConnected()) return;
     this.peripheral = await Sblendid.connect("DE1");
     this.service = await this.peripheral.getService("a000", converters);
-    this.events.emit("connected");
+    // this.emit("connected");
   }
 
   async disconnect(): Promise<void> {
@@ -19,7 +19,7 @@ export default class Machine {
     await this.getPeripheral().disconnect();
     this.peripheral = undefined;
     this.service = undefined;
-    this.events.emit("disconnected");
+    // this.emit("disconnected");
   }
 
   async turnOn(): Promise<void> {
@@ -52,8 +52,8 @@ export default class Machine {
     return this.peripheral.isConnected();
   }
 
-  emit<N extends Name>(name: N, value?: Value<N>): void {
-    this.events.emit(name);
+  private emit<N extends Name>(name: N, value?: Value<N>): void {
+    // this.emit(name);
   }
 
   private getPeripheral(): Peripheral {
