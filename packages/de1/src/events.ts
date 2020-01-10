@@ -1,6 +1,6 @@
 import { EventEmitter } from "events";
 import Machine from "./machine";
-import { Name, Listener } from "./converters";
+import { Name, Value, Listener } from "./converters";
 
 export default class Events {
   private emitter = new EventEmitter();
@@ -8,6 +8,8 @@ export default class Events {
 
   constructor(machine: Machine) {
     this.machine = machine;
+    this.on("connected", this.handleConnect.bind(this));
+    this.on("disconnected", this.handleDisconnect.bind(this));
   }
 
   public on<N extends Name>(name: N, listener: Listener<N>): void {
@@ -17,4 +19,16 @@ export default class Events {
   public off<N extends Name>(name: N, listener: Listener<N>): void {
     this.emitter.off(name, listener);
   }
+
+  public emit<N extends Name>(name: N, value?: Value<N>): void {
+    this.emitter.emit(name);
+  }
+
+  private handleConnect(): void {
+    const service = await this.machine.
+  }
+
+  private handleDisconnect(): void {}
+
+  private handleServiceEvent<N extends Name>(name: N, value: Value<N>): void {}
 }

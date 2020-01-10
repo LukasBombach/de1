@@ -1,14 +1,17 @@
+import { EventEmitter } from "events";
 import Sblendid, { Peripheral, Service } from "@sblendid/sblendid";
-import converters, { Converters, Name, Value } from "./converters";
+import converters, { Converters, Name, Value, Listener } from "./converters";
 
 export default class Machine {
   private peripheral?: Peripheral;
   private service?: Service<Converters>;
+  private events = new EventEmitter();
 
   public async connect(): Promise<void> {
     if (this.isConnected()) return;
     this.peripheral = await Sblendid.connect("DE1");
     this.service = await this.peripheral.getService("a000", converters);
+    this.events.emit("connected");
   }
 
   public async disconnect(): Promise<void> {
@@ -16,6 +19,7 @@ export default class Machine {
     await this.getPeripheral().disconnect();
     this.peripheral = undefined;
     this.service = undefined;
+    this.events.emit("disconnected");
   }
 
   public async turnOn(): Promise<void> {
@@ -35,6 +39,18 @@ export default class Machine {
   public async write<N extends Name>(name: N, value: Value<N>): Promise<void> {
     const service = this.getService();
     await service.write(name, value);
+  }
+
+  public on<N extends Name>(name: N, listener: Listener<N>): void {
+    this.events.on(name, listener);
+  }
+
+  public off<N extends Name>(name: N, listener: Listener<N>): void {
+    this.events.off(name, listener);
+  }
+
+  public emit<N extends Name>(name: N, value?: Value<N>): void {
+    this.events.emit(name);
   }
 
   public isConnected(): boolean {
