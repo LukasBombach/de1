@@ -24,27 +24,27 @@ export default class Serializer<T> {
 
   private values: Value[] = [];
 
-  public char(value: number) {
+  char(value: number) {
     this.add("Uint8", value);
     return this;
   }
 
-  public short(value: number) {
+  short(value: number) {
     this.add("Uint16", value, false);
     return this;
   }
 
-  public int(value: number) {
+  int(value: number) {
     this.add("Uint16", value, true);
     return this;
   }
 
-  public sha(value: string) {
+  sha(value: string) {
     this.add("Uint16", parseInt(value, 16), true);
     return this;
   }
 
-  public dataView(): DataView {
+  dataView(): DataView {
     const length = this.getBufferLength();
     const buffer = new ArrayBuffer(length);
     const dataView = new DataView(buffer);
@@ -52,7 +52,7 @@ export default class Serializer<T> {
     return dataView;
   }
 
-  public buffer(): Buffer {
+  buffer(): Buffer {
     return Buffer.from(this.dataView().buffer);
   }
 

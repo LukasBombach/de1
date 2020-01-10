@@ -10,7 +10,7 @@ export default class Parser<T> {
   }
 
   // todo only allow function here
-  public char(name: string, divideBy: number | ((value: number) => any) = 1) {
+  char(name: string, divideBy: number | ((value: number) => any) = 1) {
     const process =
       typeof divideBy === "number" ? (v: number) => v / divideBy : divideBy;
     const value = process(this.dataView.getUint8(this.offset));
@@ -20,7 +20,7 @@ export default class Parser<T> {
   }
 
   // todo only allow function here
-  public short(name: string, divideBy: number | ((value: number) => any) = 1) {
+  short(name: string, divideBy: number | ((value: number) => any) = 1) {
     const process =
       typeof divideBy === "number" ? (v: number) => v / divideBy : divideBy;
     const value = process(this.dataView.getUint16(this.offset, false));
@@ -29,21 +29,21 @@ export default class Parser<T> {
     return this;
   }
 
-  public int(name: string, process: (value: number) => any = v => v) {
+  int(name: string, process: (value: number) => any = v => v) {
     const value = process(this.dataView.getUint32(this.offset, true));
     this.setVar(name, value);
     this.offset += 4;
     return this;
   }
 
-  public intSigned(name: string, process: (value: number) => any = v => v) {
+  intSigned(name: string, process: (value: number) => any = v => v) {
     const value = process(this.dataView.getInt32(this.offset, true));
     this.setVar(name, value);
     this.offset += 4;
     return this;
   }
 
-  public sha(name: string) {
+  sha(name: string) {
     const value = this.dataView.getUint32(this.offset, true).toString(16);
     const sanitizedValue = value === "0" ? "" : value;
     this.setVar(name, sanitizedValue);
@@ -51,7 +51,7 @@ export default class Parser<T> {
     return this;
   }
 
-  public vars(): T {
+  vars(): T {
     return this.varsInternal;
   }
 

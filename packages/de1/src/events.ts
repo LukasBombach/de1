@@ -12,21 +12,19 @@ export default class Events {
     this.on("disconnected", this.handleDisconnect.bind(this));
   }
 
-  public on<N extends Name>(name: N, listener: Listener<N>): void {
+  on<N extends Name>(name: N, listener: Listener<N>): void {
     this.emitter.on(name, listener);
   }
 
-  public off<N extends Name>(name: N, listener: Listener<N>): void {
+  off<N extends Name>(name: N, listener: Listener<N>): void {
     this.emitter.off(name, listener);
   }
 
-  public emit<N extends Name>(name: N, value?: Value<N>): void {
+  emit<N extends Name>(name: N, value?: Value<N>): void {
     this.emitter.emit(name);
   }
 
-  private handleConnect(): void {
-    const service = await this.machine.
-  }
+  private handleConnect(): void {}
 
   private handleDisconnect(): void {}
 
