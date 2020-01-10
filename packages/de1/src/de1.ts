@@ -82,6 +82,6 @@ export default class DE1 {
   }
 
   off<N extends Name>(name: N, listener: Listener<N>): void {
-    this.events.on(name, listener);
+    this.events.off(name, listener);
   }
 }
