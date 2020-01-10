@@ -12,32 +12,32 @@ export default class State {
     this.machine = machine;
   }
 
-  public async start(state: StateValue): Promise<void> {
+  async start(state: StateValue): Promise<void> {
     await this.write(state);
   }
 
-  public async stop(state: StateValue): Promise<void> {
+  async stop(state: StateValue): Promise<void> {
     const currentState = await this.read();
     if (currentState === state) await this.write("idle");
   }
 
-  public async stopEverything(): Promise<void> {
+  async stopEverything(): Promise<void> {
     const currentState = await this.read();
     if (currentState !== "sleep") await this.write("idle");
   }
 
-  public async getState(): Promise<ExtendedStates> {
+  async getState(): Promise<ExtendedStates> {
     if (!this.machine.isConnected()) return "disconnected";
     const { state, substate } = await this.machine.read("stateInfo");
     if (substate === "heating") return "heating";
     return state;
   }
 
-  public async read(): Promise<StateValue> {
+  async read(): Promise<StateValue> {
     return await this.machine.read("state");
   }
 
-  public async write(value: StateValue): Promise<void> {
+  async write(value: StateValue): Promise<void> {
     await this.machine.write("state", value);
   }
 }

@@ -7,14 +7,14 @@ export default class Machine {
   private service?: Service<Converters>;
   private events = new EventEmitter();
 
-  public async connect(): Promise<void> {
+  async connect(): Promise<void> {
     if (this.isConnected()) return;
     this.peripheral = await Sblendid.connect("DE1");
     this.service = await this.peripheral.getService("a000", converters);
     this.events.emit("connected");
   }
 
-  public async disconnect(): Promise<void> {
+  async disconnect(): Promise<void> {
     if (!this.isConnected()) return;
     await this.getPeripheral().disconnect();
     this.peripheral = undefined;
@@ -22,37 +22,37 @@ export default class Machine {
     this.events.emit("disconnected");
   }
 
-  public async turnOn(): Promise<void> {
+  async turnOn(): Promise<void> {
     const currentState = await this.read("state");
     if (currentState === "sleep") await this.write("state", "idle");
   }
 
-  public async turnOff(): Promise<void> {
+  async turnOff(): Promise<void> {
     await this.write("state", "sleep");
   }
 
-  public async read<N extends Name>(name: N): Promise<Value<N>> {
+  async read<N extends Name>(name: N): Promise<Value<N>> {
     return await this.getService().read(name);
   }
 
-  public async write<N extends Name>(name: N, value: Value<N>): Promise<void> {
+  async write<N extends Name>(name: N, value: Value<N>): Promise<void> {
     await this.getService().write(name, value);
   }
 
-  public isConnected(): boolean {
+  on<N extends Name>(name: N, listener: Listener<N>): void {
+    this.events.on(name, listener);
+  }
+
+  off<N extends Name>(name: N, listener: Listener<N>): void {
+    this.events.off(name, listener);
+  }
+
+  isConnected(): boolean {
     if (!this.peripheral) return false;
     return this.peripheral.isConnected();
   }
 
-  public on<N extends Name>(name: N, listener: Listener<N>): void {
-    this.events.on(name, listener);
-  }
-
-  public off<N extends Name>(name: N, listener: Listener<N>): void {
-    this.events.off(name, listener);
-  }
-
-  public emit<N extends Name>(name: N, value?: Value<N>): void {
+  emit<N extends Name>(name: N, value?: Value<N>): void {
     this.events.emit(name);
   }
 
