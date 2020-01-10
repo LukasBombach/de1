@@ -15,6 +15,6 @@ export default class Events {
   }
 
   public off<N extends Name>(name: N, listener: Listener<N>): void {
-    this.emitter.on(name, listener);
+    this.emitter.off(name, listener);
   }
 }
