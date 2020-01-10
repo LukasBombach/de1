@@ -32,13 +32,16 @@ export default class Machine {
   }
 
   public async read<N extends Name>(name: N): Promise<Value<N>> {
-    const service = this.getService();
-    return await service.read(name);
+    return await this.getService().read(name);
   }
 
   public async write<N extends Name>(name: N, value: Value<N>): Promise<void> {
-    const service = this.getService();
-    await service.write(name, value);
+    await this.getService().write(name, value);
+  }
+
+  public isConnected(): boolean {
+    if (!this.peripheral) return false;
+    return this.peripheral.isConnected();
   }
 
   public on<N extends Name>(name: N, listener: Listener<N>): void {
@@ -51,10 +54,6 @@ export default class Machine {
 
   public emit<N extends Name>(name: N, value?: Value<N>): void {
     this.events.emit(name);
-  }
-
-  public isConnected(): boolean {
-    return Boolean(this.peripheral?.isConnected());
   }
 
   private getPeripheral(): Peripheral {

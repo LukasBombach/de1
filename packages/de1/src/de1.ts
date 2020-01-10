@@ -1,12 +1,10 @@
 import Machine from "./machine";
 import State, { ExtendedStates } from "./state";
-import Events from "./events";
 import { Name, Listener } from "./converters";
 
 export default class DE1 {
   private machine = new Machine();
   private state = new State(this.machine);
-  private events = new Events(this.machine);
 
   async connect(): Promise<void> {
     await this.machine.connect();
@@ -78,10 +76,10 @@ export default class DE1 {
   }
 
   on<N extends Name>(name: N, listener: Listener<N>): void {
-    this.events.on(name, listener);
+    this.machine.on(name, listener);
   }
 
   off<N extends Name>(name: N, listener: Listener<N>): void {
-    this.events.off(name, listener);
+    this.machine.off(name, listener);
   }
 }
