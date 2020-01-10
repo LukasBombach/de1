@@ -8,8 +8,8 @@ export default class Events {
 
   constructor(machine: Machine) {
     this.machine = machine;
-    this.on("connected", this.handleConnect.bind(this));
-    this.on("disconnected", this.handleDisconnect.bind(this));
+    // this.on("connected", this.handleConnect.bind(this));
+    // this.on("disconnected", this.handleDisconnect.bind(this));
   }
 
   on<N extends Name>(name: N, listener: Listener<N>): void {
