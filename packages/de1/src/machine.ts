@@ -2,9 +2,11 @@ import { EventEmitter } from "events";
 import Sblendid, { Peripheral, Service } from "@sblendid/sblendid";
 import converters, { Converters, Name, Value, Listener } from "./converters";
 
-type EventName = Name | "connected" | "disconnected";
-type EventValue<N extends EventName> = N extends Name ? Value<N> : undefined;
-type EventListener<N extends EventName> = N extends Name
+export type EventName = Name | "connected" | "disconnected";
+export type EventValue<N extends EventName> = N extends Name
+  ? Value<N>
+  : undefined;
+export type EventListener<N extends EventName> = N extends Name
   ? Listener<N>
   : () => void;
 

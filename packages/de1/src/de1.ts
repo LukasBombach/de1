@@ -1,6 +1,5 @@
-import Machine from "./machine";
+import Machine, { EventName, EventListener } from "./machine";
 import State, { ExtendedStates } from "./state";
-import { Name, Listener } from "./converters";
 
 export default class DE1 {
   private machine = new Machine();
@@ -75,11 +74,11 @@ export default class DE1 {
     return level;
   }
 
-  on<N extends Name>(name: N, listener: Listener<N>): void {
+  on<N extends EventName>(name: N, listener: EventListener<N>): void {
     this.machine.on(name, listener);
   }
 
-  off<N extends Name>(name: N, listener: Listener<N>): void {
+  off<N extends EventName>(name: N, listener: EventListener<N>): void {
     this.machine.off(name, listener);
   }
 }
