@@ -1,17 +1,24 @@
-import { EventEmitter } from "events";
+import mitt from "mitt";
 import Sblendid, { Peripheral, Service } from "@sblendid/sblendid";
 import converters, { Converters, Name, Value, Listener } from "./converters";
+
+type EventName = Name | "connected" | "disconnected";
+type EventValue<N extends EventName> = N extends Name ? Value<N> : undefined;
+type EventListener<N extends EventName> = N extends Name
+  ? Listener<N>
+  : () => void;
 
 export default class Machine {
   private peripheral?: Peripheral;
   private service?: Service<Converters>;
-  private events = new EventEmitter();
+  private events = mitt();
 
   async connect(): Promise<void> {
     if (this.isConnected()) return;
     this.peripheral = await Sblendid.connect("DE1");
     this.service = await this.peripheral.getService("a000", converters);
-    // this.emit("connected");
+    this.service!.on();
+    this.emit("connected");
   }
 
   async disconnect(): Promise<void> {
@@ -19,7 +26,7 @@ export default class Machine {
     await this.getPeripheral().disconnect();
     this.peripheral = undefined;
     this.service = undefined;
-    // this.emit("disconnected");
+    this.emit("disconnected");
   }
 
   async turnOn(): Promise<void> {
@@ -39,11 +46,11 @@ export default class Machine {
     await this.getService().write(name, value);
   }
 
-  on<N extends Name>(name: N, listener: Listener<N>): void {
+  on<N extends EventName>(name: N, listener: EventListener<N>): void {
     this.events.on(name, listener);
   }
 
-  off<N extends Name>(name: N, listener: Listener<N>): void {
+  off<N extends EventName>(name: N, listener: EventListener<N>): void {
     this.events.off(name, listener);
   }
 
@@ -52,8 +59,8 @@ export default class Machine {
     return this.peripheral.isConnected();
   }
 
-  private emit<N extends Name>(name: N, value?: Value<N>): void {
-    // this.emit(name);
+  private emit<N extends EventName>(name: N, value?: EventValue<N>): void {
+    this.events.emit(name, value);
   }
 
   private getPeripheral(): Peripheral {
