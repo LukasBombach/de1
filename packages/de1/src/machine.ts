@@ -1,4 +1,4 @@
-import mitt from "mitt";
+import { EventEmitter } from "events";
 import Sblendid, { Peripheral, Service } from "@sblendid/sblendid";
 import converters, { Converters, Name, Value, Listener } from "./converters";
 
@@ -11,13 +11,12 @@ type EventListener<N extends EventName> = N extends Name
 export default class Machine {
   private peripheral?: Peripheral;
   private service?: Service<Converters>;
-  private events = mitt();
+  private events = new EventEmitter();
 
   async connect(): Promise<void> {
     if (this.isConnected()) return;
     this.peripheral = await Sblendid.connect("DE1");
     this.service = await this.peripheral.getService("a000", converters);
-    this.service!.on();
     this.emit("connected");
   }
 
