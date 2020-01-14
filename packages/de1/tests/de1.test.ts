@@ -6,7 +6,10 @@ describe("de1", () => {
   let readSpy: jest.SpyInstance;
   let writeSpy: jest.SpyInstance;
 
-  const stateFunctions = [["turnOn", "sleep", "idle", "not sleep"]];
+  const stateFunctions = [
+    ["turnOn", "idle", "sleep"],
+    ["turnOff", "sleep"],
+  ];
 
   beforeAll(() => {
     readSpy = jest.spyOn(Service.prototype, "read");
@@ -47,19 +50,19 @@ describe("de1", () => {
     spy.mockRestore();
   });
 
-  test.each(stateFunctions.map(([f, s, e]) => [f, s, e]))(
+  test.each(stateFunctions.map(([f, e, i]) => [f, e, i]))(
     `%s sets the machine to "%s" if the state is "%s"`,
-    async (fn, state, expected) => {
-      readSpy.mockResolvedValueOnce(state);
+    async (fn, expected, ifstate) => {
+      readSpy.mockResolvedValueOnce(ifstate);
       await expect((de1 as any)[fn]()).resolves.toBe(undefined);
       expect(writeSpy).toHaveBeenCalledWith("state", expected);
     },
   );
 
-  test.each(stateFunctions.map(([f, , , u]) => [f, u]))(
-    `%s doesn't change the machine's state if the state is "%s"`,
-    async (fn, unless) => {
-      readSpy.mockResolvedValueOnce(unless);
+  test.each(stateFunctions.map(([f, , i]) => [f, i]))(
+    `%s doesn't change the machine's state if the state is not "%s"`,
+    async (fn, ifstate) => {
+      readSpy.mockResolvedValueOnce(`not ${ifstate}`);
       await expect((de1 as any)[fn]()).resolves.toBe(undefined);
       expect(writeSpy).not.toHaveBeenCalled();
     },
