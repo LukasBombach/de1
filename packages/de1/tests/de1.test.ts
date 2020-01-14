@@ -5,8 +5,25 @@ describe("de1", () => {
     expect(() => new DE1()).not.toThrow();
   });
 
-  // async connect(): Promise<void>
-  // async disconnect(): Promise<void>
+  it("connects to the DE1 machine", async () => {
+    const de1 = new DE1();
+    await expect(de1.connect()).resolves.toBe(undefined);
+    await de1.disconnect();
+  });
+
+  it("disconnect to the DE1 machine", async () => {
+    const de1 = new DE1();
+    await de1.connect();
+    await expect(de1.disconnect()).resolves.toBe(undefined);
+  });
+
+  it("turns machine on", async () => {
+    const de1 = new DE1();
+    await de1.connect();
+    await expect(de1.turnOn()).resolves.toBe(undefined);
+    await de1.disconnect();
+  });
+
   // async turnOn(): Promise<void>
   // async turnOff(): Promise<void>
   // async startEspresso(): Promise<void>
