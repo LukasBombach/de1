@@ -57,7 +57,11 @@ describe("de1", () => {
     expect(writeSpy).not.toHaveBeenCalled();
   });
 
-  // async turnOff(): Promise<void>
+  it("turns machine off", async () => {
+    await expect(de1.turnOff()).resolves.toBe(undefined);
+    expect(writeSpy).toHaveBeenCalledWith("state", "sleep");
+  });
+
   // async startEspresso(): Promise<void>
   // async stopEspresso(): Promise<void>
   // async startSteam(): Promise<void>
