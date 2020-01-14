@@ -1,4 +1,3 @@
-import { EventEmitter } from "events";
 import Sblendid, { Peripheral, Service } from "@sblendid/sblendid";
 import converters, { Converters, Name, Value, Listener } from "./converters";
 
