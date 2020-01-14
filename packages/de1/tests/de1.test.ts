@@ -2,6 +2,27 @@ import Sblendid, { Peripheral, Service } from "@sblendid/sblendid";
 import DE1 from "../src/de1";
 
 describe("de1", () => {
+  let de1 = new DE1();
+  let readSpy: jest.SpyInstance;
+  let writeSpy: jest.SpyInstance;
+
+  beforeAll(() => {
+    readSpy = jest.spyOn(Service.prototype, "read");
+    writeSpy = jest.spyOn(Service.prototype, "write");
+  });
+
+  beforeEach(async () => {
+    readSpy.mockReset();
+    writeSpy.mockReset();
+    await de1.connect();
+  });
+
+  afterAll(async () => {
+    await de1.disconnect();
+    readSpy.mockRestore();
+    writeSpy.mockRestore();
+  });
+
   it("can be instantiated", () => {
     expect(() => new DE1()).not.toThrow();
   });
@@ -25,13 +46,17 @@ describe("de1", () => {
   });
 
   it("turns machine on", async () => {
-    const de1 = new DE1();
-    await de1.connect();
+    readSpy.mockResolvedValue("sleep");
     await expect(de1.turnOn()).resolves.toBe(undefined);
-    await de1.disconnect();
+    expect(writeSpy).toHaveBeenCalledWith("state", "idle");
   });
 
-  // async turnOn(): Promise<void>
+  it("doesn't turn machine on if it's not sleeping", async () => {
+    readSpy.mockResolvedValue("espresso");
+    await expect(de1.turnOn()).resolves.toBe(undefined);
+    expect(writeSpy).not.toHaveBeenCalled();
+  });
+
   // async turnOff(): Promise<void>
   // async startEspresso(): Promise<void>
   // async stopEspresso(): Promise<void>
