@@ -6,6 +6,8 @@ describe("de1", () => {
   let readSpy: jest.SpyInstance;
   let writeSpy: jest.SpyInstance;
 
+  const stateFunctions = [["turnOn", "sleep", "idle", "not sleep"]];
+
   beforeAll(() => {
     readSpy = jest.spyOn(Service.prototype, "read");
     writeSpy = jest.spyOn(Service.prototype, "write");
@@ -45,22 +47,23 @@ describe("de1", () => {
     spy.mockRestore();
   });
 
-  it("turns machine on", async () => {
-    readSpy.mockResolvedValue("sleep");
-    await expect(de1.turnOn()).resolves.toBe(undefined);
-    expect(writeSpy).toHaveBeenCalledWith("state", "idle");
-  });
+  test.each(stateFunctions.map(([f, s, e]) => [f, s, e]))(
+    `%s sets the machine to "%s" if the state is "%s"`,
+    async (fn, state, expected) => {
+      readSpy.mockResolvedValueOnce(state);
+      await expect((de1 as any)[fn]()).resolves.toBe(undefined);
+      expect(writeSpy).toHaveBeenCalledWith("state", expected);
+    },
+  );
 
-  it("doesn't turn machine on if it's not sleeping", async () => {
-    readSpy.mockResolvedValue("espresso");
-    await expect(de1.turnOn()).resolves.toBe(undefined);
-    expect(writeSpy).not.toHaveBeenCalled();
-  });
-
-  it("turns machine off", async () => {
-    await expect(de1.turnOff()).resolves.toBe(undefined);
-    expect(writeSpy).toHaveBeenCalledWith("state", "sleep");
-  });
+  test.each(stateFunctions.map(([f, , , u]) => [f, u]))(
+    `%s doesn't change the machine's state if the state is "%s"`,
+    async (fn, unless) => {
+      readSpy.mockResolvedValueOnce(unless);
+      await expect((de1 as any)[fn]()).resolves.toBe(undefined);
+      expect(writeSpy).not.toHaveBeenCalled();
+    },
+  );
 
   // async startEspresso(): Promise<void>
   // async stopEspresso(): Promise<void>
