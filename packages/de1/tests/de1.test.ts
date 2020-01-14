@@ -1,3 +1,4 @@
+import Sblendid, { Peripheral, Service } from "@sblendid/sblendid";
 import DE1 from "../src/de1";
 
 describe("de1", () => {
@@ -6,15 +7,21 @@ describe("de1", () => {
   });
 
   it("connects to the DE1 machine", async () => {
+    const spy = jest.spyOn(Sblendid, "connect");
     const de1 = new DE1();
     await expect(de1.connect()).resolves.toBe(undefined);
+    expect(spy).toHaveBeenCalledWith("DE1");
     await de1.disconnect();
+    spy.mockRestore();
   });
 
-  it("disconnect to the DE1 machine", async () => {
+  it("disconnects from the DE1 machine", async () => {
+    const spy = jest.spyOn(Peripheral.prototype, "disconnect");
     const de1 = new DE1();
     await de1.connect();
     await expect(de1.disconnect()).resolves.toBe(undefined);
+    expect(spy).toHaveBeenCalledWith();
+    spy.mockRestore();
   });
 
   it("turns machine on", async () => {

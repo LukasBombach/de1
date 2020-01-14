@@ -1,4 +1,6 @@
 import Peripheral from "./peripheral";
+export { default as Peripheral } from "./peripheral";
+export { default as Service } from "./service";
 
 export default class Sblendid {
   static async connect(name: string): Promise<Peripheral> {
