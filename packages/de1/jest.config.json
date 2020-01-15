@@ -1,6 +1,6 @@
 {
   "preset": "ts-jest",
   "testEnvironment": "node",
-  "testMatch": ["<rootDir>/tests/*.test.[jt]s?(x)"],
+  "testMatch": ["<rootDir>/tests/**/*.test.[jt]s?(x)"],
   "verbose": true
 }
