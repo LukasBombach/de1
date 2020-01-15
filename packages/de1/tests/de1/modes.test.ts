@@ -31,27 +31,27 @@ describe("de1 mode functions", () => {
     ${"startFlushing"}  | ${"hotWaterRinse"}
     ${"startDescaling"} | ${"descale"}
     ${"turnOff"}        | ${"sleep"}
+    ${"stopEverything"} | ${"idle"}
   `("$fn sets the machine's state to $state", async ({ fn, state }) => {
     await expect((de1 as any)[fn]()).resolves.toBeUndefined();
     expect(writeSpy).toHaveBeenCalledWith("state", state);
   });
 
   test.each`
-    fn                 | state
-    ${"stopEspresso"}  | ${"espresso"}
-    ${"stopSteam"}     | ${"steam"}
-    ${"stopHotWater"}  | ${"hotWater"}
-    ${"stopFlushing"}  | ${"hotWaterRinse"}
-    ${"stopDescaling"} | ${"descale"}
-    ${"turnOn"}        | ${"sleep"}
+    fn                  | state
+    ${"stopEspresso"}   | ${"not espresso"}
+    ${"stopSteam"}      | ${"not steam"}
+    ${"stopHotWater"}   | ${"not hotWater"}
+    ${"stopFlushing"}   | ${"not hotWaterRinse"}
+    ${"stopDescaling"}  | ${"not descale"}
+    ${"turnOn"}         | ${"not sleep"}
+    ${"stopEverything"} | ${"sleep"}
   `(
     "$fn doesn't change the machine's state if the state is not $state",
     async ({ fn, state }) => {
-      readSpy.mockResolvedValueOnce(`not ${state}`);
+      readSpy.mockResolvedValueOnce(state);
       await expect((de1 as any)[fn]()).resolves.toBeUndefined();
       expect(writeSpy).not.toHaveBeenCalled();
     },
   );
-
-  // async stopEverything(): Promise<void>
 });
