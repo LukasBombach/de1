@@ -24,38 +24,34 @@ describe("de1 mode functions", () => {
   });
 
   test.each`
-    initial    | fn          | expected
-    ${"sleep"} | ${"turnOn"} | ${"idle"}
-  `(
-    `$fn sets the machine to $expected if the state is $initial`,
-    async ({ initial, fn, expected }) => {
-      readSpy.mockResolvedValueOnce(initial);
-      await expect((de1 as any)[fn]()).resolves.toBeUndefined();
-      expect(writeSpy).toHaveBeenCalledWith("state", expected);
-    },
-  );
+    fn                  | state
+    ${"startEspresso"}  | ${"espresso"}
+    ${"startSteam"}     | ${"steam"}
+    ${"startHotWater"}  | ${"hotWater"}
+    ${"startFlushing"}  | ${"hotWaterRinse"}
+    ${"startDescaling"} | ${"descale"}
+    ${"turnOff"}        | ${"sleep"}
+  `("$fn sets the machine's state to $state", async ({ fn, state }) => {
+    await expect((de1 as any)[fn]()).resolves.toBeUndefined();
+    expect(writeSpy).toHaveBeenCalledWith("state", state);
+  });
 
   test.each`
-    fn          | ifNot
-    ${"turnOn"} | ${"sleep"}
+    fn                 | state
+    ${"stopEspresso"}  | ${"espresso"}
+    ${"stopSteam"}     | ${"steam"}
+    ${"stopHotWater"}  | ${"hotWater"}
+    ${"stopFlushing"}  | ${"hotWaterRinse"}
+    ${"stopDescaling"} | ${"descale"}
+    ${"turnOn"}        | ${"sleep"}
   `(
-    `$fn doesn't change the machine's state if the state is not $ifNot`,
-    async ({ fn, ifNot }) => {
-      readSpy.mockResolvedValueOnce(`not ${ifNot}`);
+    "$fn doesn't change the machine's state if the state is not $state",
+    async ({ fn, state }) => {
+      readSpy.mockResolvedValueOnce(`not ${state}`);
       await expect((de1 as any)[fn]()).resolves.toBeUndefined();
       expect(writeSpy).not.toHaveBeenCalled();
     },
   );
 
-  // async startEspresso(): Promise<void>
-  // async stopEspresso(): Promise<void>
-  // async startSteam(): Promise<void>
-  // async stopSteam(): Promise<void>
-  // async startHotWater(): Promise<void>
-  // async stopHotWater(): Promise<void>
-  // async startFlushing(): Promise<void>
-  // async stopFlushing(): Promise<void>
-  // async startDescaling(): Promise<void>
-  // async stopDescaling(): Promise<void>
   // async stopEverything(): Promise<void>
 });
