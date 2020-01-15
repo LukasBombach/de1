@@ -49,7 +49,7 @@ describe("de1 mode functions", () => {
   `(
     "$fn doesn't change the machine's state if the state is not $state",
     async ({ fn, state }) => {
-      readSpy.mockResolvedValueOnce(state);
+      readSpy.mockImplementationOnce(chcr => (chcr === "state" ? state : null));
       await expect((de1 as any)[fn]()).resolves.toBeUndefined();
       expect(writeSpy).not.toHaveBeenCalled();
     },
