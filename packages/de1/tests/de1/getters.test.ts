@@ -1,6 +1,7 @@
 import { Service } from "@sblendid/sblendid";
 import DE1 from "../../src/de1";
 
+// TODO gotta mock binary values instead of parsed values
 describe("de1 getters", () => {
   const de1 = new DE1();
   let readSpy: jest.SpyInstance;
