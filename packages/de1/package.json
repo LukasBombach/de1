@@ -13,7 +13,8 @@
   },
   "dependencies": {
     "@sblendid/adapter-node": "0.3.0",
-    "@sblendid/sblendid": "0.3.0"
+    "@sblendid/sblendid": "0.3.0",
+    "buffer-dataview": "0.0.2"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "11.0.1",
