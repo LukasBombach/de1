@@ -11,35 +11,35 @@ export default class Parser<T> {
     this.varsInternal = {};
   }
 
-  char(name: string, process?: Processor) {
+  char(name: string, process?: Processor): this {
     const val = this.buffer.readUInt8(this.offset);
     this.setVar(name, val, process);
     this.offset += 1;
     return this;
   }
 
-  short(name: string, process?: Processor) {
+  short(name: string, process?: Processor): this {
     const val = this.buffer.readUInt16BE(this.offset);
     this.setVar(name, val, process);
     this.offset += 2;
     return this;
   }
 
-  int(name: string, process?: Processor) {
+  int(name: string, process?: Processor): this {
     const val = this.buffer.readUInt32LE(this.offset);
     this.setVar(name, val, process);
     this.offset += 4;
     return this;
   }
 
-  intSigned(name: string, process?: Processor) {
+  intSigned(name: string, process?: Processor): this {
     const val = this.buffer.readInt32LE(this.offset);
     this.setVar(name, val, process);
     this.offset += 4;
     return this;
   }
 
-  sha(name: string) {
+  sha(name: string): this {
     const val = this.buffer.readUInt32LE(this.offset);
     this.setVar(name, val, val => (val === 0 ? "" : val.toString(16)));
     this.offset += 4;
