@@ -6,12 +6,12 @@ type State = "connecting" | "connected" | "disconnecting" | "disconnected";
 export default class Peripheral {
   private state: State = "disconnected";
 
-  async getService<C extends Converters>(
+  async getService(
     id: string,
-    converters: C,
-  ): Promise<Service<C> | undefined> {
+    converters: Converters,
+  ): Promise<Service | undefined> {
     if (id !== "a000") return undefined;
-    return new Service(converters);
+    return new Service();
   }
 
   async connect(): Promise<void> {
