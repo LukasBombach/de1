@@ -8,8 +8,8 @@ export interface Water {
 
 function decode(data: Buffer): Water {
   return new Parser<Water>(data)
-    .short("level", 256)
-    .short("startFillLevel", 256)
+    .short("level", v => v / 256)
+    .short("startFillLevel", v => v / 256)
     .vars();
 }
 

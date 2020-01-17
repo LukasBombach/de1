@@ -7,7 +7,7 @@ describe.skip("converters", () => {
     shot: {
       uuid: "a00d",
       //buffer: new Buffer("1b69004a00004b0e4b93dd5000590000300396", "hex"),
-      buffer: new Buffer("64", "hex"),
+      buffer: Buffer.from("64", "hex"),
       parsed: {
         timer: 100,
         frameNumber: 105,

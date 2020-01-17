@@ -44,21 +44,17 @@ describe("parser", () => {
     ${"intSigned"} | ${"Int32LE"}  | ${0x12345678}
   `("$fn processes a $type", ({ fn, type, value }: EachRecord) => {
     const buffer = getBuffer(type, value);
-    const process = jest.fn(v => v.toString());
-    const parser = new Parser(buffer)[fn]("val") as Parser<{ val: number }>;
-    const processor = new Parser(buffer)[fn]("val", process) as Parser<{
-      val: string;
-    }>;
+    const processor = jest.fn(v => v.toString());
+    const parser = new Parser<{ val: number }>(buffer)[fn]("val");
+    const processed = new Parser<{ val: number }>(buffer)[fn]("val", processor);
     expect(parser.vars().val).toBe(value);
-    expect(processor.vars().val).toBe(value.toString());
-    expect(process).toHaveBeenCalledWith(value);
+    expect(processed.vars().val).toBe(value.toString());
+    expect(processor).toHaveBeenCalledWith(value);
   });
 
   test("sha processes a UInt32LE", () => {
     const buffer = getBuffer("UInt32LE", 12345678);
-    const parser = new Parser(buffer).sha("val") as Parser<{
-      val: string;
-    }>;
+    const parser = new Parser<{ val: number }>(buffer).sha("val");
     expect(parser.vars().val).toBe("bc614e");
   });
 });
