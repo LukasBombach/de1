@@ -23,6 +23,13 @@ describe("parser", () => {
     Int32LE: ["writeInt32LE", 4],
   };
 
+  const values = {
+    char: 0x12,
+    short: 0x1234,
+    int: 0x12345678,
+    intSigned: 0x12345678,
+  };
+
   function getBuffer(type: keyof BufferMethods, value: number): Buffer {
     const [method, alloc] = bufferMethods[type];
     const buffer = Buffer.alloc(alloc);
@@ -38,10 +45,10 @@ describe("parser", () => {
 
   test.each`
     fn             | type          | value
-    ${"char"}      | ${"UInt8"}    | ${0x12}
-    ${"short"}     | ${"UInt16BE"} | ${0x1234}
-    ${"int"}       | ${"UInt32LE"} | ${0x12345678}
-    ${"intSigned"} | ${"Int32LE"}  | ${0x12345678}
+    ${"char"}      | ${"UInt8"}    | ${values.char}
+    ${"short"}     | ${"UInt16BE"} | ${values.short}
+    ${"int"}       | ${"UInt32LE"} | ${values.int}
+    ${"intSigned"} | ${"Int32LE"}  | ${values.intSigned}
   `("$fn processes a $type", ({ fn, type, value }: EachRecord) => {
     const buffer = getBuffer(type, value);
     const processor = jest.fn(v => v.toString());
@@ -54,7 +61,43 @@ describe("parser", () => {
 
   test("sha processes a UInt32LE", () => {
     const buffer = getBuffer("UInt32LE", 12345678);
-    const parser = new Parser<{ val: number }>(buffer).sha("val");
+    const parser = new Parser<{ val: string }>(buffer).sha("val");
+    const parser2 = new Parser<{ val: string }>(
+      Buffer.from("00000000", "hex"),
+    ).sha("val");
     expect(parser.vars().val).toBe("bc614e");
+    expect(parser2.vars().val).toBe("");
+  });
+
+  test("methods can be chained to create an object", () => {
+    const buffer = Buffer.alloc(11);
+    buffer.writeUInt8(values.char, 0);
+    buffer.writeUInt16BE(values.short, 1);
+    buffer.writeUInt32LE(values.int, 3);
+    buffer.writeInt32LE(values.intSigned, 7);
+    const parser = new Parser(buffer)
+      .char("char")
+      .short("short")
+      .int("int")
+      .intSigned("intSigned");
+    expect(parser.vars()).toStrictEqual(values);
+  });
+
+  test("variables can be nested", () => {
+    const { char } = values;
+    const buffer = Buffer.alloc(7);
+    buffer.writeUInt8(char, 0);
+    buffer.writeUInt8(char, 1);
+    buffer.writeUInt8(char, 2);
+    buffer.writeUInt8(char, 3);
+    const parser = new Parser(buffer)
+      .char("one.a")
+      .char("one.b")
+      .char("two.a")
+      .char("two.b");
+    expect(parser.vars()).toStrictEqual({
+      one: { a: char, b: char },
+      two: { a: char, b: char },
+    });
   });
 });
