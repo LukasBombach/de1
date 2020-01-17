@@ -708,11 +708,6 @@ bser@2.1.1:
   dependencies:
     node-int64 "^0.4.0"
 
-buffer-dataview@0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/buffer-dataview/-/buffer-dataview-0.0.2.tgz#f2be7ee29ac2443ff3706ddef746c75cfe6507e1"
-  integrity sha1-8r5+4prCRD/zcG3e90bHXP5lB+E=
-
 buffer-from@1.x, buffer-from@^1.0.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/buffer-from/-/buffer-from-1.1.1.tgz#32713bc028f75c02fdb710d7c7bcec1f2c6070ef"
