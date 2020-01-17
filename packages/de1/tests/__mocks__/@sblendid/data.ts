@@ -1,4 +1,4 @@
-const binary = {
+export const binary = {
   a001: Buffer.from("040901c151092c5ee0000000000000000000", "hex"),
   a002: Buffer.from("00", "hex"),
   a003: Buffer.from("0000000000000000", "hex"),
@@ -18,7 +18,7 @@ const binary = {
   a011: Buffer.from("198b0500", "hex"),
 };
 
-const events = [
+export const events = [
   ["a00d", Buffer.from("2d4300440000209e210d5e5a005e0000000249", "hex")],
   ["a00e", Buffer.from("0000", "hex")],
   ["a00d", Buffer.from("2d470044000020ba210dd95a005e0000000249", "hex")],
