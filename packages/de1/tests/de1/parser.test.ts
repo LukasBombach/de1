@@ -5,8 +5,8 @@ type ParserMethod = "char" | "short" | "int" | "intSigned" | "sha";
 type BufferMethods = {
   UInt8: ["writeUInt8", number];
   UInt16BE: ["writeUInt16BE", number];
-  UInt32LE: ["writeUInt32LE", number];
-  Int32LE: ["writeInt32LE", number];
+  UInt32BE: ["writeUInt32BE", number];
+  Int32BE: ["writeInt32BE", number];
 };
 
 type EachRecord = {
@@ -19,8 +19,8 @@ describe("parser", () => {
   const bufferMethods: BufferMethods = {
     UInt8: ["writeUInt8", 2],
     UInt16BE: ["writeUInt16BE", 4],
-    UInt32LE: ["writeUInt32LE", 4],
-    Int32LE: ["writeInt32LE", 4],
+    UInt32BE: ["writeUInt32BE", 4],
+    Int32BE: ["writeInt32BE", 4],
   };
 
   const values = {
@@ -47,8 +47,8 @@ describe("parser", () => {
     fn             | type          | value
     ${"char"}      | ${"UInt8"}    | ${values.char}
     ${"short"}     | ${"UInt16BE"} | ${values.short}
-    ${"int"}       | ${"UInt32LE"} | ${values.int}
-    ${"intSigned"} | ${"Int32LE"}  | ${values.intSigned}
+    ${"int"}       | ${"UInt32BE"} | ${values.int}
+    ${"intSigned"} | ${"Int32BE"}  | ${values.intSigned}
   `("$fn processes a $type", ({ fn, type, value }: EachRecord) => {
     const buffer = getBuffer(type, value);
     const processor = jest.fn(v => v.toString());
@@ -59,8 +59,8 @@ describe("parser", () => {
     expect(processor).toHaveBeenCalledWith(value);
   });
 
-  test("sha processes a UInt32LE", () => {
-    const buffer = getBuffer("UInt32LE", 12345678);
+  test("sha processes a UInt32BE", () => {
+    const buffer = getBuffer("UInt32BE", 12345678);
     const parser = new Parser<{ val: string }>(buffer).sha("val");
     const parser2 = new Parser<{ val: string }>(
       Buffer.from("00000000", "hex"),
@@ -73,8 +73,8 @@ describe("parser", () => {
     const buffer = Buffer.alloc(11);
     buffer.writeUInt8(values.char, 0);
     buffer.writeUInt16BE(values.short, 1);
-    buffer.writeUInt32LE(values.int, 3);
-    buffer.writeInt32LE(values.intSigned, 7);
+    buffer.writeUInt32BE(values.int, 3);
+    buffer.writeInt32BE(values.intSigned, 7);
     const parser = new Parser(buffer)
       .char("char")
       .short("short")
