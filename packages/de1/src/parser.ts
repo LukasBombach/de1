@@ -1,60 +1,56 @@
-import BufferDataView from "buffer-dataview";
+type Processor = (val: number) => any;
 
 export default class Parser<T> {
-  private dataView: DataView;
+  private buffer: Buffer;
   private offset: number;
   private varsInternal: any;
 
-  constructor(data: Buffer) {
-    this.dataView = new BufferDataView(data);
+  constructor(buffer: Buffer) {
     this.offset = 0;
+    this.buffer = buffer;
     this.varsInternal = {};
   }
 
-  char(name: string, process?: (value: number) => any) {
-    const buffer = this.dataView.getUint8(this.offset);
-    const value = process ? process(buffer) : buffer;
-    this.setVar(name, value);
+  char(name: string, process?: Processor) {
+    const val = this.buffer.readUInt8(this.offset);
+    this.setVar(name, val, process);
     this.offset += 1;
     return this;
   }
 
-  /* // todo only allow function here
-  short(name: string, process: (value: number) => any) {
-    const uint16 = this.dataView.getUint16(this.offset, false);
-    const value = process(uint16);
-    this.setVar(name, value);
+  short(name: string, process?: Processor) {
+    const val = this.buffer.readUInt16BE(this.offset);
+    this.setVar(name, val, process);
     this.offset += 2;
     return this;
   }
 
-  int(name: string, process: (value: number) => any = v => v) {
-    const value = process(this.dataView.getUint32(this.offset, true));
-    this.setVar(name, value);
+  int(name: string, process?: Processor) {
+    const val = this.buffer.readUInt32LE(this.offset);
+    this.setVar(name, val, process);
     this.offset += 4;
     return this;
   }
 
-  intSigned(name: string, process: (value: number) => any = v => v) {
-    const value = process(this.dataView.getInt32(this.offset, true));
-    this.setVar(name, value);
+  intSigned(name: string, process?: Processor) {
+    const val = this.buffer.readInt32LE(this.offset);
+    this.setVar(name, val, process);
     this.offset += 4;
     return this;
   }
 
   sha(name: string) {
-    const value = this.dataView.getUint32(this.offset, true).toString(16);
-    const sanitizedValue = value === "0" ? "" : value;
-    this.setVar(name, sanitizedValue);
+    const val = this.buffer.readUInt32LE(this.offset);
+    this.setVar(name, val, val => (val === 0 ? "" : val.toString(16)));
     this.offset += 4;
     return this;
-  } */
+  }
 
   vars(): T {
     return this.varsInternal;
   }
 
-  private setVar(path: string, value: number | string) {
+  private setVar(path: string, val: number, process?: Processor) {
     const keys = path.split(".");
     const key = keys[keys.length - 1];
     let node = this.varsInternal;
@@ -62,6 +58,6 @@ export default class Parser<T> {
       if (node[k] === undefined) node[k] = {};
       node = node[k];
     });
-    node[key] = value;
+    node[key] = process ? process(val) : val;
   }
 }
