@@ -69,7 +69,7 @@ function parse(data: Buffer): number {
 }
 
 function serialize(state: State): Buffer {
-  return new Serializer().char(states[state]).buffer();
+  return new Serializer().char(states[state]).buffer;
 }
 
 function getNameFromValue(state: number): State {
