@@ -9,15 +9,6 @@ Object {
 }
 `;
 
-exports[`serializer char adds a 1 int 1`] = `
-Object {
-  "data": Array [
-    18,
-  ],
-  "type": "Buffer",
-}
-`;
-
 exports[`serializer int adds a $length int 1`] = `
 Object {
   "data": Array [
@@ -30,31 +21,7 @@ Object {
 }
 `;
 
-exports[`serializer int adds a 4 int 1`] = `
-Object {
-  "data": Array [
-    18,
-    52,
-    86,
-    120,
-  ],
-  "type": "Buffer",
-}
-`;
-
 exports[`serializer intSigned adds a $length int 1`] = `
-Object {
-  "data": Array [
-    18,
-    52,
-    86,
-    120,
-  ],
-  "type": "Buffer",
-}
-`;
-
-exports[`serializer intSigned adds a 4 int 1`] = `
 Object {
   "data": Array [
     18,
@@ -101,29 +68,7 @@ Object {
 }
 `;
 
-exports[`serializer sha adds a 4 int 1`] = `
-Object {
-  "data": Array [
-    0,
-    188,
-    97,
-    78,
-  ],
-  "type": "Buffer",
-}
-`;
-
 exports[`serializer short adds a $length int 1`] = `
-Object {
-  "data": Array [
-    18,
-    52,
-  ],
-  "type": "Buffer",
-}
-`;
-
-exports[`serializer short adds a 2 int 1`] = `
 Object {
   "data": Array [
     18,
