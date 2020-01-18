@@ -12,37 +12,29 @@ export default class Parser<T> {
   }
 
   char(name: string, process?: Processor): this {
-    const val = this.buffer.readUInt8(this.offset);
-    this.setVar(name, val, process);
-    this.offset += 1;
+    this.setVar(name, this.readUint(1), process);
     return this;
   }
 
   short(name: string, process?: Processor): this {
-    const val = this.buffer.readUInt16LE(this.offset);
-    this.setVar(name, val, process);
-    this.offset += 2;
+    this.setVar(name, this.readUint(2), process);
     return this;
   }
 
   int(name: string, process?: Processor): this {
-    const val = this.buffer.readUInt32LE(this.offset);
-    this.setVar(name, val, process);
-    this.offset += 4;
+    this.setVar(name, this.readUint(4), process);
     return this;
   }
 
   intSigned(name: string, process?: Processor): this {
-    const val = this.buffer.readInt32LE(this.offset);
-    this.setVar(name, val, process);
-    this.offset += 4;
+    this.setVar(name, this.readInt(4), process);
     return this;
   }
 
   sha(name: string): this {
-    const val = this.buffer.readUInt32LE(this.offset);
-    this.setVar(name, val, val => (val === 0 ? "" : val.toString(16)));
-    this.offset += 4;
+    this.setVar(name, this.readInt(4), val =>
+      val === 0 ? "" : val.toString(16),
+    );
     return this;
   }
 
@@ -59,5 +51,17 @@ export default class Parser<T> {
       node = node[k];
     });
     node[key] = process ? process(val) : val;
+  }
+
+  private readUint(byteLength: number): number {
+    const val = this.buffer.readUIntBE(this.offset, byteLength);
+    this.offset += byteLength;
+    return val;
+  }
+
+  private readInt(byteLength: number): number {
+    const val = this.buffer.readIntBE(this.offset, byteLength);
+    this.offset += byteLength;
+    return val;
   }
 }
