@@ -19,7 +19,7 @@ export default class Parser<T> {
   }
 
   short(name: string, process?: Processor): this {
-    const val = this.buffer.readUInt16BE(this.offset);
+    const val = this.buffer.readUInt16LE(this.offset);
     this.setVar(name, val, process);
     this.offset += 2;
     return this;
