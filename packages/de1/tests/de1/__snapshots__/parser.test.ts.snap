@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`parser char processes a $type 1`] = `
+Object {
+  "value": 18,
+}
+`;
+
+exports[`parser char processes a $type 2`] = `
+Object {
+  "val": "18",
+}
+`;
+
+exports[`parser int processes a $type 1`] = `
+Object {
+  "value": 305419896,
+}
+`;
+
+exports[`parser int processes a $type 2`] = `
+Object {
+  "val": "305419896",
+}
+`;
+
+exports[`parser intSigned processes a $type 1`] = `
+Object {
+  "value": 305419896,
+}
+`;
+
+exports[`parser intSigned processes a $type 2`] = `
+Object {
+  "val": "305419896",
+}
+`;
+
+exports[`parser sha processes a $type 1`] = `
+Object {
+  "value": "12345678",
+}
+`;
+
+exports[`parser sha processes a $type 2`] = `
+Object {
+  "val": "12345678",
+}
+`;
+
+exports[`parser short processes a $type 1`] = `
+Object {
+  "value": 4660,
+}
+`;
+
+exports[`parser short processes a $type 2`] = `
+Object {
+  "val": "4660",
+}
+`;
