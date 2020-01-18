@@ -6,53 +6,54 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v1
+      - name: Checkout
+        uses: actions/checkout@v1
 
-    - name: Node v10
-      uses: actions/setup-node@v1
-      with:
-        node-version: 10
+      - name: Node v10
+        uses: actions/setup-node@v1
+        with:
+          node-version: 10
 
-    - name: Get yarn cache
-      id: yarn-cache
-      run: echo "::set-output name=dir::$(yarn cache dir)"
+      - name: Get yarn cache
+        id: yarn-cache
+        run: echo "::set-output name=dir::$(yarn cache dir)"
 
-    - name: yarn install
-      run: yarn install --frozen-lockfile
+      - name: yarn install
+        run: yarn install --frozen-lockfile
 
-    - name: Build (de1)
-      working-directory: packages/de1
-      run: yarn build
+      - name: Build (de1)
+        working-directory: packages/de1
+        run: yarn build
 
   test:
     name: Test
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v1
+      - name: Checkout
+        uses: actions/checkout@v1
 
-    - name: Node v10
-      uses: actions/setup-node@v1
-      with:
-        node-version: 10
+      - name: Node v10
+        uses: actions/setup-node@v1
+        with:
+          node-version: 10
 
-    - name: Get yarn cache
-      id: yarn-cache
-      run: echo "::set-output name=dir::$(yarn cache dir)"
+      - name: Get yarn cache
+        id: yarn-cache
+        run: echo "::set-output name=dir::$(yarn cache dir)"
 
-    - name: yarn install
-      run: yarn install  --frozen-lockfile
+      - name: yarn install
+        run: yarn install  --frozen-lockfile
 
-    - name: Code formatting
-      run: yarn prettier
+      - name: Code formatting
+        run: yarn prettier
 
-    # - name: Code linting
-    #   run: yarn eslint
+      - name: Unit Tests
+        working-directory: packages/de1
+        run: yarn test
 
-    - uses: actions/cache@v1
-      with:
-        path: ${{ steps.yarn-cache.outputs.dir }}
-        key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-yarn-
+      - uses: actions/cache@v1
+        with:
+          path: ${{ steps.yarn-cache.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-

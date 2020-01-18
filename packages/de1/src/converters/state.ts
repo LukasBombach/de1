@@ -48,7 +48,7 @@ export const states: States = {
   refill: 0x11,
   clean: 0x12,
   inBootLoader: 0x13,
-  airPurge: 0x14
+  airPurge: 0x14,
 };
 
 function decode(data: Buffer): State {
@@ -69,7 +69,7 @@ function parse(data: Buffer): number {
 }
 
 function serialize(state: State): Buffer {
-  return new Serializer().char(states[state]).buffer();
+  return new Serializer().char(states[state]).buffer;
 }
 
 function getNameFromValue(state: number): State {

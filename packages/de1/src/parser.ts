@@ -1,66 +1,48 @@
+type Processor = (val: number) => any;
+
 export default class Parser<T> {
-  private dataView: DataView;
+  private buffer: Buffer;
   private offset: number;
   private varsInternal: any;
 
-  constructor(data: DataView | Buffer) {
-    this.dataView = this.getDataView(data);
+  constructor(buffer: Buffer) {
     this.offset = 0;
+    this.buffer = buffer;
     this.varsInternal = {};
   }
 
-  // todo only allow function here
-  public char(name: string, divideBy: number | ((value: number) => any) = 1) {
-    const process =
-      typeof divideBy === "number" ? (v: number) => v / divideBy : divideBy;
-    const value = process(this.dataView.getUint8(this.offset));
-    this.setVar(name, value);
-    this.offset += 1;
+  char(name: string, process?: Processor): this {
+    this.setVar(name, this.readUint(1), process);
     return this;
   }
 
-  // todo only allow function here
-  public short(name: string, divideBy: number | ((value: number) => any) = 1) {
-    const process =
-      typeof divideBy === "number" ? (v: number) => v / divideBy : divideBy;
-    const value = process(this.dataView.getUint16(this.offset, false));
-    this.setVar(name, value);
-    this.offset += 2;
+  short(name: string, process?: Processor): this {
+    this.setVar(name, this.readUint(2), process);
     return this;
   }
 
-  public int(name: string, process: (value: number) => any = v => v) {
-    const value = process(this.dataView.getUint32(this.offset, true));
-    this.setVar(name, value);
-    this.offset += 4;
+  int(name: string, process?: Processor): this {
+    this.setVar(name, this.readUint(4), process);
     return this;
   }
 
-  public intSigned(name: string, process: (value: number) => any = v => v) {
-    const value = process(this.dataView.getInt32(this.offset, true));
-    this.setVar(name, value);
-    this.offset += 4;
+  intSigned(name: string, process?: Processor): this {
+    this.setVar(name, this.readInt(4), process);
     return this;
   }
 
-  public sha(name: string) {
-    const value = this.dataView.getUint32(this.offset, true).toString(16);
-    const sanitizedValue = value === "0" ? "" : value;
-    this.setVar(name, sanitizedValue);
-    this.offset += 4;
+  sha(name: string): this {
+    this.setVar(name, this.readInt(4), val =>
+      val === 0 ? "" : val.toString(16),
+    );
     return this;
   }
 
-  public vars(): T {
+  vars(): T {
     return this.varsInternal;
   }
 
-  private getDataView(data: DataView | Buffer): DataView {
-    if (data instanceof DataView) return data;
-    return new DataView(data.buffer);
-  }
-
-  private setVar(path: string, value: number | string) {
+  private setVar(path: string, val: number, process?: Processor) {
     const keys = path.split(".");
     const key = keys[keys.length - 1];
     let node = this.varsInternal;
@@ -68,6 +50,18 @@ export default class Parser<T> {
       if (node[k] === undefined) node[k] = {};
       node = node[k];
     });
-    node[key] = value;
+    node[key] = process ? process(val) : val;
+  }
+
+  private readUint(byteLength: number): number {
+    const val = this.buffer.readUIntBE(this.offset, byteLength);
+    this.offset += byteLength;
+    return val;
+  }
+
+  private readInt(byteLength: number): number {
+    const val = this.buffer.readIntBE(this.offset, byteLength);
+    this.offset += byteLength;
+    return val;
   }
 }

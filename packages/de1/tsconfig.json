@@ -9,6 +9,6 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "moduleResolution": "node",
-    "module": "ESNext"
+    "module": "commonjs"
   }
 }

@@ -35,14 +35,13 @@ function encode(shotSettings: ShotSettings): Buffer {
     .char(shotSettings.targetHotWaterVol)
     .char(shotSettings.targetHotWaterLength)
     .char(shotSettings.targetEspressoVol)
-    .short(shotSettings.targetGroupTemp)
-    .buffer();
+    .short(shotSettings.targetGroupTemp).buffer;
 }
 
 const converter: Converter<ShotSettings> = {
   uuid: "a00b",
   encode,
-  decode
+  decode,
 };
 
 export default converter;

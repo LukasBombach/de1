@@ -1,28 +1,32 @@
 {
-    "name": "de1",
-    "version": "0.0.2",
-    "main": "lib/index.cjs.js",
-    "module": "lib/index.es.js",
-    "types": "lib/src",
-    "license": "MIT",
-    "scripts": {
-        "build": "rollup -c rollup.config.ts",
-        "dev": "rollup -w -c rollup.config.ts",
-        "ts": "ts-node --project tsconfig.json"
-    },
-    "dependencies": {
-        "@sblendid/adapter-node": "0.3.0",
-        "@sblendid/sblendid": "0.3.0"
-    },
-    "devDependencies": {
-        "@rollup/plugin-commonjs": "11.0.1",
-        "@rollup/plugin-node-resolve": "6.1.0",
-        "@types/web-bluetooth": "0.0.5",
-        "rollup": "1.28.0",
-        "rollup-plugin-auto-external": "2.0.0",
-        "rollup-plugin-typescript2": "0.25.3",
-        "ts-node": "8.5.4",
-        "tslib": "1.10.0",
-        "typescript": "3.7.4"
-    }
+  "name": "de1",
+  "version": "0.0.2",
+  "main": "lib/index.cjs.js",
+  "module": "lib/index.es.js",
+  "types": "lib/src",
+  "license": "MIT",
+  "scripts": {
+    "build": "rollup -c rollup.config.ts",
+    "dev": "rollup -w -c rollup.config.ts",
+    "test": "jest -c jest.config.json",
+    "ts": "ts-node --project tsconfig.json"
+  },
+  "dependencies": {
+    "@sblendid/adapter-node": "0.3.0",
+    "@sblendid/sblendid": "0.3.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "11.0.1",
+    "@rollup/plugin-node-resolve": "7.0.0",
+    "@rollup/plugin-typescript": "2.1.0",
+    "@types/jest": "24.0.25",
+    "@types/web-bluetooth": "0.0.5",
+    "jest": "24.9.0",
+    "rollup": "1.29.0",
+    "rollup-plugin-auto-external": "2.0.0",
+    "ts-jest": "24.3.0",
+    "ts-node": "8.6.2",
+    "tslib": "1.10.0",
+    "typescript": "3.7.4"
+  }
 }

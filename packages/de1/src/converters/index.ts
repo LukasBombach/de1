@@ -1,4 +1,4 @@
-import { Converter, Value } from "@sblendid/sblendid";
+import { Converter, Names, PickValue } from "@sblendid/sblendid";
 import state, { State } from "./state";
 import water, { Water } from "./water";
 import versions, { Versions } from "./versions";
@@ -6,26 +6,16 @@ import shot, { Shot } from "./shot";
 import shotSettings, { ShotSettings } from "./shotSettings";
 import stateInfo, { StateInfo } from "./stateInfo";
 import shotDescriptionHeader, {
-  ShotDescriptionHeader
+  ShotDescriptionHeader,
 } from "./shotDescriptionHeader";
 import shotFrame, { ShotFrame } from "./shotFrame";
 import calibrate, { Calibrate } from "./calibrate";
 
-export { State } from "./state";
-export { Water } from "./water";
-export { Versions } from "./versions";
-export { Shot } from "./shot";
-export { ShotSettings } from "./shotSettings";
-export { StateInfo, SubState } from "./stateInfo";
-export { ShotDescriptionHeader } from "./shotDescriptionHeader";
-export { ShotFrame } from "./shotFrame";
-export { Calibrate } from "./calibrate";
+export type Name = Names<Converters>;
+export type Value<N extends Name> = PickValue<Converters, N>;
+export type Listener<N extends Name> = (value: Value<N>) => void;
 
-export type ConverterKey = keyof Converters;
-export type ConverterValue = Value<Converters>;
-
-export interface Converters {
-  [key: string]: Converter<any>
+export type Converters = {
   state: Converter<State>;
   water: Converter<Water>;
   versions: Converter<Versions>;
@@ -35,9 +25,9 @@ export interface Converters {
   shotDescriptionHeader: Converter<ShotDescriptionHeader>;
   shotFrame: Converter<ShotFrame>;
   calibrate: Converter<Calibrate>;
-}
+};
 
-const converters: Converters = {
+export default {
   state,
   water,
   versions,
@@ -46,7 +36,5 @@ const converters: Converters = {
   stateInfo,
   shotDescriptionHeader,
   shotFrame,
-  calibrate
+  calibrate,
 };
-
-export default converters;

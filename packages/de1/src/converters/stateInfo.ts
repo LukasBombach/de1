@@ -22,7 +22,7 @@ export const subStates: SubStates = {
   preinfusion: 0x04,
   pouring: 0x05,
   ending: 0x06,
-  refill: 0x11
+  refill: 0x11,
 };
 
 export interface StateInfo {
@@ -40,7 +40,7 @@ function decode(data: Buffer): StateInfo {
 function getKeyFromValue<Map extends States | SubStates>(
   type: string,
   map: Map,
-  value: number
+  value: number,
 ): Map extends States ? State : SubState {
   const values = Object.values(map);
   const keys = Object.keys(map);
@@ -51,7 +51,7 @@ function getKeyFromValue<Map extends States | SubStates>(
 
 const converter: Converter<StateInfo> = {
   uuid: "a00e",
-  decode
+  decode,
 };
 
 export default converter;

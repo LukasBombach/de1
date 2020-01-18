@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`serializer char adds a $length int 1`] = `
+Object {
+  "data": Array [
+    18,
+  ],
+  "type": "Buffer",
+}
+`;
+
+exports[`serializer int adds a $length int 1`] = `
+Object {
+  "data": Array [
+    18,
+    52,
+    86,
+    120,
+  ],
+  "type": "Buffer",
+}
+`;
+
+exports[`serializer intSigned adds a $length int 1`] = `
+Object {
+  "data": Array [
+    18,
+    52,
+    86,
+    120,
+  ],
+  "type": "Buffer",
+}
+`;
+
+exports[`serializer methods can be chained 1`] = `
+Object {
+  "data": Array [
+    18,
+    18,
+    52,
+    18,
+    52,
+    86,
+    120,
+    18,
+    52,
+    86,
+    120,
+    0,
+    188,
+    97,
+    78,
+  ],
+  "type": "Buffer",
+}
+`;
+
+exports[`serializer sha adds a $length int 1`] = `
+Object {
+  "data": Array [
+    0,
+    188,
+    97,
+    78,
+  ],
+  "type": "Buffer",
+}
+`;
+
+exports[`serializer short adds a $length int 1`] = `
+Object {
+  "data": Array [
+    18,
+    52,
+  ],
+  "type": "Buffer",
+}
+`;

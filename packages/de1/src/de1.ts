@@ -1,148 +1,85 @@
-import Sblendid, { Peripheral, Service } from "@sblendid/sblendid";
-import converters, { Converters, ConverterKey, ConverterValue } from "./converters";
-import EventEmitter, { Event, Listener } from "./events";
+import Machine from "./machine";
+import State, { ExtendedStates } from "./state";
+import { Name, Listener } from "./converters";
 
 export default class DE1 {
-  private machine?: Peripheral;
-  private service?: Service<Converters>;
-  private events: EventEmitter = new EventEmitter();
-
-  static async connect(): Promise<DE1> {
-    const de1 = new DE1();
-    await de1.connect();
-    return de1;
-  }
+  private machine = new Machine();
+  private state = new State(this.machine);
 
   async connect(): Promise<void> {
-    if (this.isConnected()) return;
-    this.machine = await Sblendid.connect("DE1");
-    this.service = await this.machine.getService("a000", converters);
-    this.events.addEventListeners(this.service!);
-    this.events.emit("connected", undefined);
+    await this.machine.connect();
   }
 
   async disconnect(): Promise<void> {
-    if (!this.isConnected()) return;
-    await this.machine!.disconnect();
-    this.events.removeEventListeners(this.service!);
-    this.events.emit("disconnected", undefined);
-    this.machine = undefined;
-    this.service = undefined;
+    await this.machine.disconnect();
   }
 
   async turnOn(): Promise<void> {
-    const currentState = await this.read("state");
-    if (currentState === "sleep") await this.write("state", "idle");
+    await this.machine.turnOn();
   }
 
   async turnOff(): Promise<void> {
-    await this.write("state", "sleep");
-  }
-
-  async stopEverything(): Promise<void> {
-    await this.write("state", "idle");
+    await this.machine.turnOff();
   }
 
   async startEspresso(): Promise<void> {
-    await this.write("state", "espresso");
+    await this.state.start("espresso");
   }
 
   async stopEspresso(): Promise<void> {
-    const currentState = await this.read("state");
-    if (currentState === "espresso") await this.write("state", "idle");
+    await this.state.stop("espresso");
   }
 
   async startSteam(): Promise<void> {
-    await this.write("state", "steam");
+    await this.state.start("steam");
   }
 
   async stopSteam(): Promise<void> {
-    const currentState = await this.read("state");
-    if (currentState === "steam") await this.write("state", "idle");
+    await this.state.stop("steam");
   }
 
   async startHotWater(): Promise<void> {
-    await this.write("state", "hotWater");
+    await this.state.start("hotWater");
   }
 
   async stopHotWater(): Promise<void> {
-    const currentState = await this.read("state");
-    if (currentState === "hotWater") await this.write("state", "idle");
+    await this.state.stop("hotWater");
   }
 
   async startFlushing(): Promise<void> {
-    await this.write("state", "hotWaterRinse");
+    await this.state.start("hotWaterRinse");
   }
 
   async stopFlushing(): Promise<void> {
-    const currentState = await this.read("state");
-    if (currentState === "hotWaterRinse") await this.write("state", "idle");
+    await this.state.stop("hotWaterRinse");
   }
 
   async startDescaling(): Promise<void> {
-    await this.write("state", "descale");
+    await this.state.start("descale");
   }
 
   async stopDescaling(): Promise<void> {
-    const currentState = await this.read("state");
-    if (currentState === "descale") await this.write("state", "idle");
+    await this.state.stop("descale");
   }
 
-  async getState(): Promise<string> {
-    if (!this.isConnected()) return "disconnected";
-    const { state, substate } = await this.read("stateInfo");
-    if (state === "sleep") return "sleep";
-    if (substate === "heating") return "heating";
-    if (state === "espresso") return "espresso";
-    if (state === "steam") return "steam";
-    if (state === "hotWater") return "hotWater";
-    if (state === "hotWaterRinse") return "flushing";
-    if (state === "descale") return "descale";
-    return "idle";
+  async stopEverything(): Promise<void> {
+    await this.state.stopEverything();
   }
 
-  async getWaterlevel(): Promise<number> {
-    const { level } = await this.read("water");
+  async getState(): Promise<ExtendedStates> {
+    return await this.state.getState();
+  }
+
+  async getWaterLevel(): Promise<number> {
+    const { level } = await this.machine.read("water");
     return level;
   }
 
-  public on<E extends Event>(event: E, listener: Listener<E>): void {
-    this.events.on(event, listener);
+  on<N extends Name>(name: N, listener: Listener<N>): void {
+    this.machine.on(name, listener);
   }
 
-  public once<E extends Event>(event: E, listener: Listener<E>): void {
-    this.events.once(event, listener);
-  }
-
-  public off<E extends Event>(event: E, listener: Listener<E>): void {
-    this.events.off(event, listener);
-  }
-
-  public isConnected(): boolean {
-    if (!this.machine) return false;
-    return this.machine.isConnected();
-  }
-
-  public getBleService(): Service<Converters> {
-    if (!this.service) throw new Error("DE1 is not connected yet");
-    return this.service;
-  }
-
-  public getBleAdapterforDebugging(): Peripheral["adapter"] {
-    if (!this.machine) throw new Error("DE1 is not connected yet");
-    return this.machine.adapter;
-  }
-
-  private async read(
-    name: string
-  ) {
-    return await this.getBleService().read(name);
-  }
-
-  private async write(
-    name: string,
-    value: string
-  ) {
-    await this.getBleService().write(name, value);
+  off<N extends Name>(name: N, listener: Listener<N>): void {
+    this.machine.off(name, listener);
   }
 }

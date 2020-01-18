@@ -26,14 +26,13 @@ function encode(shotSettings: ShotDescriptionHeader): Buffer {
     .char(shotSettings.numberOfFrames)
     .char(shotSettings.numberOfPreinfuseFrames)
     .char(shotSettings.minimumPressure * 16)
-    .char(shotSettings.maximumFlow * 16)
-    .buffer();
+    .char(shotSettings.maximumFlow * 16).buffer;
 }
 
 const converter: Converter<ShotDescriptionHeader> = {
   uuid: "a00f",
   decode,
-  encode
+  encode,
 };
 
 export default converter;
