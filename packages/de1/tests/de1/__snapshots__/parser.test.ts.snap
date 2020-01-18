@@ -36,6 +36,16 @@ Object {
 }
 `;
 
+exports[`parser methods can be chained to create an object 1`] = `
+Object {
+  "char": 18,
+  "int": 305419896,
+  "intSigned": 305419896,
+  "sha": "12345678",
+  "short": 4660,
+}
+`;
+
 exports[`parser sha processes a $type 1`] = `
 Object {
   "value": "12345678",
@@ -51,5 +61,18 @@ Object {
 exports[`parser short processes a $type 2`] = `
 Object {
   "val": "4660",
+}
+`;
+
+exports[`parser variables can be nested 1`] = `
+Object {
+  "one": Object {
+    "a": 18,
+    "b": 18,
+  },
+  "two": Object {
+    "a": 18,
+    "b": 18,
+  },
 }
 `;

@@ -16,6 +16,12 @@ describe("parser", () => {
   const intSigned = 0x12345678;
   const sha = 0x12345678;
 
+  const charBuffer = getBuffer(1, char, false);
+  const shortBuffer = getBuffer(2, short, false);
+  const intBuffer = getBuffer(4, int, false);
+  const intSignedBuffer = getBuffer(4, intSigned, true);
+  const shaBuffer = getBuffer(4, sha, true);
+
   function getBuffer(length: number, val: number, signed: boolean): Buffer {
     const buffer = Buffer.alloc(length);
     if (signed) buffer.writeIntBE(val, 0, length);
@@ -30,12 +36,12 @@ describe("parser", () => {
   });
 
   test.each`
-    fn             | value        | buffer                           | process
-    ${"char"}      | ${char}      | ${getBuffer(1, char, false)}     | ${true}
-    ${"short"}     | ${short}     | ${getBuffer(2, short, false)}    | ${true}
-    ${"int"}       | ${int}       | ${getBuffer(4, int, false)}      | ${true}
-    ${"intSigned"} | ${intSigned} | ${getBuffer(4, intSigned, true)} | ${true}
-    ${"sha"}       | ${sha}       | ${getBuffer(4, sha, true)}       | ${false}
+    fn             | value        | buffer             | process
+    ${"char"}      | ${char}      | ${charBuffer}      | ${true}
+    ${"short"}     | ${short}     | ${shortBuffer}     | ${true}
+    ${"int"}       | ${int}       | ${intBuffer}       | ${true}
+    ${"intSigned"} | ${intSigned} | ${intSignedBuffer} | ${true}
+    ${"sha"}       | ${sha}       | ${shaBuffer}       | ${false}
   `("$fn processes a $type", ({ buffer, fn, value, process }: EachRecord) => {
     const parsed = new Parser(buffer)[fn]("value");
     expect(parsed.vars()).toMatchSnapshot();
@@ -47,36 +53,35 @@ describe("parser", () => {
     }
   });
 
-  /*
   test("methods can be chained to create an object", () => {
-    const buffer = Buffer.alloc(11);
-    buffer.writeUInt8(char, 0);
-    buffer.writeUInt16BE(short, 1);
-    buffer.writeUInt32BE(int, 3);
-    buffer.writeInt32BE(intSigned, 7);
+    const buffer = Buffer.concat([
+      charBuffer,
+      shortBuffer,
+      intBuffer,
+      intSignedBuffer,
+      shaBuffer,
+    ]);
     const parser = new Parser(buffer)
       .char("char")
       .short("short")
       .int("int")
-      .intSigned("intSigned");
-    expect(parser.vars()).toStrictEqual(values);
+      .intSigned("intSigned")
+      .sha("sha");
+    expect(parser.vars()).toMatchSnapshot();
   });
 
   test("variables can be nested", () => {
-    const { char } = values;
-    const buffer = Buffer.alloc(7);
-    buffer.writeUInt8(char, 0);
-    buffer.writeUInt8(char, 1);
-    buffer.writeUInt8(char, 2);
-    buffer.writeUInt8(char, 3);
+    const buffer = Buffer.concat([
+      charBuffer,
+      charBuffer,
+      charBuffer,
+      charBuffer,
+    ]);
     const parser = new Parser(buffer)
       .char("one.a")
       .char("one.b")
       .char("two.a")
       .char("two.b");
-    expect(parser.vars()).toStrictEqual({
-      one: { a: char, b: char },
-      two: { a: char, b: char },
-    });
-  }); */
+    expect(parser.vars()).toMatchSnapshot();
+  });
 });
