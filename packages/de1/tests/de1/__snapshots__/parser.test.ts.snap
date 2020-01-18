@@ -42,12 +42,6 @@ Object {
 }
 `;
 
-exports[`parser sha processes a $type 2`] = `
-Object {
-  "val": "12345678",
-}
-`;
-
 exports[`parser short processes a $type 1`] = `
 Object {
   "value": 4660,

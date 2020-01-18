@@ -37,12 +37,14 @@ describe("parser", () => {
     ${"intSigned"} | ${intSigned} | ${getBuffer(4, intSigned, true)} | ${true}
     ${"sha"}       | ${sha}       | ${getBuffer(4, sha, true)}       | ${false}
   `("$fn processes a $type", ({ buffer, fn, value, process }: EachRecord) => {
-    const processor = jest.fn(v => v.toString());
     const parsed = new Parser(buffer)[fn]("value");
-    const processed = new Parser(buffer)[fn]("val", processor);
     expect(parsed.vars()).toMatchSnapshot();
-    expect(processed.vars()).toMatchSnapshot();
-    if (process) expect(processor).toHaveBeenCalledWith(value);
+    if (process) {
+      const processor = jest.fn(v => v.toString());
+      const processed = new Parser(buffer)[fn]("val", processor);
+      expect(processed.vars()).toMatchSnapshot();
+      expect(processor).toHaveBeenCalledWith(value);
+    }
   });
 
   /*
