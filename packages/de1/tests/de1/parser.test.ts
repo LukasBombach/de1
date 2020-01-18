@@ -10,11 +10,11 @@ type EachRecord = {
 };
 
 describe("parser", () => {
-  const char = 0x12;
-  const short = 0x1234;
-  const int = 0x12345678;
-  const intSigned = 0x12345678;
-  const sha = 0x12345678;
+  const char = 12;
+  const short = 1234;
+  const int = 12345678;
+  const intSigned = 12345678;
+  const sha = 12345678;
 
   const charBuffer = getBuffer(1, char, false);
   const shortBuffer = getBuffer(2, short, false);

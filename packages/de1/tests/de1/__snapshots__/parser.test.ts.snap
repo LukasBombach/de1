@@ -2,77 +2,77 @@
 
 exports[`parser char processes a $type 1`] = `
 Object {
-  "value": 18,
+  "value": 12,
 }
 `;
 
 exports[`parser char processes a $type 2`] = `
 Object {
-  "val": "18",
+  "val": "12",
 }
 `;
 
 exports[`parser int processes a $type 1`] = `
 Object {
-  "value": 305419896,
+  "value": 12345678,
 }
 `;
 
 exports[`parser int processes a $type 2`] = `
 Object {
-  "val": "305419896",
+  "val": "12345678",
 }
 `;
 
 exports[`parser intSigned processes a $type 1`] = `
 Object {
-  "value": 305419896,
+  "value": 12345678,
 }
 `;
 
 exports[`parser intSigned processes a $type 2`] = `
 Object {
-  "val": "305419896",
+  "val": "12345678",
 }
 `;
 
 exports[`parser methods can be chained to create an object 1`] = `
 Object {
-  "char": 18,
-  "int": 305419896,
-  "intSigned": 305419896,
-  "sha": "12345678",
-  "short": 4660,
+  "char": 12,
+  "int": 12345678,
+  "intSigned": 12345678,
+  "sha": "bc614e",
+  "short": 1234,
 }
 `;
 
 exports[`parser sha processes a $type 1`] = `
 Object {
-  "value": "12345678",
+  "value": "bc614e",
 }
 `;
 
 exports[`parser short processes a $type 1`] = `
 Object {
-  "value": 4660,
+  "value": 1234,
 }
 `;
 
 exports[`parser short processes a $type 2`] = `
 Object {
-  "val": "4660",
+  "val": "1234",
 }
 `;
 
 exports[`parser variables can be nested 1`] = `
 Object {
   "one": Object {
-    "a": 18,
-    "b": 18,
+    "a": 12,
+    "b": 12,
   },
   "two": Object {
-    "a": 18,
-    "b": 18,
+    "a": 12,
+    "b": 12,
   },
 }
 `;
