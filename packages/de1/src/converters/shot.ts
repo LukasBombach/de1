@@ -35,7 +35,7 @@ function decode(data: Buffer): Shot {
     .vars();
 }
 
-function convert_3_char_to_U24P16(buffer: Buffer): number {
+function convert3CharToU24P16(buffer: Buffer): number {
   const value = buffer[0] + buffer[1] / 256 + buffer[2] / 65536;
   return value;
 }
