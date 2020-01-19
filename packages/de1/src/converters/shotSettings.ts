@@ -35,7 +35,7 @@ function encode(shotSettings: ShotSettings): Buffer {
     .char(shotSettings.targetHotWaterVol)
     .char(shotSettings.targetHotWaterLength)
     .char(shotSettings.targetEspressoVol)
-    .short(shotSettings.targetGroupTemp).buffer;
+    .short(shotSettings.targetGroupTemp * 256).buffer;
 }
 
 const converter: Converter<ShotSettings> = {

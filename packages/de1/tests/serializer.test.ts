@@ -1,4 +1,4 @@
-import Serializer from "../../src/serializer";
+import Serializer from "../src/serializer";
 
 type SerializerMethod = "char" | "short" | "int" | "intSigned" | "sha";
 

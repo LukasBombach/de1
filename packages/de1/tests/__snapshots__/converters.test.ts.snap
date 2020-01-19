@@ -1,0 +1,99 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`converters decoding calibrate returns the expected output 1`] = `
+Object {
+  "calCommand": 0,
+  "calTarget": 0,
+  "de1ReportedVal": 0,
+  "measuredVal": 0,
+  "writeKey": "0",
+}
+`;
+
+exports[`converters decoding shot returns the expected output 1`] = `
+Object {
+  "frameNumber": 3,
+  "groupFlow": 0,
+  "groupPressure": 0.01806640625,
+  "headTemp1": 75,
+  "headTemp2": 147,
+  "headTemp3": 221,
+  "mixTemp": 75.0546875,
+  "setGroupFlow": 3,
+  "setGroupPressure": 0,
+  "setHeadTemp": 89,
+  "setMixTemp": 80,
+  "steamTemp": 150,
+  "timer": 7017,
+}
+`;
+
+exports[`converters decoding shotDescriptionHeader returns the expected output 1`] = `
+Object {
+  "headerV": 1,
+  "maximumFlow": 6,
+  "minimumPressure": 0,
+  "numberOfFrames": 6,
+  "numberOfPreinfuseFrames": 1,
+}
+`;
+
+exports[`converters decoding shotFrame returns the expected output 1`] = `
+Object {
+  "flag": 65,
+  "frameLen": 127,
+  "frameToWrite": 5,
+  "maxVol": 0,
+  "setVal": 1.8125,
+  "temp": 88,
+  "triggerVal": 0,
+}
+`;
+
+exports[`converters decoding shotSettings returns the expected output 1`] = `
+Object {
+  "steamSettings": 0,
+  "targetEspressoVol": 200,
+  "targetGroupTemp": 89,
+  "targetHotWaterLength": 60,
+  "targetHotWaterTemp": 80,
+  "targetHotWaterVol": 100,
+  "targetSteamLength": 60,
+  "targetSteamTemp": 160,
+}
+`;
+
+exports[`converters decoding state returns the expected output 1`] = `"sleep"`;
+
+exports[`converters decoding stateInfo returns the expected output 1`] = `
+Object {
+  "state": "sleep",
+  "substate": "ready",
+}
+`;
+
+exports[`converters decoding versions returns the expected output 1`] = `
+Object {
+  "bluetooth": Object {
+    "apiVersion": 4,
+    "changes": 81,
+    "commits": 449,
+    "release": 9,
+    "sha": "92c5ee0",
+  },
+  "firmware": Object {
+    "apiVersion": 0,
+    "changes": 0,
+    "commits": 0,
+    "release": 0,
+    "sha": "",
+  },
+}
+`;
+
+exports[`converters decoding water returns the expected output 1`] = `
+Object {
+  "level": 16.98828125,
+  "startFillLevel": 6,
+}
+`;
