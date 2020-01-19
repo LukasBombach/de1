@@ -26,4 +26,13 @@ describe("converters", () => {
       if (decode) expect(decode(data[uuid])).toMatchSnapshot();
     },
   );
+
+  test.each(Object.entries(converters).filter(([, { encode }]) => !!encode))(
+    "encoding %s returns the expected output",
+    (name, { uuid, decode, encode }) => {
+      if (!decode) throw new Error("This test does not work");
+      const decodedData = decode(data[uuid]);
+      expect(encode!(decodedData)).toStrictEqual(data[uuid]);
+    },
+  );
 });
