@@ -25,7 +25,7 @@ function decode(data: Buffer): Shot {
     .short("groupPressure", v => v / 4096)
     .short("groupFlow", v => v / 4096)
     .short("mixTemp", v => v / 256)
-    .bytes("headTemp", 3, convert_3_char_to_U24P16)
+    .bytes("headTemp", 3, convert3CharToU24P16)
     .short("setMixTemp", v => v / 256)
     .short("setHeadTemp", v => v / 256)
     .char("setGroupPressure", v => v / 16)
