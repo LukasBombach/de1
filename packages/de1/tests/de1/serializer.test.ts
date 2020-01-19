@@ -4,9 +4,7 @@ type SerializerMethod = "char" | "short" | "int" | "intSigned" | "sha";
 
 type EachRecord = {
   fn: SerializerMethod;
-  length: number;
   value: number;
-  signed: boolean;
 };
 
 describe("serializer", () => {

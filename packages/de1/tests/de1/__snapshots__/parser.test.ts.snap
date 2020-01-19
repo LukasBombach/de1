@@ -1,0 +1,78 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`parser char processes a $type 1`] = `
+Object {
+  "value": 12,
+}
+`;
+
+exports[`parser char processes a $type 2`] = `
+Object {
+  "val": "12",
+}
+`;
+
+exports[`parser int processes a $type 1`] = `
+Object {
+  "value": 12345678,
+}
+`;
+
+exports[`parser int processes a $type 2`] = `
+Object {
+  "val": "12345678",
+}
+`;
+
+exports[`parser intSigned processes a $type 1`] = `
+Object {
+  "value": 12345678,
+}
+`;
+
+exports[`parser intSigned processes a $type 2`] = `
+Object {
+  "val": "12345678",
+}
+`;
+
+exports[`parser methods can be chained to create an object 1`] = `
+Object {
+  "char": 12,
+  "int": 12345678,
+  "intSigned": 12345678,
+  "sha": "bc614e",
+  "short": 1234,
+}
+`;
+
+exports[`parser sha processes a $type 1`] = `
+Object {
+  "value": "bc614e",
+}
+`;
+
+exports[`parser short processes a $type 1`] = `
+Object {
+  "value": 1234,
+}
+`;
+
+exports[`parser short processes a $type 2`] = `
+Object {
+  "val": "1234",
+}
+`;
+
+exports[`parser variables can be nested 1`] = `
+Object {
+  "one": Object {
+    "a": 12,
+    "b": 12,
+  },
+  "two": Object {
+    "a": 12,
+    "b": 12,
+  },
+}
+`;
