@@ -25,9 +25,7 @@ function decode(data: Buffer): Shot {
     .short("groupPressure", v => v / 4096)
     .short("groupFlow", v => v / 4096)
     .short("mixTemp", v => v / 256)
-    .char("headTemp1")
-    .char("headTemp2")
-    .char("headTemp3")
+    .bytes("headTemp", 3, convert_3_char_to_U24P16)
     .short("setMixTemp", v => v / 256)
     .short("setHeadTemp", v => v / 256)
     .char("setGroupPressure", v => v / 16)
@@ -35,6 +33,11 @@ function decode(data: Buffer): Shot {
     .char("frameNumber")
     .char("steamTemp")
     .vars();
+}
+
+function convert_3_char_to_U24P16(buffer: Buffer): number {
+  const value = buffer[0] + buffer[1] / 256 + buffer[2] / 65536;
+  return value;
 }
 
 const converter: Converter<Shot> = {
