@@ -14,7 +14,6 @@ Object {
   "setHeadTemp": 89,
   "setMixTemp": 80,
   "steamTemp": 150,
-  "time": 1579463684261,
   "timer": 7017,
 }
 `;
