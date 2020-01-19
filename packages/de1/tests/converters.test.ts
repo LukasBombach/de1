@@ -20,10 +20,10 @@ describe("converters", () => {
     },
   );
 
-  test.each(Object.entries(converters))(
+  test.each(Object.entries(converters).filter(([, { decode }]) => !!decode))(
     "decoding %s returns the expected output",
     (name, { uuid, decode }) => {
-      if (decode) expect(decode(data[uuid])).toMatchSnapshot();
+      expect(decode!(data[uuid])).toMatchSnapshot();
     },
   );
 
