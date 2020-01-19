@@ -2,7 +2,14 @@
 
 exports[`parser bytes can be read and parsed 1`] = `
 Object {
-  "value": "",
+  "value": Object {
+    "data": Array [
+      1,
+      2,
+      3,
+    ],
+    "type": "Buffer",
+  },
 }
 `;
 
