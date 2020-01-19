@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`converters The decode function of shot returns the expected output 1`] = `
+Object {
+  "frameNumber": 3,
+  "groupFlow": 0,
+  "groupPressure": 0.01806640625,
+  "headTemp1": 75,
+  "headTemp2": 147,
+  "headTemp3": 221,
+  "mixTemp": 75.0546875,
+  "setGroupFlow": 3,
+  "setGroupPressure": 0,
+  "setHeadTemp": 89,
+  "setMixTemp": 80,
+  "steamTemp": 150,
+  "time": 1579463684261,
+  "timer": 7017,
+}
+`;
