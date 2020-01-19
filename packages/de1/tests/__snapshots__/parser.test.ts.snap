@@ -1,5 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`parser bytes can be read and parsed 1`] = `
+Object {
+  "value": "",
+}
+`;
+
 exports[`parser char processes a $type 1`] = `
 Object {
   "value": 12,

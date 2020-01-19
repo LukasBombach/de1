@@ -53,6 +53,15 @@ describe("parser", () => {
     }
   });
 
+  test("bytes can be read and parsed", () => {
+    const buffer = Buffer.from([1, 2, 3, 4, 5, 6]);
+    const part = buffer.subarray(0, 3);
+    const processor = jest.fn(v => v.toString());
+    const processed = new Parser(buffer).bytes("value", 3, processor);
+    expect(processed.vars()).toMatchSnapshot();
+    expect(processor).toHaveBeenCalledWith(part);
+  });
+
   test("methods can be chained to create an object", () => {
     const buffer = Buffer.concat([
       charBuffer,
