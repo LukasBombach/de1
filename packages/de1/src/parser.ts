@@ -38,6 +38,17 @@ export default class Parser<T> {
     return this;
   }
 
+  bytes(
+    name: string,
+    byteLength: number,
+    process: (bytes: Buffer) => any,
+  ): this {
+    const bytes = this.buffer.subarray(this.offset, this.offset + byteLength);
+    this.offset += byteLength;
+    this.setVar(name, process(bytes));
+    return this;
+  }
+
   vars(): T {
     return this.varsInternal;
   }
