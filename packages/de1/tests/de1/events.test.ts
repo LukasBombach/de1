@@ -2,11 +2,15 @@ import { EventEmitter } from "events";
 import { Service } from "@sblendid/sblendid";
 import DE1 from "../../src/de1";
 import converters, { Name } from "../../src/converters";
+import events from "../__fixtures__/events";
 
 describe("de1 events", () => {
   const de1 = new DE1();
-  const names = Object.keys(converters) as Name[];
   const emitter = new EventEmitter();
+  const namesWithEventFixture = Object.entries(converters)
+    .filter(([name]) => events.hasOwnProperty(name))
+    .map(([name]) => name as Name);
+
   let onSpy: jest.SpyInstance;
   let offSpy: jest.SpyInstance;
 
@@ -30,9 +34,16 @@ describe("de1 events", () => {
     offSpy.mockRestore();
   });
 
-  test.each(names)("%s emits the expected values", async name => {
-    const listener = jest.fn();
-    de1.on(name, listener);
-    // expect(listener.mock.calls).toMatchSnapshot();
-  });
+  test.each(namesWithEventFixture)(
+    "%s emits the expected values",
+    async name => {
+      const converter = converters[name];
+      const buffer = events[converter.uuid];
+      const data = converter.decode!(buffer);
+      const listener = jest.fn();
+      de1.on(name, listener);
+      emitter.emit(name, data);
+      expect(listener.mock.calls).toMatchSnapshot();
+    },
+  );
 });
