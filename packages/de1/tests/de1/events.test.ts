@@ -6,6 +6,7 @@ describe("de1 events", () => {
 
   test.each(names)("%s emits the expected values", async name => {
     const de1 = new DE1();
+    await de1.connect();
     const listener = jest.fn();
     de1.on(name, listener);
     expect(listener.mock.calls).toMatchSnapshot();
