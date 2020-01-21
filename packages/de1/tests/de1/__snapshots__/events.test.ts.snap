@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`de1 events shot emits the expected values 1`] = `
+exports[`de1 events on(shot) emits the expected values 1`] = `
 Array [
   Array [
     Object {
@@ -20,7 +20,7 @@ Array [
 ]
 `;
 
-exports[`de1 events stateInfo emits the expected values 1`] = `
+exports[`de1 events on(stateInfo) emits the expected values 1`] = `
 Array [
   Array [
     Object {
@@ -31,7 +31,7 @@ Array [
 ]
 `;
 
-exports[`de1 events water emits the expected values 1`] = `
+exports[`de1 events on(water) emits the expected values 1`] = `
 Array [
   Array [
     Object {

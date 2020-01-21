@@ -38,7 +38,7 @@ describe("de1 events", () => {
   });
 
   test.each(namesWithEventFixture)(
-    "%s emits the expected values",
+    "on(%s) emits the expected values",
     async name => {
       const converter = converters[name];
       const buffer = events[converter.uuid];
@@ -47,6 +47,15 @@ describe("de1 events", () => {
       de1.on(name, listener);
       emitter.emit(name, data);
       expect(listener.mock.calls).toMatchSnapshot();
+    },
+  );
+
+  test.each(namesWithEventFixture)(
+    "off(%s) removes the event listener",
+    async name => {
+      const listener = jest.fn();
+      de1.off(name, listener);
+      expect(offSpy).toHaveBeenCalledWith(name, listener);
     },
   );
 });
