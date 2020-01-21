@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`de1 events shot emits the expected values 1`] = `
+Array [
+  Array [
+    Object {
+      "frameNumber": 3,
+      "groupFlow": 0,
+      "groupPressure": 0.010498046875,
+      "headTemp": 24.933395385742188,
+      "mixTemp": 25.03515625,
+      "setGroupFlow": 0,
+      "setGroupPressure": 0,
+      "setHeadTemp": 89,
+      "setMixTemp": 23.546875,
+      "steamTemp": 33,
+      "timer": 44742,
+    },
+  ],
+]
+`;
+
+exports[`de1 events stateInfo emits the expected values 1`] = `
+Array [
+  Array [
+    Object {
+      "state": "sleep",
+      "substate": "ready",
+    },
+  ],
+]
+`;
+
+exports[`de1 events water emits the expected values 1`] = `
+Array [
+  Array [
+    Object {
+      "level": 5.1953125,
+      "startFillLevel": 6,
+    },
+  ],
+]
+`;

@@ -7,9 +7,12 @@ import events from "../__fixtures__/events";
 describe("de1 events", () => {
   const de1 = new DE1();
   const emitter = new EventEmitter();
-  const namesWithEventFixture = Object.entries(converters)
-    .filter(([name]) => events.hasOwnProperty(name))
-    .map(([name]) => name as Name);
+
+  // todo we don't have enough events
+  // todo this mapping code is horrible
+  const namesWithEventFixture = Object.keys(events)
+    .map(uuid => Object.entries(converters).find(([, c]) => c.uuid === uuid))
+    .map(c => c![0] as Name);
 
   let onSpy: jest.SpyInstance;
   let offSpy: jest.SpyInstance;
