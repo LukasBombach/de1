@@ -10,21 +10,21 @@ describe("de1 events", () => {
   let onSpy: jest.SpyInstance;
   let offSpy: jest.SpyInstance;
 
-  beforeAll(async () => {
+  beforeEach(async () => {
     onSpy = jest
       .spyOn(Service.prototype, "on")
-      .mockImplementation(async (name: string, listener: any) => {
+      .mockImplementation(async (name, listener) => {
         emitter.on(name, listener);
       });
     offSpy = jest
       .spyOn(Service.prototype, "off")
-      .mockImplementation(async (name: string, listener: any) => {
+      .mockImplementation(async (name, listener) => {
         emitter.off(name, listener);
       });
     await de1.connect();
   });
 
-  afterAll(async () => {
+  afterEach(async () => {
     await de1.disconnect();
     onSpy.mockRestore();
     offSpy.mockRestore();
