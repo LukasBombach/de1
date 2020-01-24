@@ -127,6 +127,6 @@ export default class DE1 {
   ): Promise<Value<N>> {
     if (typeof value !== "object" || value === null) return value;
     const currentValue = await this.machine.read(name);
-    return Object.assign({}, currentValue, value);
+    return {...currentValue, ...value};
   }
 }
