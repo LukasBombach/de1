@@ -121,12 +121,19 @@ export default class DE1 {
     this.machine.off(name, listener);
   }
 
+  // todo unlawful any, terrible code with implicit bugs
+  // todo to fix this we need to check the user passed a proper value type for that name
   private async mergeCurrentValue<N extends Name>(
     name: N,
     value: Partial<Value<N>>,
   ): Promise<Value<N>> {
     if (typeof value !== "object" || value === null) return value;
     const currentValue = await this.machine.read(name);
-    return {...currentValue, ...value};
+    if (typeof currentValue !== "object" || currentValue === null) {
+      throw new Error(
+        `Cannot set value "${value}" for "${name}", the data typed don't match`,
+      );
+    }
+    return { ...(currentValue as any), ...value };
   }
 }
