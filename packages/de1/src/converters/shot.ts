@@ -6,9 +6,7 @@ export interface Shot {
   groupPressure: number;
   groupFlow: number;
   mixTemp: number;
-  headTemp1: number;
-  headTemp2: number;
-  headTemp3: number;
+  headTemp: number;
   setMixTemp: number;
   setHeadTemp: number;
   setGroupPressure: number;
