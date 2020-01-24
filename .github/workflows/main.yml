@@ -1,5 +1,5 @@
 name: Workflow
-on: [push]
+on: [push, pull_request]
 
 jobs:
   build:
@@ -49,7 +49,12 @@ jobs:
 
       - name: Unit Tests
         working-directory: packages/de1
-        run: yarn test
+        run: yarn test --coverage
+
+      - name: Coveralls
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: actions/cache@v1
         with:
