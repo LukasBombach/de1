@@ -54,4 +54,20 @@ describe("de1 mode functions", () => {
       expect(writeSpy).not.toHaveBeenCalled();
     },
   );
+
+  test.each`
+    fn                 | state
+    ${"stopEspresso"}  | ${"espresso"}
+    ${"stopSteam"}     | ${"steam"}
+    ${"stopHotWater"}  | ${"hotWater"}
+    ${"stopFlushing"}  | ${"hotWaterRinse"}
+    ${"stopDescaling"} | ${"descale"}
+  `(
+    "$fn sets the machine's state to idle if state is $state",
+    async ({ fn, state }) => {
+      readSpy.mockImplementationOnce(chcr => (chcr === "state" ? state : null));
+      await expect((de1 as any)[fn]()).resolves.toBeUndefined();
+      expect(writeSpy).toHaveBeenCalledWith("state", "idle");
+    },
+  );
 });
