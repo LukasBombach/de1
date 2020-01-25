@@ -139,5 +139,9 @@ export default class DE1 {
   private async mergeCurrentValue<N extends Name>(
     name: N,
     value: Partial<Value<N>>,
-  ): Promise<Value<N>> {}
+  ): Promise<Value<N>> {
+    if (typeof value !== "object" || value === null) return value;
+    const currentValue = await this.machine.read(name);
+    return Object.assign({}, currentValue, value);
+  }
 }

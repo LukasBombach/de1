@@ -11,13 +11,6 @@ import shotDescriptionHeader, {
 import shotFrame, { ShotFrame } from "./shotFrame";
 import calibrate, { Calibrate } from "./calibrate";
 
-type SubType<Base, Condition> = Pick<
-  Base,
-  {
-    [Key in keyof Base]: Base[Key] extends Condition ? Key : never;
-  }[keyof Base]
->;
-
 export type Name = Names<Converters>;
 export type Value<N extends Name> = PickValue<Converters, N>;
 export type Listener<N extends Name> = (value: Value<N>) => void;
