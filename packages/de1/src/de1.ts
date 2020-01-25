@@ -1,6 +1,6 @@
 import Machine from "./machine";
 import State, { ExtendedStates } from "./state";
-import { Name, Listener, Value } from "./converters";
+import converters, { Name, Listener, Value } from "./converters";
 
 export default class DE1 {
   private machine = new Machine();
@@ -109,6 +109,7 @@ export default class DE1 {
   }
 
   async set<N extends Name>(name: N, value: Partial<Value<N>>): Promise<void> {
+    this.validateValue(name, value);
     const mergedValue = await this.mergeCurrentValue(name, value);
     await this.machine.write(name, mergedValue);
   }
@@ -121,19 +122,22 @@ export default class DE1 {
     this.machine.off(name, listener);
   }
 
-  // todo unlawful any, terrible code with implicit bugs
-  // todo to fix this we need to check the user passed a proper value type for that name
+  // todo unlawful any
+  private validateValue(name: Name, value: any): void {
+    const { encode, validate } = converters[name];
+    if (typeof encode === "undefined") {
+      throw new Error(`${name} is not settable`);
+    }
+    if (typeof validate === "undefined") {
+      throw new Error(`${name} cannot be validated`);
+    }
+    if (!validate(value)) {
+      throw new Error(`Invalid value for ${name}`);
+    }
+  }
+
   private async mergeCurrentValue<N extends Name>(
     name: N,
     value: Partial<Value<N>>,
-  ): Promise<Value<N>> {
-    if (typeof value !== "object" || value === null) return value;
-    const currentValue = await this.machine.read(name);
-    if (typeof currentValue !== "object" || currentValue === null) {
-      throw new Error(
-        `Cannot set value "${value}" for "${name}", the data typed don't match`,
-      );
-    }
-    return { ...(currentValue as any), ...value };
-  }
+  ): Promise<Value<N>> {}
 }

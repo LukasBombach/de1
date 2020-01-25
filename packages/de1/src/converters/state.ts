@@ -1,4 +1,4 @@
-import { Converter } from "@sblendid/sblendid";
+import { ValidConverter } from ".";
 import Parser from "../parser";
 import Serializer from "../serializer";
 
@@ -80,10 +80,15 @@ function getNameFromValue(state: number): State {
   return keys[valueIndex] as State;
 }
 
-const converter: Converter<State> = {
+function validate(state: State): boolean {
+  return Object.keys(states).includes(state);
+}
+
+const converter: ValidConverter<State> = {
   uuid: "a002",
   encode,
   decode,
+  validate,
 };
 
 export default converter;
