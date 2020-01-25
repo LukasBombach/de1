@@ -62,6 +62,7 @@ describe("de1 mode functions", () => {
     ${"stopHotWater"}  | ${"hotWater"}
     ${"stopFlushing"}  | ${"hotWaterRinse"}
     ${"stopDescaling"} | ${"descale"}
+    ${"turnOn"}        | ${"sleep"}
   `(
     "$fn sets the machine's state to idle if state is $state",
     async ({ fn, state }) => {
