@@ -29,13 +29,12 @@ describe("de1 getters", () => {
 
   test("set validates the value", async () => {
     const set = (name: any, val?: any) => de1.set(name, val);
-    await expect(set("noEncode")).rejects.toThrow("noEncode is not settable");
-    await expect(set("noValidate")).rejects.toThrow(
-      "noValidate cannot be validated",
-    );
-    await expect(set("invalid", "foo")).rejects.toThrow(
-      "Invalid value for invalid",
-    );
+    const expectedNoEncode = "noEncode is not settable";
+    const expectedNoValidate = "noValidate cannot be validated";
+    const expectedInvalid = "Invalid value for invalid";
+    await expect(set("noEncode")).rejects.toThrow(expectedNoEncode);
+    await expect(set("noValidate")).rejects.toThrow(expectedNoValidate);
+    await expect(set("invalid", "foo")).rejects.toThrow(expectedInvalid);
   });
 
   test.todo("set merges partial values");
