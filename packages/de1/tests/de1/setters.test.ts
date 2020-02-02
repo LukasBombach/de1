@@ -1,9 +1,10 @@
 import DE1 from "../../src/de1";
 
 jest.mock("../../src/converters", () => ({
+  state: { encode: () => {}, validate: () => true },
   noEncode: {},
   noValidate: { encode: () => {} },
-  invalid: { validate: () => false },
+  invalid: { encode: () => {}, validate: () => false },
 }));
 
 describe("de1 getters", () => {
@@ -17,7 +18,7 @@ describe("de1 getters", () => {
     await de1.disconnect();
   });
 
-  test.skip("set writes a value to the machine", async () => {
+  test("set writes a value to the machine", async () => {
     const name = "state";
     const value = "idle";
     const spy = jest.spyOn(de1["machine"], "write");
@@ -27,17 +28,15 @@ describe("de1 getters", () => {
   });
 
   test("set validates the value", async () => {
-    // const set = (name: any, val?: any) => () => de1.set(name, val);
-    expect(() => (de1.set as any)("noEncode")).toThrowError(
-      "noEncode is not settable",
+    const set = (name: any, val?: any) => de1.set(name, val);
+    await expect(set("noEncode")).rejects.toThrow("noEncode is not settable");
+    await expect(set("noValidate")).rejects.toThrow(
+      "noValidate cannot be validated",
     );
-    expect(() => (de1.set as any)("noValidate")).toThrowError(
-      `noValidate cannot be validated`,
-    );
-    expect(() => (de1.set as any)("invalid", "foo")).toThrowError(
+    await expect(set("invalid", "foo")).rejects.toThrow(
       "Invalid value for invalid",
     );
   });
 
-  test("set merges partial values", async () => {});
+  test.todo("set merges partial values");
 });
