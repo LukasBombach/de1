@@ -56,11 +56,17 @@ describe("de1 getters", () => {
     await de1.connect();
   });
 
-  test("getWaterLevel returns the water level", async () => {
-    const level = 100;
-    readSpy.mockImplementationOnce(chcr =>
-      chcr === "water" ? { level } : null,
-    );
-    await expect(de1.getWaterLevel()).resolves.toBe(level);
+  // todo bad any typecast
+  test.each`
+    fn                   | chcr              | mock                  | expected
+    ${"getWaterLevel"}   | ${"water"}        | ${{ level: 100 }}     | ${100}
+    ${"getMixTemp"}      | ${"shot"}         | ${{ mixTemp: 100 }}   | ${100}
+    ${"getHeadTemp"}     | ${"shot"}         | ${{ headTemp: 100 }}  | ${100}
+    ${"getSteamTemp"}    | ${"shot"}         | ${{ steamTemp: 100 }} | ${100}
+    ${"getShotSettings"} | ${"shotSettings"} | ${{ foo: "bar" }}     | ${{ foo: "bar" }}
+    ${"getVersions"}     | ${"versions"}     | ${{ foo: "bar" }}     | ${{ foo: "bar" }}
+  `("$fn returns $expected", async ({ fn, chcr, mock, expected }) => {
+    readSpy.mockImplementationOnce(name => (name === chcr ? mock : undefined));
+    await expect((de1 as any)[fn]()).resolves.toStrictEqual(expected);
   });
 });

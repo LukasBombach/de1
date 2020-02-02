@@ -23,6 +23,7 @@ describe("de1 mode functions", () => {
     writeSpy.mockRestore();
   });
 
+  // todo bad any typecast
   test.each`
     fn                  | state
     ${"startEspresso"}  | ${"espresso"}
@@ -37,6 +38,7 @@ describe("de1 mode functions", () => {
     expect(writeSpy).toHaveBeenCalledWith("state", state);
   });
 
+  // todo bad any typecast
   test.each`
     fn                  | state
     ${"stopEspresso"}   | ${"not espresso"}
