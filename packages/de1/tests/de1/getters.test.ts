@@ -56,6 +56,14 @@ describe("de1 getters", () => {
     await de1.connect();
   });
 
+  test("get returns the read output from the machine", async () => {
+    const name = "state";
+    const value = "idle";
+    const spy = jest.spyOn(de1["machine"], "read").mockResolvedValue(value);
+    await expect(de1.get(name)).resolves.toBe(value);
+    spy.mockRestore();
+  });
+
   // todo bad any typecast
   test.each`
     fn                   | chcr              | mock                  | expected
