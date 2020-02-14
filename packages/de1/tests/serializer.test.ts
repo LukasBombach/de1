@@ -14,6 +14,7 @@ describe("serializer", () => {
   const intSigned = 0x12345678;
   const sha = "bc614e";
 
+  // todo bad any typecast
   test.each`
     fn             | value
     ${"char"}      | ${char}
@@ -23,7 +24,7 @@ describe("serializer", () => {
     ${"sha"}       | ${sha}
   `("$fn adds a $length int", ({ fn, value }: EachRecord) => {
     const serializer = new Serializer();
-    (serializer[fn] as any)(value); // TODO unlawful any
+    (serializer[fn] as any)(value);
     expect(serializer.buffer).toMatchSnapshot();
   });
 

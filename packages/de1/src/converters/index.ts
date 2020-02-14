@@ -15,19 +15,23 @@ export type Name = Names<Converters>;
 export type Value<N extends Name> = PickValue<Converters, N>;
 export type Listener<N extends Name> = (value: Value<N>) => void;
 
+export interface ValidConverter<T> extends Converter<T> {
+  validate?: (value: Partial<T>) => boolean;
+}
+
 export type Converters = {
-  state: Converter<State>;
-  water: Converter<Water>;
-  versions: Converter<Versions>;
-  shot: Converter<Shot>;
-  shotSettings: Converter<ShotSettings>;
-  stateInfo: Converter<StateInfo>;
-  shotDescriptionHeader: Converter<ShotDescriptionHeader>;
-  shotFrame: Converter<ShotFrame>;
-  calibrate: Converter<Calibrate>;
+  state: ValidConverter<State>;
+  water: ValidConverter<Water>;
+  versions: ValidConverter<Versions>;
+  shot: ValidConverter<Shot>;
+  shotSettings: ValidConverter<ShotSettings>;
+  stateInfo: ValidConverter<StateInfo>;
+  shotDescriptionHeader: ValidConverter<ShotDescriptionHeader>;
+  shotFrame: ValidConverter<ShotFrame>;
+  calibrate: ValidConverter<Calibrate>;
 };
 
-export default {
+const converters: Converters = {
   state,
   water,
   versions,
@@ -38,3 +42,5 @@ export default {
   shotFrame,
   calibrate,
 };
+
+export default converters;

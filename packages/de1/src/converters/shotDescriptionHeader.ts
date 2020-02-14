@@ -1,4 +1,4 @@
-import { Converter } from "@sblendid/sblendid";
+import { ValidConverter } from ".";
 import Parser from "../parser";
 import Serializer from "../serializer";
 
@@ -20,19 +20,30 @@ function decode(data: Buffer): ShotDescriptionHeader {
     .vars();
 }
 
-function encode(shotSettings: ShotDescriptionHeader): Buffer {
+function encode(header: ShotDescriptionHeader): Buffer {
   return new Serializer()
-    .char(shotSettings.headerV)
-    .char(shotSettings.numberOfFrames)
-    .char(shotSettings.numberOfPreinfuseFrames)
-    .char(shotSettings.minimumPressure * 16)
-    .char(shotSettings.maximumFlow * 16).buffer;
+    .char(header.headerV)
+    .char(header.numberOfFrames)
+    .char(header.numberOfPreinfuseFrames)
+    .char(header.minimumPressure * 16)
+    .char(header.maximumFlow * 16).buffer;
 }
 
-const converter: Converter<ShotDescriptionHeader> = {
+function validate(header: Partial<ShotDescriptionHeader>): boolean {
+  return Serializer.validate(header, {
+    headerV: Number(),
+    numberOfFrames: Number(),
+    numberOfPreinfuseFrames: Number(),
+    minimumPressure: Number(),
+    maximumFlow: Number(),
+  });
+}
+
+const converter: ValidConverter<ShotDescriptionHeader> = {
   uuid: "a00f",
   decode,
   encode,
+  validate,
 };
 
 export default converter;

@@ -1,4 +1,4 @@
-import { Converter } from "@sblendid/sblendid";
+import { ValidConverter } from ".";
 import Parser from "../parser";
 import Serializer from "../serializer";
 
@@ -38,10 +38,24 @@ function encode(shotSettings: ShotSettings): Buffer {
     .short(shotSettings.targetGroupTemp * 256).buffer;
 }
 
-const converter: Converter<ShotSettings> = {
+function validate(shotSettings: Partial<ShotSettings>): boolean {
+  return Serializer.validate(shotSettings, {
+    steamSettings: Number(),
+    targetSteamTemp: Number(),
+    targetSteamLength: Number(),
+    targetHotWaterTemp: Number(),
+    targetHotWaterVol: Number(),
+    targetHotWaterLength: Number(),
+    targetEspressoVol: Number(),
+    targetGroupTemp: Number(),
+  });
+}
+
+const converter: ValidConverter<ShotSettings> = {
   uuid: "a00b",
   encode,
   decode,
+  validate,
 };
 
 export default converter;
